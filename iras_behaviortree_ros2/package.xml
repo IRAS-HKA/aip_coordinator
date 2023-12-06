@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>iras_behaviortree_ros2</name>
+  <version>0.0.0</version>
+  <description>A wrapper around BehaviorTree.CPP, it provides an API for ROS2 services and actions inside a BehaviorTree node.</description>
+  <maintainer email="andreas.zachariae@hs-karlsruhe.de">Andreas Zachariae</maintainer>
+  <license>TODO: License declaration</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_index_cpp</buildtool_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <depend>rclcpp</depend>
+  <depend>rclcpp_action</depend>
+  <depend>action_msgs</depend>
+  <depend>cpp_core</depend>
+  <depend>behaviortree_cpp_v3</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
