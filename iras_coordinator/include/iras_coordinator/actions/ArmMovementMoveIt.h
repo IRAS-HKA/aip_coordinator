@@ -11,14 +11,11 @@
 #include <iras_coordinator/default.h>
 
 #include <iras_behaviortree_ros2/components/RosAction.h>
-#include <iras_behaviortree_ros2/tools/convert.h>
 #include <iras_interfaces/action/move_arm_move_it.hpp>
 #include <tf2/LinearMath/Quaternion.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 
 using MoveArmMoveIt = iras_interfaces::action::MoveArmMoveIt;
-// TODO:
-// Custom Action interface for arm control
 
 class ArmMovementMoveIt : public RosAction<MoveArmMoveIt>
 {

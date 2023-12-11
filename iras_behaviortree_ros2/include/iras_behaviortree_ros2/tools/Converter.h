@@ -24,7 +24,7 @@ inline float BT::convertFromString<float>(BT::StringView str)
     return std::stof(str.data());
 }
 
-class convert
+class Converter
 {
 public:
     static std::string ftos(std::string float_str)

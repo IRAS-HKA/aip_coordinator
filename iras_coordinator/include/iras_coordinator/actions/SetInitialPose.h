@@ -11,7 +11,6 @@
 #include <iras_coordinator/default.h>
 
 #include <iras_behaviortree_ros2/components/RosNode.h>
-#include <iras_behaviortree_ros2/tools/convert.h>
 #include <geometry_msgs/msg/pose_with_covariance_stamped.hpp>
 
 class SetInitialPose : public RosNode

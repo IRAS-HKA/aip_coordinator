@@ -12,7 +12,6 @@
 #include <iras_coordinator/default.h>
 
 #include <iras_behaviortree_ros2/components/RosNode.h>
-#include <iras_behaviortree_ros2/tools/convert.h>
 
 #include <geometry_msgs/msg/transform_stamped.hpp>
 

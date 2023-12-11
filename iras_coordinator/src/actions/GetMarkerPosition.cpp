@@ -82,8 +82,8 @@ BT::NodeStatus GetMarkerPosition::on_running()
                 log(std::to_string(transformStamped.transform.translation.x));
 
                 log("Marker Pose " + std::to_string(marker_mean_.size()));
-                log("MarkerPosition: (x=" + convert::ftos(transformStamped.transform.translation.x) + ", y=" + convert::ftos(transformStamped.transform.translation.y) + ", z=" + convert::ftos(transformStamped.transform.translation.z) + ")");
-                log("MarkerPosition: (roll=" + convert::ftos(roll) + ", pitch=" + convert::ftos(pitch) + ", yaw=" + convert::ftos(yaw) + ")");
+                log("MarkerPosition: (x=" + Converter::ftos(transformStamped.transform.translation.x) + ", y=" + Converter::ftos(transformStamped.transform.translation.y) + ", z=" + Converter::ftos(transformStamped.transform.translation.z) + ")");
+                log("MarkerPosition: (roll=" + Converter::ftos(roll) + ", pitch=" + Converter::ftos(pitch) + ", yaw=" + Converter::ftos(yaw) + ")");
 
                 return BT::NodeStatus::RUNNING;
             }
@@ -119,8 +119,8 @@ BT::NodeStatus GetMarkerPosition::on_running()
             setOutput<float>("rotation_z", mean_yaw);
 
             log("Mean Marker Pose");
-            log("MarkerPosition: (x=" + convert::ftos(x) + ", y=" + convert::ftos(y) + ", z=" + convert::ftos(z) + ")");
-            log("MarkerPosition: (roll=" + convert::ftos(mean_roll) + ", pitch=" + convert::ftos(mean_pitch) + ", yaw=" + convert::ftos(mean_yaw) + ")");
+            log("MarkerPosition: (x=" + Converter::ftos(x) + ", y=" + Converter::ftos(y) + ", z=" + Converter::ftos(z) + ")");
+            log("MarkerPosition: (roll=" + Converter::ftos(mean_roll) + ", pitch=" + Converter::ftos(mean_pitch) + ", yaw=" + Converter::ftos(mean_yaw) + ")");
 
             tf_publisher_ = std::make_shared<tf2_ros::StaticTransformBroadcaster>(get_node_handle());
             rclcpp::Time now = get_node_handle()->get_clock()->now();

@@ -57,7 +57,7 @@ BT::NodeStatus SetInitialPose::on_start()
 
     pose_publisher_->publish(msg);
 
-    log("Goal: (x=" + convert::ftos(msg.pose.pose.position.x) + ", y=" + convert::ftos(msg.pose.pose.position.y) + ", z=" + convert::ftos(msg.pose.pose.position.z) + ")");
+    log("Goal: (x=" + Converter::ftos(msg.pose.pose.position.x) + ", y=" + Converter::ftos(msg.pose.pose.position.y) + ", z=" + Converter::ftos(msg.pose.pose.position.z) + ")");
 
     return BT::NodeStatus::SUCCESS;
 }

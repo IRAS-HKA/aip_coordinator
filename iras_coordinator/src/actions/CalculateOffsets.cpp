@@ -73,7 +73,7 @@ BT::NodeStatus CalculateOffsets::on_running()
             setOutput<float>("out_x", transformStamped.transform.translation.x);
             setOutput<float>("out_y", -transformStamped.transform.translation.y);
             setOutput<float>("out_z", transformStamped.transform.translation.z);
-            log("Offset Position in base_frame: (x=" + convert::ftos(transformStamped.transform.translation.x) + ", y=" + convert::ftos(transformStamped.transform.translation.y) + ", z=" + convert::ftos(transformStamped.transform.translation.z) + ")");
+            log("Offset Position in base_frame: (x=" + Converter::ftos(transformStamped.transform.translation.x) + ", y=" + Converter::ftos(transformStamped.transform.translation.y) + ", z=" + Converter::ftos(transformStamped.transform.translation.z) + ")");
 
             return BT::NodeStatus::SUCCESS;
         }

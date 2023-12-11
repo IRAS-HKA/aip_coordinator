@@ -68,7 +68,7 @@ void ArmMovementMoveIt::on_send(MoveArmMoveIt::Goal &goal)
 
     goal.pose.header.stamp = get_node_handle()->now();
 
-    log("Goal: (x=" + convert::ftos(goal.pose.pose.position.x) + ", y=" + convert::ftos(goal.pose.pose.position.y) + ", z=" + convert::ftos(goal.pose.pose.position.z) + ")\n(rx=" + convert::ftos(rx_input.value()) + ", ry=" + convert::ftos(ry_input.value()) + ", rz=" + convert::ftos(rz_input.value()) + ")");
+    log("Goal: (x=" + Converter::ftos(goal.pose.pose.position.x) + ", y=" + Converter::ftos(goal.pose.pose.position.y) + ", z=" + Converter::ftos(goal.pose.pose.position.z) + ")\n(rx=" + Converter::ftos(rx_input.value()) + ", ry=" + Converter::ftos(ry_input.value()) + ", rz=" + Converter::ftos(rz_input.value()) + ")");
 }
 
 void ArmMovementMoveIt::on_feedback(const std::shared_ptr<const MoveArmMoveIt::Feedback> feedback)
@@ -78,9 +78,9 @@ void ArmMovementMoveIt::on_feedback(const std::shared_ptr<const MoveArmMoveIt::F
 
 void ArmMovementMoveIt::on_result(const rclcpp_action::ClientGoalHandle<MoveArmMoveIt>::WrappedResult &result, const MoveArmMoveIt::Goal &goal)
 {
-    log("Goal reached! (x=" + convert::ftos(goal.pose.pose.position.x) +
-        ", y=" + convert::ftos(goal.pose.pose.position.y) +
-        ", z=" + convert::ftos(goal.pose.pose.position.z) +
+    log("Goal reached! (x=" + Converter::ftos(goal.pose.pose.position.x) +
+        ", y=" + Converter::ftos(goal.pose.pose.position.y) +
+        ", z=" + Converter::ftos(goal.pose.pose.position.z) +
         "), Total time: " + std::to_string((int)(get_node_handle()->now().seconds() - -goal.pose.header.stamp.sec)) + "s" +
         ", code: " + std::to_string(result.result->err_code) + " " + result.result->msg);
 }
