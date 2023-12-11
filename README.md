@@ -31,6 +31,8 @@ To view or modify the behavior trees, attach a new shell
 - [ ] Integrate cpp_core
 - [ ] Better name ros_name() Make function for each type action, service, etc
 - [ ] Add Groot publisher integration
+- [ ] Add RosPublisher and RosSubscriber
+- [ ] finish PortHandler and rename XMLDefinition
 
 ## Port from FOXY to HUMBLE:
 - declare_parameter needs a type argument `this->declare_parameter("my_str", rclcpp::PARAMETER_STRING);`
