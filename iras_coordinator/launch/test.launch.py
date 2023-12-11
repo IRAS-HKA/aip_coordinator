@@ -16,7 +16,8 @@ def generate_launch_description():
             # name='Coordinator',
             output='screen',
             parameters=[
-                {'main_tree_path': "/home/docker/ros2_ws/src/iras_coordinator/behaviors/tests/TestCmdVelAction.xml"}],
+                {'main_tree_path': "/home/docker/ros2_ws/src/iras_coordinator/behaviors/tests/TestCmdVelAction.xml",
+                 'groot_palette_path': "/home/docker/ros2_ws/src/iras_coordinator/behaviors/GrootPalette.xml"}],
             on_exit=[LogInfo(
                 msg=["Coordinator has stopped. Stopping everything..."]), emit_shutdown_action],
         )

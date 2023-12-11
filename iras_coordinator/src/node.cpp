@@ -36,7 +36,7 @@
 // Misc
 #include <iras_coordinator/actions/Wait.h>
 
-BT::Tree create_tree(const std::string &path)
+BT::Tree create_tree(const std::string &main_tree_path, const std::string &groot_palette_path)
 {
     BT::BehaviorTreeFactory factory;
     factory.registerNodeType<BT::AlwaysFailureNode>("AlwaysFailureNode");
@@ -70,7 +70,7 @@ BT::Tree create_tree(const std::string &path)
     // Misc
     factory.registerNodeType<Wait>("Wait");
 
-    return factory.createTreeFromFile(path);
+    return factory.createTreeFromFile(main_tree_path);
 }
 
 BT::NodeStatus run_tree(BT::Tree &tree)
@@ -115,20 +115,24 @@ int main(int argc, char **argv)
     RosInterface::init("Coordinator", argc, argv);
 
     RosInterface::get_node_handle()->declare_parameter("main_tree_path", rclcpp::PARAMETER_STRING);
+    RosInterface::get_node_handle()->declare_parameter("groot_palette_path", rclcpp::PARAMETER_STRING);
 
     std::string main_tree_path;
+    std::string groot_palette_path;
 
     try
     {
         main_tree_path = RosInterface::get_node_handle()->get_parameter("main_tree_path").as_string();
+        groot_palette_path = RosInterface::get_node_handle()->get_parameter("groot_palette_path").as_string();
         std::cout << main_tree_path << std::endl;
+        std::cout << groot_palette_path << std::endl;
     }
     catch (const rclcpp::exceptions::ParameterNotDeclaredException &e)
     {
         std::cerr << e.what() << " not declared\n";
     }
 
-    BT::Tree tree = create_tree(main_tree_path);
+    BT::Tree tree = create_tree(main_tree_path, groot_palette_path);
 
     run_tree(tree);
 
