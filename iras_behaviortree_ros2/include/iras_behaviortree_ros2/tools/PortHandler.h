@@ -1,97 +1,98 @@
-#include <tinyxml2.h>
-#include <tuple>
+/** *******************************************************
+ * IRAS - University of Applied Sciences Karlsruhe
+ * Module : iras_behaviortree_ros2
+ * Purpose : Abstraction for handling ports and their values
+ *
+ * @author Andreas Zachariae
+ * @since 2.0.0 (2023.12.13)
+ *********************************************************/
+#pragma once
 
 #include <cpp_core/default.h>
-#include <behaviortree_cpp_v3/tree_node.h>
 
-class Port
+#include <behaviortree_cpp_v3/tree_node.h>
+#include <iras_behaviortree_ros2/tools/XmlGenerator.h>
+
+class StaticPortHandler
 {
 public:
-    Port(std::string name, std::string direction) : name(name), direction(direction) {}
+    static BT::PortsList bt_port_list_;
+    static std::unordered_map<std::string, XmlPort> xml_port_list_;
 
-    std::string getName() const { return name; }
-    std::string getDirection() const { return direction; }
+    template <typename T = void>
+    static void add_port(std::string name, std::string direction)
+    {
+        if (direction == "input")
+        {
+            bt_port_list_.insert(BT::InputPort<T>(name));
+        }
+        else if (direction == "output")
+        {
+            bt_port_list_.insert(BT::OutputPort<T>(name));
+        }
+        else if (direction == "bidirectional")
+        {
+            bt_port_list_.insert(BT::BidirectionalPort<T>(name));
+        }
+        else
+        {
+            std::cout << "ERROR: Invalid port direction: " << direction << std::endl;
+        }
 
-private:
-    std::string name;
-    std::string direction;
+        xml_port_list_.insert(std::make_pair(name, (XmlPort(name, direction))));
+        std::cout << "Added port: " << name << std::endl;
+    }
+
+    static void print_port_list();
+
+    static void print_number_of_ports();
+
+    static void create_ports();
 };
 
 class PortHandler
 {
 public:
-    static std::unordered_map<std::string, Port> xml_port_list_;
-    std::string node_xml_id;
-    std::string node_type;
+    PortHandler(BT::TreeNode *node) : bt_node_handle_(node) {}
+
+    // XmlGenerator xml_generator_;
+
+    // print all keys of the blackboard
+    void print_keys() const
+    {
+        const BT::NodeConfiguration &config = bt_node_handle_->config();
+        std::vector<BT::StringView> keys = config.blackboard->getKeys();
+        std::cout << "Keys: " << keys.size() << std::endl;
+        for (auto key : keys)
+        {
+            std::cout << BT::convertFromString<std::string>(key) << std::endl;
+        }
+    }
 
     template <typename T>
-    void addPortList(const std::string &nodeID, const std::vector<Port> &ports)
+    auto get_port_value(std::string name) const
     {
-        for (const auto &port : ports)
+        BT::Optional<T> input = bt_node_handle_->getInput<T>(name);
+        if (!input.has_value())
         {
-            this->ports.push_back({nodeID, port});
+            throw BT::RuntimeError("missing required input [" + name + "]: ", input.error());
         }
+        return input.value();
     }
 
-    void print_port_list()
+    template <typename T>
+    bool port_has_value(std::string name)
     {
-        std::cout << "Node: " << node_xml_id << std::endl;
-        std::cout << "Type: " << node_type << std::endl;
-        std::cout << "Ports: " << std::endl;
-        for (const auto &port : xml_port_list_)
-        {
-            std::cout << "  " << port.first << " (" << port.second.direction << ")" << std::endl;
-        }
+        BT::Optional<T> input = bt_node_handle_->getInput<T>(name);
+        return input.has_value();
     }
 
-    void generateGrootPalette(const std::string &filename)
+    template <typename T>
+    void set_port_value(std::string name, T value)
     {
-        tinyxml2::XMLDocument doc;
-
-        // Create an Action element for each action
-        for (const auto &portPair : ports)
-        {
-            tinyxml2::XMLElement *actionElement = doc.NewElement("Action");
-            actionElement->SetAttribute("ID", portPair.first.c_str());
-
-            // Add the ports to the Action element
-            tinyxml2::XMLElement *portElement = doc.NewElement((portPair.second.getDirection() + "_port").c_str());
-            portElement->SetAttribute("name", portPair.second.getName().c_str());
-            portElement->SetAttribute("type", getType());
-            actionElement->InsertEndChild(portElement);
-
-            doc.InsertEndChild(actionElement);
-        }
-
-        // Save the XML to a file
-        doc.SaveFile(filename.c_str());
+        bt_node_handle_->setOutput<T>(name, value);
     }
 
 private:
-    std::vector<std::pair<std::string, Port>> ports;
+    BT::TreeNode *bt_node_handle_;
 };
-
-int main()
-{
-    PortHandler generator;
-
-    // Define the list of ports for each action
-    std::vector<Port<float>> calculateOffsetsPorts = {
-        Port<float>("offset_x", "input", 0.0f),
-        Port<float>("out_x", "output", 0.0f),
-    };
-
-    std::vector<Port<int>> armMovementMoveItPorts = {
-        Port<int>("x", "input", 0),
-        Port<int>("speed", "output", 0),
-    };
-
-    // Add the port lists to the generator
-    generator.addPortList("CalculateOffsets", calculateOffsetsPorts);
-    generator.addPortList("ArmMovementMoveIt", armMovementMoveItPorts);
-
-    // Generate the Groot palette
-    generator.generateGrootPalette("output.xml");
-
-    return 0;
-}

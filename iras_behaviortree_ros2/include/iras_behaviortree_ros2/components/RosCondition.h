@@ -22,6 +22,9 @@ public:
 
     virtual BT::NodeStatus on_check() = 0;
 
+protected:
+    PortHandler ports = PortHandler(dynamic_cast<BT::TreeNode *>(this));
+
 private:
     BT::NodeStatus tick() override
     {

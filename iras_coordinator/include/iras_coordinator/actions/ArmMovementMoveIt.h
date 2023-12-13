@@ -20,18 +20,11 @@ using MoveArmMoveIt = iras_interfaces::action::MoveArmMoveIt;
 class ArmMovementMoveIt : public RosAction<MoveArmMoveIt>
 {
 public:
-    static BT::PortsList providedPorts() { return {BT::InputPort<float>("x"),
-                                                   BT::InputPort<float>("y"),
-                                                   BT::InputPort<float>("z"),
-                                                   BT::InputPort<float>("rotation_x"),
-                                                   BT::InputPort<float>("rotation_y"),
-                                                   BT::InputPort<float>("rotation_z"),
-                                                   BT::InputPort<bool>("cart"), // TODO: rename cartesian
-                                                   BT::InputPort<float>("speed")}; }
+    static BT::PortsList providedPorts();
 
     ArmMovementMoveIt(const std::string &name, const BT::NodeConfiguration &config) : RosAction(name, config) {}
 
-    std::string ros_name() { return "move_to_pose"; }
+    std::string ros2_action_name() override;
 
     void on_send(MoveArmMoveIt::Goal &goal) override;
     void on_feedback(const std::shared_ptr<const MoveArmMoveIt::Feedback> feedback) override;

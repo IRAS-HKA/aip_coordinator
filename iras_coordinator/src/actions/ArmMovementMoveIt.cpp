@@ -2,6 +2,25 @@
 
 #define DEG2RAD(x) ((x) * 3.1415 / 180.0f)
 
+std::string ArmMovementMoveIt::ros2_action_name()
+{
+    return "move_to_pose";
+}
+
+BT::PortsList ArmMovementMoveIt::providedPorts()
+{
+    // Arguments: <data_type>(name, direction[input, output, bidirectional])
+    add_port<float>("x", "input");
+    add_port<float>("y", "input");
+    add_port<float>("z", "input");
+    add_port<float>("rotation_x", "input");
+    add_port<float>("rotation_y", "input");
+    add_port<float>("rotation_z", "input");
+    add_port<bool>("cart", "input"); // TODO: rename cartesian
+    add_port<float>("speed", "input");
+    return bt_port_list_;
+}
+
 void ArmMovementMoveIt::on_send(MoveArmMoveIt::Goal &goal)
 {
     // TODO done
