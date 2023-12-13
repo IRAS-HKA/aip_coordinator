@@ -23,8 +23,6 @@ public:
 
     Wait(const std::string &name, const BT::NodeConfiguration &config) : RosNode(name, config) {}
 
-    std::string ros_name() { return "Wait"; }
-
     BT::NodeStatus on_start() override;
     BT::NodeStatus on_running() override;
     void on_halted() override;

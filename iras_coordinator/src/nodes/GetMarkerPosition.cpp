@@ -1,4 +1,4 @@
-#include <iras_coordinator/actions/GetMarkerPosition.h>
+#include <iras_coordinator/nodes/GetMarkerPosition.h>
 
 #define RAD2DEG(x) ((x) * 180.0f / 3.1415)
 #define DEG2RAD(x) ((x) * 3.1415 / 180.0f)

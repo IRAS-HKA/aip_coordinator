@@ -22,7 +22,7 @@ public:
 
     ClearLocalCostmap(const std::string &name, const BT::NodeConfiguration &config) : RosService(name, config) {}
 
-    std::string ros_name() { return "/local_costmap/clear_entirely_local_costmap"; }
+    std::string ros2_service_name() override;
 
     void on_send(std::shared_ptr<ClearLocalCostmapSrv::Request> request) override;
     bool on_result(std::shared_future<std::shared_ptr<ClearLocalCostmapSrv::Response>> response, std::shared_ptr<ClearLocalCostmapSrv::Request> request) override;

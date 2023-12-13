@@ -1,4 +1,9 @@
-#include <iras_coordinator/actions/ClearLocalCostmap.h>
+#include <iras_coordinator/services/ClearLocalCostmap.h>
+
+std::string ClearLocalCostmap::ros2_service_name()
+{
+    return "/local_costmap/clear_entirely_local_costmap";
+}
 
 void ClearLocalCostmap::on_send(std::shared_ptr<ClearLocalCostmapSrv::Request>)
 {

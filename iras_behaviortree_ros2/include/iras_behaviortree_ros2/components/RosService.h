@@ -30,6 +30,7 @@ protected:
     using RequestT = typename ServiceT::Request;
     using ResponseT = typename ServiceT::Response;
 
+    virtual std::string ros2_service_name() = 0;
     virtual void on_send(std::shared_ptr<RequestT> request) = 0;
     virtual bool on_result(std::shared_future<std::shared_ptr<ResponseT>> response, std::shared_ptr<RequestT> request) = 0;
 
@@ -43,9 +44,9 @@ private:
 
     BT::NodeStatus on_start() override
     {
-        log("Connecting to service: " + ros_name());
+        log("Connecting to service: " + ros2_service_name());
 
-        client_ = RosNode::get_node_handle()->create_client<ServiceT>(ros_name());
+        client_ = RosNode::get_node_handle()->create_client<ServiceT>(ros2_service_name());
 
         return BT::NodeStatus::RUNNING;
     }

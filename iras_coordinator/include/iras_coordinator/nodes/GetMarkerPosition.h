@@ -36,8 +36,6 @@ public:
 
     GetMarkerPosition(const std::string &name, const BT::NodeConfiguration &config);
 
-    std::string ros_name() { return "GetMarkerPosition"; }
-
     BT::NodeStatus on_start() override;
     BT::NodeStatus on_running() override;
     void on_halted() override {}

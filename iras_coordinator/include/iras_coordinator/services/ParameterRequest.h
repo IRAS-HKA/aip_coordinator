@@ -43,7 +43,7 @@ public:
 
     ParameterRequest(const std::string &name, const BT::NodeConfiguration &config) : RosService(name, config) {}
 
-    std::string ros_name() override { return "UserDialog"; }
+    std::string ros2_service_name() override { return "UserDialog"; }
 
     void on_send(std::shared_ptr<UserDialog::Request> request) override
     {

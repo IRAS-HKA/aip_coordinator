@@ -1,4 +1,4 @@
-#include <iras_coordinator/actions/Wait.h>
+#include <iras_coordinator/nodes/Wait.h>
 
 BT::NodeStatus Wait::on_start()
 {

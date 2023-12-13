@@ -31,6 +31,7 @@ protected:
     using FeedbackT = typename ActionT::Feedback;
     using ResultT = typename rclcpp_action::ClientGoalHandle<ActionT>::WrappedResult;
 
+    virtual std::string ros2_action_name() = 0;
     virtual void on_send(GoalT &goal) = 0;
     virtual void on_feedback(const std::shared_ptr<const FeedbackT>) {}
     virtual void on_result(const ResultT &result, const GoalT &goal) = 0;
@@ -47,14 +48,14 @@ private:
 
     BT::NodeStatus on_start() override
     {
-        log("Connecting to action server: " + ros_name());
+        log("Connecting to action server: " + ros2_action_name());
 
         client_ = rclcpp_action::create_client<ActionT>(
             get_node_handle()->get_node_base_interface(),
             get_node_handle()->get_node_graph_interface(),
             get_node_handle()->get_node_logging_interface(),
             get_node_handle()->get_node_waitables_interface(),
-            ros_name());
+            ros2_action_name());
 
         return BT::NodeStatus::RUNNING;
     }

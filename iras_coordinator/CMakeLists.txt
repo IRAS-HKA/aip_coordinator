@@ -50,14 +50,18 @@ set(DEPENDENCIES
 )
 
 file (GLOB SOURCES_ACTIONS src/actions/*.cpp)
+file (GLOB SOURCES_SERVICES src/services/*.cpp)
 file (GLOB SOURCES_CONDITIONS src/conditions/*.cpp)
 file (GLOB SOURCES_CONTROLS src/controls/*.cpp)
+file (GLOB SOURCES_NODES src/nodes/*.cpp)
 
 add_executable(Coordinator
   src/node.cpp
   ${SOURCES_ACTIONS}
+  ${SOURCES_SERVICES}
   ${SOURCES_CONDITIONS}
-  ${SOURCES_CONTROLS})
+  ${SOURCES_CONTROLS}
+  ${SOURCES_NODES})
 
 target_link_libraries(Coordinator
   iras_behaviortree_ros2::behaviortree_ros_lib

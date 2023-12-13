@@ -43,8 +43,6 @@ public:
 
     CalculateOffsets(const std::string &name, const BT::NodeConfiguration &config);
 
-    std::string ros_name() { return "CalculateOffsets"; }
-
     BT::NodeStatus on_start() override;
     BT::NodeStatus on_running() override;
     void on_halted() override {}

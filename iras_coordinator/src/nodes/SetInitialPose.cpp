@@ -1,4 +1,4 @@
-#include <iras_coordinator/actions/SetInitialPose.h>
+#include <iras_coordinator/nodes/SetInitialPose.h>
 
 SetInitialPose::SetInitialPose(const std::string &name, const BT::NodeConfiguration &config) : RosNode(name, config)
 {

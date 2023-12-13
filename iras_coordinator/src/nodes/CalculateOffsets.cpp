@@ -1,4 +1,4 @@
-#include <iras_coordinator/actions/CalculateOffsets.h>
+#include <iras_coordinator/nodes/CalculateOffsets.h>
 
 CalculateOffsets::CalculateOffsets(const std::string &name, const BT::NodeConfiguration &config) : RosNode(name, config)
 {

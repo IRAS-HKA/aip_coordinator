@@ -22,7 +22,7 @@ public:
 
     BaseMovementNav2(const std::string &name, const BT::NodeConfiguration &config) : RosAction(name, config) {}
 
-    std::string ros_name() { return "navigate_to_pose"; }
+    std::string ros2_action_name() override;
 
     void on_send(NavigateToPoseROS2Nav::Goal &goal) override;
     void on_feedback(const std::shared_ptr<const NavigateToPoseROS2Nav::Feedback> feedback) override;

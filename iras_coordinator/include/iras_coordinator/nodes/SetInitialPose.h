@@ -26,8 +26,6 @@ public:
 
     SetInitialPose(const std::string &name, const BT::NodeConfiguration &config);
 
-    std::string ros_name() { return "initialpose"; }
-
     BT::NodeStatus on_start() override;
     BT::NodeStatus on_running() override { return BT::NodeStatus::RUNNING; }
     void on_halted() override {}
