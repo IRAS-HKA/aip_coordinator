@@ -8,6 +8,7 @@
  * @since 1.0.0 (2020.08.26)
  *********************************************************/
 #include <behaviortree_cpp_v3/bt_factory.h>
+#include "behaviortree_cpp_v3/loggers/bt_zmq_publisher.h"
 #include <iras_behaviortree_ros2/components/RosInterface.h>
 #include <iras_behaviortree_ros2/tools/XmlGenerator.h>
 
@@ -136,7 +137,11 @@ int main(int argc, char **argv)
 
     BT::Tree tree = create_tree(main_tree_path, groot_palette_path);
 
+    std::unique_ptr<BT::PublisherZMQ> zmq_publisher = std::make_unique<BT::PublisherZMQ>(tree);
+
     run_tree(tree);
+
+    zmq_publisher.reset();
 
     RosInterface::shutdown();
 
