@@ -17,6 +17,7 @@
 
 #include <iras_behaviortree_ros2/tools/Progress.h>
 #include <iras_behaviortree_ros2/tools/Converter.h>
+#include <iras_behaviortree_ros2/tools/PortHandler.h>
 #include <iras_behaviortree_ros2/components/RosInterface.h>
 
 class RosNode : public RosInterface, public BT::StatefulActionNode

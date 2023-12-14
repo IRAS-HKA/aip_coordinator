@@ -1,24 +1,39 @@
 #include <iras_coordinator/actions/BaseMovementNav2.h>
 
+/**
+ * @brief Set the name of the ROS2 action server to connect with.
+ * @return Topic name as a string.
+ */
 std::string BaseMovementNav2::ros2_action_name()
 {
     return "navigate_to_pose";
 }
 
+/**
+ * @brief Set the list of ports provided by the BT node.
+ *
+ * New port:
+ *      direction = [BT::InputPort, BT::OutputPort, BT::BidirectionalPort]
+ *      data_type = <[float, int, std::string]>
+ *      name = ("name")
+ *
+ * @return List of provided ports.
+ */
 BT::PortsList BaseMovementNav2::providedPorts()
 {
-    // Arguments: <data_type>(name, direction[input, output, bidirectional])
-    add_port<std::string>("frame_id", "input");
-    add_port<float>("x", "input");
-    add_port<float>("y", "input");
-    add_port<float>("quaternion_x", "input");
-    add_port<float>("quaternion_y", "input");
-    add_port<float>("quaternion_z", "input");
-    add_port<float>("quaternion_w", "input");
-    return bt_port_list_;
+    return {BT::InputPort<std::string>("frame_id"),
+            BT::InputPort<float>("x"),
+            BT::InputPort<float>("y"),
+            BT::InputPort<float>("quaternion_x"),
+            BT::InputPort<float>("quaternion_y"),
+            BT::InputPort<float>("quaternion_z"),
+            BT::InputPort<float>("quaternion_w")};
 }
 
-void BaseMovementNav2::on_send(NavigateToPoseROS2Nav::Goal &goal)
+/**
+ * @brief Set the content of the goal message which is sent to the ROS2 action server.
+ */
+void BaseMovementNav2::on_send(NavigateToPoseAction::Goal &goal)
 {
     if (ports.port_has_value<float>("quaternion_x") && ports.port_has_value<float>("quaternion_y") && ports.port_has_value<float>("quaternion_z") && ports.port_has_value<float>("quaternion_w"))
     {
@@ -26,7 +41,6 @@ void BaseMovementNav2::on_send(NavigateToPoseROS2Nav::Goal &goal)
         goal.pose.pose.orientation.y = ports.get_port_value<float>("quaternion_y");
         goal.pose.pose.orientation.z = ports.get_port_value<float>("quaternion_z");
         goal.pose.pose.orientation.w = ports.get_port_value<float>("quaternion_w");
-        log("Note: Quaternion values are set.");
     }
     else
     {
@@ -55,14 +69,20 @@ void BaseMovementNav2::on_send(NavigateToPoseROS2Nav::Goal &goal)
     log("Goal: (x=" + Converter::ftos(goal.pose.pose.position.x) + ", y=" + Converter::ftos(goal.pose.pose.position.y) + ")");
 }
 
-void BaseMovementNav2::on_feedback(const std::shared_ptr<const NavigateToPoseROS2Nav::Feedback>)
+/**
+ * @brief Define what happens when recieving feedback from the ROS2 action server.
+ */
+void BaseMovementNav2::on_feedback(const std::shared_ptr<const NavigateToPoseAction::Feedback>)
 {
     // log("Current position: (x=" + Converter::ftos((float)feedback->current_pose.pose.position.x) +
     //     ", y=" + Converter::ftos((float)feedback->current_pose.pose.position.y) +
     //     "), Time elapsed: " + std::to_string(feedback->navigation_time.sec) + "s");
 }
 
-void BaseMovementNav2::on_result(const rclcpp_action::ClientGoalHandle<NavigateToPoseROS2Nav>::WrappedResult &, const NavigateToPoseROS2Nav::Goal &goal)
+/**
+ * @brief Define what happens when recieving the result from the ROS2 action server.
+ */
+void BaseMovementNav2::on_result(const rclcpp_action::ClientGoalHandle<NavigateToPoseAction>::WrappedResult &, const NavigateToPoseAction::Goal &goal)
 {
     log("Goal reached! (x=" + Converter::ftos(goal.pose.pose.position.x) +
         ", y=" + Converter::ftos(goal.pose.pose.position.y) +
