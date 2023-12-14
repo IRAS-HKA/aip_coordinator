@@ -36,8 +36,6 @@ public:
     RosInterface(const std::string &name);
     ~RosInterface();
 
-    virtual std::string ros_name() { return name_; }
-
 protected:
     // Maybe create class NodeInfo with packages, name, ... instead of only names
     std::vector<std::string> required_nodes;
