@@ -30,9 +30,11 @@ To view or modify the behavior trees, attach a new shell
 - [ ] Integrate LifecycleManager to Coordinater
 - [ ] Integrate cpp_core
 - [x] Better name ros_name() Make function for each type action, service, etc
-- [ ] Add Groot publisher integration
+- [x] Add Groot publisher integration
 - [ ] Add RosPublisher and RosSubscriber
 - [x] finish PortHandler and rename XMLDefinition
+- [ ] Add general doc with purpose of this repo
+- [ ] Add instructions how to add new nodes
 
 ## Port from FOXY to HUMBLE:
 - declare_parameter needs a type argument `this->declare_parameter("my_str", rclcpp::PARAMETER_STRING);`
