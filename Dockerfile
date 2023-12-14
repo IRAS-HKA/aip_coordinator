@@ -58,7 +58,7 @@ RUN mkdir -p /home/$USER/ros2_ws/src
 ##############################################################################
 WORKDIR /home/$USER/ros2_ws/src
 RUN git config --global advice.detachedHead false
-# RUN git clone --depth 1 https://github.com/BehaviorTree/Groot.git
+RUN git clone --depth 1 https://github.com/BehaviorTree/Groot.git
 
 COPY iras_behaviortree_ros2 ./iras_behaviortree_ros2
 COPY iras_coordinator ./iras_coordinator

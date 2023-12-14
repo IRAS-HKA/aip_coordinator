@@ -9,6 +9,7 @@
  *********************************************************/
 #include <behaviortree_cpp_v3/bt_factory.h>
 #include <iras_behaviortree_ros2/components/RosInterface.h>
+#include <iras_behaviortree_ros2/tools/XmlGenerator.h>
 
 // Conditions
 #include <iras_coordinator/conditions/CheckStop.h>
@@ -18,29 +19,27 @@
 #include <iras_coordinator/conditions/CheckBlackboardInt.h>
 
 // User Input
-#include <iras_coordinator/actions/ParameterRequest.h>
+#include <iras_coordinator/services/ParameterRequest.h>
 
 // Arm
 #include <iras_coordinator/actions/ArmMovementMoveIt.h>
 
 // Navigation
 #include <iras_coordinator/actions/BaseMovementNav2.h>
-#include <iras_coordinator/actions/ClearGlobalCostmap.h>
-#include <iras_coordinator/actions/ClearLocalCostmap.h>
-#include <iras_coordinator/actions/SetInitialPose.h>
+#include <iras_coordinator/services/ClearGlobalCostmap.h>
+#include <iras_coordinator/services/ClearLocalCostmap.h>
+#include <iras_coordinator/nodes/SetInitialPose.h>
 
 // Camera
-#include <iras_coordinator/actions/CalculateOffsets.h>
-#include <iras_coordinator/actions/GetMarkerPosition.h>
+#include <iras_coordinator/nodes/CalculateOffsets.h>
+#include <iras_coordinator/nodes/GetMarkerPosition.h>
 
 // Misc
-#include <iras_coordinator/actions/Wait.h>
+#include <iras_coordinator/nodes/Wait.h>
 
 BT::Tree create_tree(const std::string &main_tree_path, const std::string &groot_palette_path)
 {
     BT::BehaviorTreeFactory factory;
-    factory.registerNodeType<BT::AlwaysFailureNode>("AlwaysFailureNode");
-
     // Conditions
     factory.registerNodeType<CheckStop>("CheckStop");
     factory.registerNodeType<CheckBattery>("CheckBattery");
@@ -69,6 +68,9 @@ BT::Tree create_tree(const std::string &main_tree_path, const std::string &groot
 
     // Misc
     factory.registerNodeType<Wait>("Wait");
+
+    XmlGenerator xml_generator(&factory);
+    xml_generator.generate_xml_palette(groot_palette_path);
 
     return factory.createTreeFromFile(main_tree_path);
 }
