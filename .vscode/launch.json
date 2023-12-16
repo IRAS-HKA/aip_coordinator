@@ -4,7 +4,13 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        // Example launch of a python file
+        // Attach and debug running ROS2 node
+        {
+            "name": "ROS: Attach",
+            "type": "ros",
+            "request": "attach"
+        },
+        // Launch a python file
         {
             "name": "Python: Current File",
             "type": "python",
