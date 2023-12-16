@@ -35,6 +35,8 @@ To view or modify the behavior trees, attach a new shell
 - [x] finish PortHandler and rename XMLDefinition
 - [ ] Add general doc with purpose of this repo
 - [ ] Add instructions how to add new nodes
+- [ ] Finish refactoring of lagacy nodes with new style
+- [x] Add cpp debugger for ros nodes and launch files (ROS extension has to be installed)
 
 ## Port from FOXY to HUMBLE:
 - declare_parameter needs a type argument `this->declare_parameter("my_str", rclcpp::PARAMETER_STRING);`

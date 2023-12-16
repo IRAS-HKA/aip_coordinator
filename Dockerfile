@@ -16,6 +16,7 @@ RUN rosdep update --rosdistro $ROS_DISTRO
 RUN apt-get update && apt-get install --no-install-recommends -y \
     python3-pip \
     python3-colcon-common-extensions \
+    gdb \
     ros-$ROS_DISTRO-behaviortree-cpp-v3 \
     ros-$ROS_DISTRO-nav2-msgs \
     qtbase5-dev \

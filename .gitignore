@@ -1,6 +1,5 @@
 # Custom
-.vscode
-!.vscode/c_cpp_properties.json
+# .vscode
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
