@@ -1,59 +1,49 @@
 #include <iras_coordinator/nodes/SetInitialPose.h>
 
+/**
+ * @brief Constructor of the node, initialize e.g. ROS2 subscriber.
+ */
 SetInitialPose::SetInitialPose(const std::string &name, const BT::NodeConfiguration &config) : RosNode(name, config)
 {
     pose_publisher_ = get_node_handle()->create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>("/initialpose", 10);
 }
 
+/**
+ * @brief Set the list of ports provided by the BT node.
+ *
+ * New port:
+ *      direction = [BT::InputPort, BT::OutputPort, BT::BidirectionalPort]
+ *      data_type = <[float, int, std::string]>
+ *      name = ("name")
+ *
+ * @return List of provided ports.
+ */
+BT::PortsList SetInitialPose::providedPorts()
+{
+    return {BT::InputPort<float>("x"),
+            BT::InputPort<float>("y"),
+            BT::InputPort<float>("z"),
+            BT::InputPort<float>("quaternion_x"),
+            BT::InputPort<float>("quaternion_y"),
+            BT::InputPort<float>("quaternion_z"),
+            BT::InputPort<float>("quaternion_w")};
+}
+
+/**
+ * @brief Define what happens when this node is ticked for the first time.
+ * @return BT::NodeStatus RUNNING (Has to return RUNNING to allow on_running to be called)
+ */
 BT::NodeStatus SetInitialPose::on_start()
 {
-    // Check if Optional is valid. If not, throw its error
-    BT::Optional<float> x_input = getInput<float>("x");
-    BT::Optional<float> y_input = getInput<float>("y");
-    BT::Optional<float> z_input = getInput<float>("z");
-    BT::Optional<float> qx_input = getInput<float>("quaternion_x");
-    BT::Optional<float> qy_input = getInput<float>("quaternion_y");
-    BT::Optional<float> qz_input = getInput<float>("quaternion_z");
-    BT::Optional<float> qw_input = getInput<float>("quaternion_w");
-
-    if (!x_input.has_value())
-    {
-        throw BT::RuntimeError("missing required input [x]: ", x_input.error());
-    }
-    if (!y_input.has_value())
-    {
-        throw BT::RuntimeError("missing required input [y]: ", y_input.error());
-    }
-    if (!z_input.has_value())
-    {
-        throw BT::RuntimeError("missing required input [z]: ", z_input.error());
-    }
-    if (!qx_input.has_value())
-    {
-        throw BT::RuntimeError("missing required input [qx_input]: ", qx_input.error());
-    }
-    if (!qy_input.has_value())
-    {
-        throw BT::RuntimeError("missing required input [qy_input]: ", qy_input.error());
-    }
-    if (!qz_input.has_value())
-    {
-        throw BT::RuntimeError("missing required input [qz_input]: ", qz_input.error());
-    }
-    if (!qw_input.has_value())
-    {
-        throw BT::RuntimeError("missing required input [qw_input]: ", qw_input.error());
-    }
-
     geometry_msgs::msg::PoseWithCovarianceStamped msg;
 
-    msg.pose.pose.position.x = x_input.value();
-    msg.pose.pose.position.y = y_input.value();
-    msg.pose.pose.position.z = z_input.value();
-    msg.pose.pose.orientation.x = qx_input.value();
-    msg.pose.pose.orientation.y = qy_input.value();
-    msg.pose.pose.orientation.z = qz_input.value();
-    msg.pose.pose.orientation.w = qw_input.value();
+    msg.pose.pose.position.x = ports.get_value<float>("x");
+    msg.pose.pose.position.y = ports.get_value<float>("y");
+    msg.pose.pose.position.z = ports.get_value<float>("z");
+    msg.pose.pose.orientation.x = ports.get_value<float>("quaternion_x");
+    msg.pose.pose.orientation.y = ports.get_value<float>("quaternion_y");
+    msg.pose.pose.orientation.z = ports.get_value<float>("quaternion_z");
+    msg.pose.pose.orientation.w = ports.get_value<float>("quaternion_w");
 
     pose_publisher_->publish(msg);
 

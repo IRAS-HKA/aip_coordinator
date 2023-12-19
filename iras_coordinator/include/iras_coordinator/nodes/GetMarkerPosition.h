@@ -19,20 +19,10 @@
 #include <time.h>
 #include <thread>
 
-// TODO: rename to GetFramePose
-// TODO: generalize marker to frame
-
 class GetMarkerPosition : public RosNode
 {
 public:
-    static BT::PortsList providedPorts() { return {BT::InputPort<int>("marker_id"),
-                                                   BT::InputPort<int>("max_seconds"),
-                                                   BT::OutputPort<float>("x"),
-                                                   BT::OutputPort<float>("y"),
-                                                   BT::OutputPort<float>("z"),
-                                                   BT::OutputPort<float>("rotation_x"),
-                                                   BT::OutputPort<float>("rotation_y"),
-                                                   BT::OutputPort<float>("rotation_z")}; }
+    static BT::PortsList providedPorts();
 
     GetMarkerPosition(const std::string &name, const BT::NodeConfiguration &config);
 
@@ -44,9 +34,7 @@ private:
     std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
     std::shared_ptr<tf2_ros::TransformListener> transform_listener_{nullptr};
     time_t start_time_;
-    time_t duration_;
     time_t last_checked_;
-    std::string marker_frame_;
     std::vector<geometry_msgs::msg::TransformStamped> marker_mean_;
     int num_markers_ = 0;
     std::shared_ptr<tf2_ros::StaticTransformBroadcaster> tf_publisher_;

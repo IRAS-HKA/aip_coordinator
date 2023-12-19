@@ -16,13 +16,7 @@
 class SetInitialPose : public RosNode
 {
 public:
-    static BT::PortsList providedPorts() { return {BT::InputPort<float>("x"),
-                                                   BT::InputPort<float>("y"),
-                                                   BT::InputPort<float>("z"),
-                                                   BT::InputPort<float>("quaternion_x"),
-                                                   BT::InputPort<float>("quaternion_y"),
-                                                   BT::InputPort<float>("quaternion_z"),
-                                                   BT::InputPort<float>("quaternion_w")}; }
+    static BT::PortsList providedPorts();
 
     SetInitialPose(const std::string &name, const BT::NodeConfiguration &config);
 

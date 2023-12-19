@@ -1,7 +1,7 @@
 /** *******************************************************
  * IRAS - University of Applied Sciences Karlsruhe
  * Module : ROS2-Node "IRASCoordinator"
- * Purpose : Provides the ROS2-Action client "navigate_to_pose"
+ * Purpose : Provides the ROS2-Action client for "navigate_to_pose"(NavigateToPose)
  *
  * @author Andreas Zachariae
  * @since 1.0.0 (2022.05.12)
@@ -15,12 +15,12 @@
 
 using NavigateToPoseAction = nav2_msgs::action::NavigateToPose;
 
-class BaseMovementNav2 : public RosAction<NavigateToPoseAction>
+class MoveBase : public RosAction<NavigateToPoseAction>
 {
 public:
     static BT::PortsList providedPorts();
 
-    BaseMovementNav2(const std::string &name, const BT::NodeConfiguration &config) : RosAction(name, config) {}
+    MoveBase(const std::string &name, const BT::NodeConfiguration &config) : RosAction(name, config) {}
 
     std::string ros2_action_name() override;
 

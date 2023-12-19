@@ -18,7 +18,7 @@
 class CheckStop : public RosCondition
 {
 public:
-    static BT::PortsList providedPorts() { return BT::PortsList(); }
+    static BT::PortsList providedPorts();
 
     CheckStop(const std::string &name, const BT::NodeConfiguration &config);
 

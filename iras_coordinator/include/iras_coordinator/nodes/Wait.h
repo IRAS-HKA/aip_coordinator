@@ -17,9 +17,7 @@
 class Wait : public RosNode
 {
 public:
-    static BT::PortsList providedPorts() { return {
-        BT::InputPort<int>("seconds"),
-    }; }
+    static BT::PortsList providedPorts();
 
     Wait(const std::string &name, const BT::NodeConfiguration &config) : RosNode(name, config) {}
 
@@ -29,5 +27,4 @@ public:
 
 private:
     time_t start_time_;
-    time_t duration_;
 };

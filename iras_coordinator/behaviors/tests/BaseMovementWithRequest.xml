@@ -3,7 +3,7 @@
         <Sequence>
             <FloatParameterRequest title="Bitte geben Sie x und y in [m] an" value="{x}" key="x" min="-10" max="10"/>
             <FloatParameterRequest value="{y}" key="y" min="-10" max="10"/>
-            <BaseMovementNav2 x="{x}" y="{y}"/>
+            <MoveBase x="{x}" y="{y}"/>
         </Sequence>
     </BehaviorTree>
 </root>

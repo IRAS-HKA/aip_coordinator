@@ -1,5 +1,8 @@
 #include <iras_coordinator/conditions/CheckDiagnosticStatus.h>
 
+/**
+ * @brief Constructor of the node, initialize e.g. ROS2 subscriber.
+ */
 CheckDiagnosticStatus::CheckDiagnosticStatus(const std::string &name, const BT::NodeConfiguration &config) : RosCondition(name, config)
 {
     stop_publisher_ = get_node_handle()->create_publisher<std_msgs::msg::Empty>("Stop", 10);
@@ -18,6 +21,25 @@ CheckDiagnosticStatus::CheckDiagnosticStatus(const std::string &name, const BT::
         } });
 }
 
+/**
+ * @brief Set the list of ports provided by the BT node.
+ *
+ * New port:
+ *      direction = [BT::InputPort, BT::OutputPort, BT::BidirectionalPort]
+ *      data_type = <[float, int, std::string]>
+ *      name = ("name")
+ *
+ * @return List of provided ports.
+ */
+BT::PortsList CheckDiagnosticStatus::providedPorts()
+{
+    return {};
+}
+
+/**
+ * @brief Define what happens when this conditions is checked.
+ * @return BT::NodeStatus SUCCESS or FAILURE
+ */
 BT::NodeStatus CheckDiagnosticStatus::on_check()
 {
     if (diagnostic_error_)

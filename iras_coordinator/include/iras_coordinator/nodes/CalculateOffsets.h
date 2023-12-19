@@ -1,7 +1,7 @@
 /** *******************************************************
  * IRAS - University of Applied Sciences Karlsruhe
  * Module : ROS2-Node "IRASCoordinator"
- * Purpose : CalculateOffsets in seconds
+ * Purpose : Add offsets from "marker_frame" to new "offset_frame" defined in given "base_frame"
  *
  * @author Andreas Zachariae
  * @author Frederik Plahl
@@ -28,18 +28,7 @@
 class CalculateOffsets : public RosNode
 {
 public:
-    static BT::PortsList providedPorts() { return {BT::InputPort<float>("offset_x"),
-                                                   BT::InputPort<float>("offset_y"),
-                                                   BT::InputPort<float>("offset_z"),
-                                                   BT::OutputPort<float>("out_x"),
-                                                   BT::OutputPort<float>("out_y"),
-                                                   BT::OutputPort<float>("out_z"),
-                                                   BT::InputPort<float>("x"),
-                                                   BT::InputPort<float>("y"),
-                                                   BT::InputPort<float>("z"),
-                                                   BT::InputPort<std::string>("base_frame"),
-                                                   BT::InputPort<std::string>("marker_frame"),
-                                                   BT::InputPort<int>("max_seconds")}; }
+    static BT::PortsList providedPorts();
 
     CalculateOffsets(const std::string &name, const BT::NodeConfiguration &config);
 
@@ -52,7 +41,5 @@ private:
     std::shared_ptr<tf2_ros::TransformListener> transform_listener_{nullptr};
     std::shared_ptr<tf2_ros::StaticTransformBroadcaster> tf_publisher_;
     time_t start_time_;
-    time_t duration_;
     time_t last_checked_;
-    std::string base_frame_;
 };

@@ -19,7 +19,7 @@
 class CheckDiagnosticStatus : public RosCondition
 {
 public:
-    static BT::PortsList providedPorts() { return BT::PortsList(); }
+    static BT::PortsList providedPorts();
 
     CheckDiagnosticStatus(const std::string &name, const BT::NodeConfiguration &config);
 

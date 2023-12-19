@@ -2,41 +2,61 @@
 
 #define RAD2DEG(x) ((x) * 180.0f / 3.1415)
 #define DEG2RAD(x) ((x) * 3.1415 / 180.0f)
-#define OFFSET_Y -0.035
+#define OFFSET_Y -0.035 // Offset from marker corner to center of the marker (For a arcuo marker with 0.07m side length)
 
 using namespace std::chrono_literals;
 
+/**
+ * @brief Constructor of the node, initialize e.g. ROS2 subscriber.
+ */
 GetMarkerPosition::GetMarkerPosition(const std::string &name, const BT::NodeConfiguration &config) : RosNode(name, config)
 {
     tf_buffer_ = std::make_unique<tf2_ros::Buffer>(get_node_handle()->get_clock());
     transform_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
 }
 
+/**
+ * @brief Set the list of ports provided by the BT node.
+ *
+ * New port:
+ *      direction = [BT::InputPort, BT::OutputPort, BT::BidirectionalPort]
+ *      data_type = <[float, int, std::string]>
+ *      name = ("name")
+ *
+ * @return List of provided ports.
+ */
+BT::PortsList GetMarkerPosition::providedPorts()
+{
+    return {BT::InputPort<std::string>("marker_frame"),
+            BT::InputPort<int>("max_seconds"),
+            BT::InputPort<std::string>("base_frame"), // default: "base_link"
+            BT::OutputPort<float>("x"),
+            BT::OutputPort<float>("y"),
+            BT::OutputPort<float>("z"),
+            BT::OutputPort<float>("rotation_x"),
+            BT::OutputPort<float>("rotation_y"),
+            BT::OutputPort<float>("rotation_z")};
+}
+
+/**
+ * @brief Define what happens when this node is ticked for the first time.
+ * @return BT::NodeStatus RUNNING (Has to return RUNNING to allow on_running to be called)
+ */
 BT::NodeStatus GetMarkerPosition::on_start()
 {
-    BT::Optional<int> marker_id = getInput<int>("marker_id");
-    BT::Optional<int> max_seconds = getInput<int>("max_seconds");
-
-    if (!marker_id.has_value())
-    {
-        throw BT::RuntimeError("missing required input [marker_id]: ", marker_id.error());
-    }
-    if (!max_seconds.has_value())
-    {
-        throw BT::RuntimeError("missing required input [max_seconds]: ", max_seconds.error());
-    }
-
-    duration_ = max_seconds.value();
     start_time_ = time(NULL);
     last_checked_ = time(NULL);
-    marker_frame_ = "marker_" + std::to_string(marker_id.value());
 
     return BT::NodeStatus::RUNNING;
 }
 
+/**
+ * @brief Define what happens when this node is ticked in RUNNING mode.
+ * @return BT::NodeStatus SUCCESS or FAILURE or RUNNING
+ */
 BT::NodeStatus GetMarkerPosition::on_running()
 {
-    if ((time(NULL) - start_time_) < duration_)
+    if ((time(NULL) - start_time_) < ports.get_value<int>("max_seconds"))
     {
         if ((time(NULL) - last_checked_) > 1)
         {
@@ -47,7 +67,7 @@ BT::NodeStatus GetMarkerPosition::on_running()
             {
                 // tf_buffer_->canTransform("base_link", marker_frame_);
                 transformStamped = tf_buffer_->lookupTransform(
-                    "base_link", marker_frame_, // get_node_handle()->get_clock()->now(), 500ms);
+                    ports.get_value<std::string>("base_frame"), ports.get_value<std::string>("marker_frame"), // get_node_handle()->get_clock()->now(), 500ms);
                     tf2::TimePointZero);
             }
             catch (tf2::TransformException &ex)
@@ -111,12 +131,12 @@ BT::NodeStatus GetMarkerPosition::on_running()
             mean_pitch = (mean_pitch / marker_mean_.size()); //- 90.0;
             mean_yaw = (mean_yaw / marker_mean_.size());     //+ 180.0;
 
-            setOutput<float>("x", x);
-            setOutput<float>("y", y);
-            setOutput<float>("z", z);
-            setOutput<float>("rotation_x", mean_roll);
-            setOutput<float>("rotation_y", mean_pitch);
-            setOutput<float>("rotation_z", mean_yaw);
+            ports.set_value<float>("x", x);
+            ports.set_value<float>("y", y);
+            ports.set_value<float>("z", z);
+            ports.set_value<float>("rotation_x", mean_roll);
+            ports.set_value<float>("rotation_y", mean_pitch);
+            ports.set_value<float>("rotation_z", mean_yaw);
 
             log("Mean Marker Pose");
             log("MarkerPosition: (x=" + Converter::ftos(x) + ", y=" + Converter::ftos(y) + ", z=" + Converter::ftos(z) + ")");

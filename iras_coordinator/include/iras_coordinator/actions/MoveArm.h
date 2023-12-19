@@ -1,7 +1,7 @@
 /*********************************************************
  * Neobotix - University of Applied Sciences Karlsruhe
  * Module : ROS2-Node "IRASCoordinator"
- * Purpose : Provides the ROS2-Action client "MoveArmToPose"
+ * Purpose : Provides the ROS2-Action client for "move_to_pose"(MoveArmMoveIt)
  *
  * @author Philipp Kirsch
  * @since 1.0.0 (2022.06.28)
@@ -17,12 +17,12 @@
 
 using MoveArmMoveIt = iras_interfaces::action::MoveArmMoveIt;
 
-class ArmMovementMoveIt : public RosAction<MoveArmMoveIt>
+class MoveArm : public RosAction<MoveArmMoveIt>
 {
 public:
     static BT::PortsList providedPorts();
 
-    ArmMovementMoveIt(const std::string &name, const BT::NodeConfiguration &config) : RosAction(name, config) {}
+    MoveArm(const std::string &name, const BT::NodeConfiguration &config) : RosAction(name, config) {}
 
     std::string ros2_action_name() override;
 

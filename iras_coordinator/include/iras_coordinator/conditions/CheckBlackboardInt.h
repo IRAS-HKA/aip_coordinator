@@ -16,7 +16,7 @@
 class CheckBlackboardInt : public RosCondition
 {
 public:
-    static BT::PortsList providedPorts() { return {BT::InputPort<int>("input"), BT::InputPort<int>("compare_to")}; }
+    static BT::PortsList providedPorts();
 
     CheckBlackboardInt(const std::string &name, const BT::NodeConfiguration &config) : RosCondition(name, config) {}
 

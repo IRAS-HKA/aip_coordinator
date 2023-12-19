@@ -18,7 +18,7 @@ using ClearGlobalCostmapSrv = nav2_msgs::srv::ClearEntireCostmap;
 class ClearGlobalCostmap : public RosService<ClearGlobalCostmapSrv>
 {
 public:
-    static BT::PortsList providedPorts() { return {}; }
+    static BT::PortsList providedPorts();
 
     ClearGlobalCostmap(const std::string &name, const BT::NodeConfiguration &config) : RosService(name, config) {}
 

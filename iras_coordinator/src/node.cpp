@@ -23,10 +23,10 @@
 #include <iras_coordinator/services/ParameterRequest.h>
 
 // Arm
-#include <iras_coordinator/actions/ArmMovementMoveIt.h>
+#include <iras_coordinator/actions/MoveArm.h>
 
 // Navigation
-#include <iras_coordinator/actions/BaseMovementNav2.h>
+#include <iras_coordinator/actions/MoveBase.h>
 #include <iras_coordinator/services/ClearGlobalCostmap.h>
 #include <iras_coordinator/services/ClearLocalCostmap.h>
 #include <iras_coordinator/nodes/SetInitialPose.h>
@@ -55,10 +55,10 @@ BT::Tree create_tree(const std::string &main_tree_path, const std::string &groot
     factory.registerNodeType<ParameterRequest<std::string>>("StringParameterRequest");
 
     // Arm
-    factory.registerNodeType<ArmMovementMoveIt>("ArmMovementMoveIt");
+    factory.registerNodeType<MoveArm>("MoveArm");
 
     // Navigation
-    factory.registerNodeType<BaseMovementNav2>("BaseMovementNav2");
+    factory.registerNodeType<MoveBase>("MoveBase");
     factory.registerNodeType<ClearGlobalCostmap>("ClearGlobalCostmap");
     factory.registerNodeType<ClearLocalCostmap>("ClearLocalCostmap");
     factory.registerNodeType<SetInitialPose>("SetInitialPose");
@@ -79,7 +79,7 @@ BT::Tree create_tree(const std::string &main_tree_path, const std::string &groot
 BT::NodeStatus run_tree(BT::Tree &tree)
 {
     BT::NodeStatus status;
-    BT::NodeStatus last_status;
+    BT::NodeStatus last_status = BT::NodeStatus::IDLE;
 
     do
     {

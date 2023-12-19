@@ -1,6 +1,6 @@
 /** *******************************************************
  * IRAS - University of Applied Sciences Karlsruhe
- * Module : ROS2-Node "IRASoordinator"
+ * Module : ROS2-Node "IRASCoordinator"
  * Purpose : Checks the ROS2-Topic "BatteryState"
  *
  * @author Andreas Zachariae
@@ -15,12 +15,10 @@
 
 #include <iras_behaviortree_ros2/components/RosCondition.h>
 
-// TODO: add port with threshold battery level
-
 class CheckBattery : public RosCondition
 {
 public:
-    static BT::PortsList providedPorts() { return BT::PortsList(); }
+    static BT::PortsList providedPorts();
 
     CheckBattery(const std::string &name, const BT::NodeConfiguration &config);
 
@@ -29,5 +27,5 @@ public:
 private:
     rclcpp::Subscription<sensor_msgs::msg::BatteryState>::SharedPtr battery_state_subscription_;
 
-    float battery_percentage_ = 1;
+    float current_battery_level_ = 1;
 };
