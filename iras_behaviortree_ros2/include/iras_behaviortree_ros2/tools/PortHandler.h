@@ -18,7 +18,7 @@ public:
     PortHandler(BT::TreeNode *node) : bt_node_handle_(node) {}
 
     template <typename T>
-    auto get_port_value(std::string name) const
+    auto get_value(std::string name) const
     {
         BT::Optional<T> input = bt_node_handle_->getInput<T>(name);
         if (!input.has_value())
@@ -29,14 +29,14 @@ public:
     }
 
     template <typename T>
-    bool port_has_value(std::string name)
+    bool has_value(std::string name)
     {
         BT::Optional<T> input = bt_node_handle_->getInput<T>(name);
         return input.has_value();
     }
 
     template <typename T>
-    void set_port_value(std::string name, T value)
+    void set_value(std::string name, T value)
     {
         bt_node_handle_->setOutput<T>(name, value);
     }
