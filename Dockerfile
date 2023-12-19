@@ -72,7 +72,8 @@ COPY cpp_core ./cpp_core
 WORKDIR /home/$USER/ros2_ws
 RUN rosdep update --rosdistro $ROS_DISTRO
 RUN rosdep install --from-paths src --ignore-src -y
-RUN . /opt/ros/$ROS_DISTRO/setup.sh && colcon build --symlink-install
+RUN . /opt/ros/$ROS_DISTRO/setup.sh && colcon build --symlink-install \
+    --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 RUN echo "source /home/$USER/ros2_ws/install/setup.bash" >> /home/$USER/.bashrc
 
 RUN sudo sed --in-place --expression \
