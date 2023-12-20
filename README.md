@@ -1,28 +1,34 @@
 # IRAS Coordinator
 This package uses the BehaviorTree.IRAS package which is a wrapper around the [BehaviorTree.cpp v3.8](https://www.behaviortree.dev/) package.
 
-The IRAS Coordinator defines the behavior trees with single BT actions.
+The IRAS Coordinator offers a starting point for high-level task control of your robotic application. Just clone this package and change the git remote and develop behaviors for your own custom project.
+```bash
+git remote remove origin
+git remote add origin <your_repo_adress>
+```
 
-The set of actions can be arranged freely with the graphical user interface [Groot](https://github.com/BehaviorTree/Groot).
+The library of actions can be arranged freely with the graphical user interface [Groot](https://github.com/BehaviorTree/Groot).
 
 ![groot](https://github.com/BehaviorTree/Groot/raw/master/groot-screenshot.png)
 
 ## How to start
 
 Build and start the docker container
-
-    source build_docker.sh
-    source start_docker.sh
+```bash
+source build_docker.sh
+source start_docker.sh
+```
 
 Inside the container launch the Coordinator node with parameters
-
-    ros2 launch iras_coordinator test.launch.py
+```bash
+ros2 launch iras_coordinator test.launch.py
+```
     
 To view or modify the behavior trees, attach a new shell and start Groot
-
-    docker exec -it coordinator bash
-    ros2 run groot Groot
-
+```bash
+docker exec -it coordinator bash
+ros2 run groot Groot
+```
 ## How to start with C++ debugging
 
 Install VSCode extension:
@@ -48,6 +54,44 @@ source start_docker.sh
 
 ## How to design a new Behavior Tree
 
+1. Start the docker container as normal
+    ```bash
+    source start_docker.sh
+    ```
+
+2. If new BT nodes were added or ports changed regenerate the GrootPalette by starting a test BT.
+   ```bash
+   # in ~/ros2_ws/
+   colcon build
+   ros2 launch iras_coordinator test.launch.py
+   ```
+
+3. Start Groot in Editor mode
+    ```bash
+    ros2 run groot Groot
+    # Click "Editor" and "START"
+    ```
+4. Load GrootPalette with all custom nodes.  
+   Click on ->  <img src="https://raw.githubusercontent.com/BehaviorTree/Groot/master/bt_editor/resources/svg/download.svg" alt="load" width="18"/> to load palette from file.  
+   Choose the file from: `/home/docker/ros2_ws/src/iras_coordinator/behaviors/GrootPalette.xml`
+5. Build BT via drag and drop
+6. Save tree to file.  
+   Click on ->  <img src="https://raw.githubusercontent.com/BehaviorTree/Groot/master/bt_editor/resources/svg/save_dark.svg" alt="load" width="18"/> to save.  
+   Choose location as: `/home/docker/ros2_ws/src/iras_coordinator/behaviors/<your_folder_name>/`
+7. Modify config parameter
+    ```yaml
+    # in /home/docker/ros2_ws/src/iras_coordinator/config/params.yaml
+    main_tree_path: "/home/docker/ros2_ws/src/iras_coordinator/behaviors/<your_folder_name>/<your_tree_name>.xml"
+    ```
+    OR create a new launch file with this parameter
+    ```python
+    # in /home/docker/ros2_ws/src/iras_coordinator/launch/<your_launch_file>.launch.py>
+    parameters=[{'main_tree_path': "/home/docker/ros2_ws/src/iras_coordinator/behaviors/<your_folder_name>/<your_tree_name>.xml",
+                 'groot_palette_path': "/home/docker/ros2_ws/src/iras_coordinator/behaviors/GrootPalette.xml"}],
+    ```
+8. Launch your node 
+   
+
 ## How to create a new custom node
 
 There are currently 4 different types of nodes supported:
@@ -58,16 +102,109 @@ There are currently 4 different types of nodes supported:
 
 This instructions gives an example for a ROS2 action client
 
-1. Add new header file in the corresponding folder at `iras_coordinator/include/iras_coordinator/actions`. For this, copy an existing file from that folder and rename. Use this structure as template. Copy `MoveBase.h` and rename to `MyCustomActionNode.h`.
-2. Do the same for the soruce file in `iras_coordinator/src/actions`. Copy `MoveBase.cpp` and rename to `MyCustomActionNode.cpp`.
-3. In your header file `MyCustomActionNode.h` include the header files of your ROS2 interface you want to use. Change
-```cpp
-~~#include <iras_interfaces/action/move_arm_move_it.hpp>~~
-```
-5. Change the class name to the same name as the file
-```cpp
-class MoveArm : public RosAction<MoveArmMoveIt>
-```
+1. Add a new header file in the corresponding folder at `iras_coordinator/include/iras_coordinator/actions`. For this, copy an existing file from that folder and rename. Use this structure as template. Copy `MoveBase.h` and rename to `MyCustomActionNode.h`.
+2. Add a new source file in `iras_coordinator/src/actions`. Copy `MoveBase.cpp` and rename to `MyCustomActionNode.cpp`.
+3. In this source file change the first line to include your newly added header.  
+   Replace: ~~`#include <iras_coordinator/actions/MoveBase.h>`~~
+    ```cpp
+    // in MyCustomActionNode.cpp
+    #include <iras_coordinator/actions/MyCustomActionNode.h>
+    ```
+4. In your header file `MyCustomActionNode.h` include the header files of your ROS2 interface you want to use. In this example it is located in the `iras_interfaces` package.  
+Replace: ~~`#include <nav2_msgs/action/navigate_to_pose.hpp>`~~  
+**Important**: Interface header files are generated automatically. If your Interface file is called `MyCustomAction.action` (PascalCase) the generated header will be `my_custom_action.hpp` (snake_case).
+    ```cpp
+    // in MyCustomActionNode.h
+    #include <iras_interfaces/action/my_custom_action.hpp>
+    ```
+5. Give an alias as shorter name.  
+Replace: ~~`using NavigateToPoseAction = nav2_msgs::action::NavigateToPose;`~~
+    ```cpp
+    // in MyCustomActionNode.h
+    using MyCustomAction = iras_interfaces::action::MyCustomAction;
+    ```
+6. Replace all occurences where old alias is used with new one in `.ccp` and `.h` file. Use VSCode find and replace (strg + f) or rename symbol (F2) shortcut.
+7. Change the class name to the same name as the file.  
+   Replace: ~~`class MoveArm : public RosAction<MoveArmMoveIt>`~~  
+   **Important**: The class name must be different from the given alias.
+    ```cpp
+    // in MyCustomActionNode.h
+    class MyCustomActionNode : public RosAction<MyCustomAction>
+    ```
+8. Replace all occurences of the old class name in the source file `.ccp` with new one. Use VSCode find and replace (strg + f) or rename symbol (F2) shortcut.  
+   Replace: For every function: ~~`std::string MoveBase::ros2_action_name()~~`
+    ```cpp
+    // in MyCustomActionNode.cpp
+    // for every function
+    std::string MyCustomActionNode::ros2_action_name()
+    /* ... */
+    ```
+9. Set the topic name of the ROS2 action server to connect with as string.
+    ```cpp
+    // in MyCustomActionNode.cpp
+    std::string MyCustomActionNode::ros2_action_name()
+    {
+        return "my_custom_action_topic";
+    }
+    ```
+10. Set the list of ports provided by the BT node.
+    ```cpp
+    // in MyCustomActionNode.cpp
+
+    /* New port:
+    *      direction = [BT::InputPort, BT::OutputPort, BT::BidirectionalPort]
+    *      data_type = <[float, int, std::string]>
+    *      name = ("name") */
+    BT::PortsList MyCustomActionNode::providedPorts()
+    {
+        return {BT::InputPort<std::string>("string_input"),
+                BT::OutputPort<float>("float_output"),
+                BT::BidirectionalPort<int>("int_bidirectional")
+                /* ... */};
+    }
+    ```
+11. Set the content of the goal message which is sent to the ROS2 action server.
+    ```cpp
+    // in MyCustomActionNode.cpp
+    void MyCustomActionNode::on_send(MyCustomAction::Goal &goal)
+    {
+        goal.header.frame_id = "custom_frame";
+        goal.header.stamp = get_node_handle()->now();
+        /* ... */
+        log("Custom goal sent");
+    }
+    ```
+12. Define what happens when recieving feedback from the ROS2 action server.
+    ```cpp
+    // in MyCustomActionNode.cpp
+    void MyCustomActionNode::on_feedback(const std::shared_ptr<const NavigateToPoseAction::Feedback> feedback)
+    {
+        /* ... */
+        log("Feedback no. " + std::to_string(feedback.counter) + " recieved");
+    }
+    ```
+13. Define what happens when recieving the result from the ROS2 action server.
+    ```cpp
+    // in MyCustomActionNode.cpp
+    void MyCustomActionNode::on_result(const rclcpp_action::ClientGoalHandle<MyCustomAction>::WrappedResult &result, const MyCustomAction::Goal &goal)
+    {
+        /* ... */
+        log("Action finished");
+    }
+    ```
+14. Include your header file in the Coordinator node at `iras_coordinator/src/node.cpp`
+    ```cpp
+    // in node.cpp
+    #include <iras_coordinator/actions/MyCustomActionNode.h>
+    ```
+15. Regsiter your node in the BehaviorTreeFactory.  
+    **Important**: The string give here defines the name of the node in BT XML representation and Groot.
+    ```cpp
+    // in node.cpp
+    factory.registerNodeType<MyCustomActionNode>("MyCustomActionNode");
+    ```
+16. Rebuild and start the container as described above. This will generate an updated GrootPalette to use in the graphical editor Groot as described in "How to design a new Behavior Tree"
+
 
 
 ## TODO
@@ -79,7 +216,8 @@ class MoveArm : public RosAction<MoveArmMoveIt>
 - [ ] Add RosPublisher and RosSubscriber
 - [x] finish PortHandler and rename XMLDefinition
 - [x] Add general doc with purpose of this repo
-- [ ] Add instructions how to add new nodes
+- [x] Add instructions how to add new nodes
+- [ ] Add instructions how to edit BT with Groot
 - [x] Finish refactoring of lagacy nodes with new style
 - [x] Add cpp debugger for ros nodes and launch files (ROS extension has to be installed)
 
