@@ -132,7 +132,7 @@ Replace: ~~`using NavigateToPoseAction = nav2_msgs::action::NavigateToPose;`~~
     class MyCustomActionNode : public RosAction<MyCustomAction>
     ```
 8. Replace all occurences of the old class name in the source file `.ccp` with new one. Use VSCode find and replace (strg + f) or rename symbol (F2) shortcut.  
-   Replace: For every function: ~~`std::string MoveBase::ros2_action_name()~~`
+   Replace: For every function: ~~`std::string MoveBase::ros2_action_name()`~~
     ```cpp
     // in MyCustomActionNode.cpp
     // for every function
@@ -197,8 +197,8 @@ Replace: ~~`using NavigateToPoseAction = nav2_msgs::action::NavigateToPose;`~~
     // in node.cpp
     #include <iras_coordinator/actions/MyCustomActionNode.h>
     ```
-15. Regsiter your node in the BehaviorTreeFactory.  
-    **Important**: The string give here defines the name of the node in BT XML representation and Groot.
+15. Register your node in the BehaviorTreeFactory.  
+    **Important**: The string given here defines the name of the node in BT XML representation and Groot.
     ```cpp
     // in node.cpp
     factory.registerNodeType<MyCustomActionNode>("MyCustomActionNode");
