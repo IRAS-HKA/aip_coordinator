@@ -220,6 +220,7 @@ Replace: ~~`using NavigateToPoseAction = nav2_msgs::action::NavigateToPose;`~~
 - [ ] Add instructions how to edit BT with Groot
 - [x] Finish refactoring of lagacy nodes with new style
 - [x] Add cpp debugger for ros nodes and launch files (ROS extension has to be installed)
+- [ ] Restructure repo folders. Move cpp_core and bt.iras to separate repo
 
 ## Port from FOXY to HUMBLE:
 - declare_parameter needs a type argument `this->declare_parameter("my_str", rclcpp::PARAMETER_STRING);`
