@@ -23,7 +23,6 @@ find_package(rclcpp_action REQUIRED)
 find_package(iras_behaviortree_ros2 REQUIRED)
 find_package(iras_interfaces REQUIRED)
 find_package(tf2_ros REQUIRED)
-find_package(cpp_core REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(geometry2 REQUIRED)
 find_package(nav2_msgs REQUIRED)
@@ -31,8 +30,7 @@ find_package(std_srvs REQUIRED)
 
 include_directories(
   include 
-  ${behaviortree_ros_INCLUDE_DIRS}
-  ${cpp_core_INCLUDE_DIRS})
+  ${behaviortree_ros_INCLUDE_DIRS})
 
  
 set(DEPENDENCIES 
@@ -41,7 +39,6 @@ set(DEPENDENCIES
   iras_behaviortree_ros2
   iras_interfaces
   tf2_ros
-  cpp_core
   tf2_geometry_msgs
   geometry2
   ament_index_cpp
@@ -65,7 +62,6 @@ add_executable(Coordinator
 
 target_link_libraries(Coordinator
   iras_behaviortree_ros2::behaviortree_ros_lib
-  cpp_core::cpp_core_lib
 )
 
 ament_target_dependencies(Coordinator

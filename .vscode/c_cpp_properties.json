@@ -6,7 +6,6 @@
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/iras_coordinator/include/*",
                 "${workspaceFolder}/iras_behaviortree_ros2/include/*",
-                "${workspaceFolder}/cpp_core/include/*",
                 "${workspaceFolder}/../install/iras_interfaces/include/iras_interfaces/*",
                 "/opt/ros/humble/include/**"
             ],

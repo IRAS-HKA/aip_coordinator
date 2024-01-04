@@ -20,7 +20,6 @@
     <depend>iras_behaviortree_ros2</depend>
     <depend>iras_interfaces</depend>
     <depend>tf2_ros</depend>
-    <depend>cpp_core</depend>
     <depend>tf2_geometry_msgs</depend>
     <depend>geometry2</depend>
     <depend>nav2_msgs</depend>

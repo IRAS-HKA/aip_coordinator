@@ -1,7 +1,7 @@
 /** *******************************************************
  * IRAS - University of Applied Sciences Karlsruhe
  * Module : ROS2-Node "CentralControl"
- * Purpose : Includes headers from cpp_core package
+ * Purpose : Includes headers from iras_behaviortree_ros2 package
  *
  * @author Andreas Zachariae
  * @author Moritz Weisenböhler
@@ -9,5 +9,4 @@
  *********************************************************/
 #pragma once
 
-#include <cpp_core/Component.h>
-#include <cpp_core/events/EventDispatcher.h>
+#include <iras_behaviortree_ros2/core/Component.h>
