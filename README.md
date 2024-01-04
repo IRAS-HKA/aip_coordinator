@@ -214,7 +214,7 @@ Replace: ~~`using NavigateToPoseAction = nav2_msgs::action::NavigateToPose;`~~
 
 ## TODO
 - [x] Groot Palette for new navigation actions clear costmap initialpose
-- [ ] (Integrate LifecycleManager to Coordinater)
+- [ ] (Integrate LifecycleManager to Coordinator)
 - [x] (Integrate cpp_core)
 - [x] Better name ros_name() Make function for each type action, service, etc
 - [x] Add Groot publisher integration
@@ -225,7 +225,8 @@ Replace: ~~`using NavigateToPoseAction = nav2_msgs::action::NavigateToPose;`~~
 - [x] Add instructions how to edit BT with Groot
 - [x] Finish refactoring of lagacy nodes with new style
 - [x] Add cpp debugger for ros nodes and launch files (ROS extension has to be installed)
-- [ ] Restructure repo folders. Move cpp_core and bt.iras to separate repo
+- [x] Restructure repo folders. Move cpp_core and bt.iras to separate repo
+- [ ] Add iras_dummies package for faster development of behaviors and offer templates for ROS2 dummy server
 
 ## Port from FOXY to HUMBLE:
 - declare_parameter needs a type argument `this->declare_parameter("my_str", rclcpp::PARAMETER_STRING);`
