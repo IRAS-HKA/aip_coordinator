@@ -61,7 +61,7 @@ WORKDIR /home/$USER/ros2_ws/src
 RUN git config --global advice.detachedHead false
 RUN git clone --depth 1 https://github.com/BehaviorTree/Groot.git
 
-COPY iras_behaviortree_ros2 ./iras_behaviortree_ros2
+RUN git clone --depth 1 -b humble https://github.com/AndreasZachariae/BehaviorTree.IRAS.git
 COPY iras_coordinator ./iras_coordinator
 COPY iras_interfaces ./iras_interfaces
 

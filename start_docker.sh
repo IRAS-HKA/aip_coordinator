@@ -31,7 +31,6 @@ run_docker() {
             --rm \
             -v $PWD/iras_coordinator:/home/docker/ros2_ws/src/iras_coordinator \
             -v $PWD/iras_interfaces:/home/docker/ros2_ws/src/iras_interfaces \
-            -v $PWD/iras_behaviortree_ros2:/home/docker/ros2_ws/src/iras_behaviortree_ros2 \
             -v $PWD/.vscode:/home/docker/ros2_ws/src/.vscode \
             iras_coordinator/ros:humble \
             # ros2 run groot Groot
