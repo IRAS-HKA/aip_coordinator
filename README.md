@@ -1,8 +1,10 @@
 # IRAS Coordinator
-This package uses the BehaviorTree.IRAS package which is a wrapper around the [BehaviorTree.cpp v3.8](https://www.behaviortree.dev/) package.
+This package uses the [BehaviorTree.IRAS](https://github.com/AndreasZachariae/BehaviorTree.IRAS) framework which is a wrapper around the [BehaviorTree.cpp v3.8](https://www.behaviortree.dev/) library and extends it for the combined use of behavior trees with ROS 2 Humble.
 
 The IRAS Coordinator offers a starting point for high-level task control of your robotic application. Just clone this package and change the git remote and develop behaviors for your own custom project.
 ```bash
+git clone -b humble https://github.com/AndreasZachariae/iras_coordinator.git
+cd iras_coordinator
 git remote remove origin
 git remote add origin <your_repo_adress>
 ```
@@ -206,18 +208,21 @@ Replace: ~~`using NavigateToPoseAction = nav2_msgs::action::NavigateToPose;`~~
 16. Rebuild and start the container as described above. This will generate an updated GrootPalette to use in the graphical editor Groot as described in "How to design a new Behavior Tree"
 
 
+## License
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+
 
 ## TODO
 - [x] Groot Palette for new navigation actions clear costmap initialpose
 - [ ] (Integrate LifecycleManager to Coordinater)
-- [ ] (Integrate cpp_core)
+- [x] (Integrate cpp_core)
 - [x] Better name ros_name() Make function for each type action, service, etc
 - [x] Add Groot publisher integration
 - [ ] Add RosPublisher and RosSubscriber
 - [x] finish PortHandler and rename XMLDefinition
 - [x] Add general doc with purpose of this repo
 - [x] Add instructions how to add new nodes
-- [ ] Add instructions how to edit BT with Groot
+- [x] Add instructions how to edit BT with Groot
 - [x] Finish refactoring of lagacy nodes with new style
 - [x] Add cpp debugger for ros nodes and launch files (ROS extension has to be installed)
 - [ ] Restructure repo folders. Move cpp_core and bt.iras to separate repo
