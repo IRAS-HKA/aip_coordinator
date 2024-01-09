@@ -1,4 +1,4 @@
 Coordinator:
   ros__parameters:
-    main_tree_path: "/home/docker/ros2_ws/src/iras_coordinator/behaviors/examples/NavigationDemo.xml"
+    main_tree_path: "/home/docker/ros2_ws/src/iras_coordinator/behaviors/examples/AIPDemo.xml"
     groot_palette_path: "/home/docker/ros2_ws/src/iras_coordinator/behaviors/GrootPalette.xml"
