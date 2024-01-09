@@ -41,6 +41,9 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/DialogDataType.msg"
 
   "srv/UserDialog.srv"
+  "srv/MoveToJointPosition.srv"
+  "srv/MoveToPose.srv"
+  "srv/SendInt.srv"
 
   "action/MoveArmMoveIt.action"
   #${MSGS}

@@ -24,6 +24,7 @@
 
 // Arm
 #include <iras_coordinator/actions/MoveArm.h>
+#include <iras_coordinator/services/MoveToJointPosition.h>
 
 // Navigation
 #include <iras_coordinator/actions/MoveBase.h>
@@ -56,6 +57,7 @@ BT::Tree create_tree(const std::string &main_tree_path, const std::string &groot
 
     // Arm
     factory.registerNodeType<MoveArm>("MoveArm");
+    factory.registerNodeType<MoveToJointPosition>("MoveToJointPosition");
 
     // Navigation
     factory.registerNodeType<MoveBase>("MoveBase");
