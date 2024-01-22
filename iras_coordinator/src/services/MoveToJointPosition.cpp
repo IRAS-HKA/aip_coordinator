@@ -21,7 +21,12 @@ std::string MoveToJointPosition::ros2_service_name()
  */
 BT::PortsList MoveToJointPosition::providedPorts()
 {
-    return {};
+    return {BT::InputPort<float>("joint1"),
+            BT::InputPort<float>("joint2"),
+            BT::InputPort<float>("joint3"),
+            BT::InputPort<float>("joint4"),
+            BT::InputPort<float>("joint5"),
+            BT::InputPort<float>("joint6")};
 }
 
 /**
@@ -29,12 +34,12 @@ BT::PortsList MoveToJointPosition::providedPorts()
  */
 void MoveToJointPosition::on_send(std::shared_ptr<MoveToJointPositionSrv::Request> request)
 {
-    request->joint_position.push_back(0.0);
-    request->joint_position.push_back(0.0);
-    request->joint_position.push_back(0.0);
-    request->joint_position.push_back(0.0);
-    request->joint_position.push_back(0.0);
-    request->joint_position.push_back(0.0);
+    request->joint_position.push_back(ports.get_value<float>("joint1"));
+    request->joint_position.push_back(ports.get_value<float>("joint2"));
+    request->joint_position.push_back(ports.get_value<float>("joint3"));
+    request->joint_position.push_back(ports.get_value<float>("joint4"));
+    request->joint_position.push_back(ports.get_value<float>("joint5"));
+    request->joint_position.push_back(ports.get_value<float>("joint6"));
 }
 
 /**
