@@ -40,6 +40,8 @@ void MoveArmToJoints::on_send(std::shared_ptr<MoveToJointPositionSrv::Request> r
     request->joint_position.push_back(ports.get_value<float>("joint4"));
     request->joint_position.push_back(ports.get_value<float>("joint5"));
     request->joint_position.push_back(ports.get_value<float>("joint6"));
+
+    log("Move arm to joints (" + Converter::ftos(request->joint_position[0]) + ", " + Converter::ftos(request->joint_position[1]) + ", " + Converter::ftos(request->joint_position[2]) + ", " + Converter::ftos(request->joint_position[3]) + ", " + Converter::ftos(request->joint_position[4]) + ", " + Converter::ftos(request->joint_position[5]) + ")");
 }
 
 /**
