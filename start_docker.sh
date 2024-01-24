@@ -8,7 +8,7 @@ NC='\033[0m' # No Color
 
 
 is_image_build() {
-    if [ "$(docker images -q iras_coordinator/ros:humble 2> /dev/null)" == "" ]; then
+    if [ "$(docker images -q aip_coordinator/ros:humble 2> /dev/null)" == "" ]; then
         echo -e "${RED}Image not found. Have you build the image?${NC}"
         echo -e "${BLUE}Try running: ./build_docker.sh${NC}"
         return 1
@@ -23,16 +23,16 @@ run_docker() {
         echo -e "${YELLOW}Running docker...${NC}"
         xhost + local:root
         docker run \
-            --name iras_coordinator \
+            --name aip_coordinator \
             -it \
             --net host \
             -e DISPLAY=$DISPLAY \
             --env-file .env \
             --rm \
-            -v $PWD/iras_coordinator:/home/docker/ros2_ws/src/iras_coordinator \
+            -v $PWD/aip_coordinator:/home/docker/ros2_ws/src/aip_coordinator \
             -v $PWD/iras_interfaces:/home/docker/ros2_ws/src/iras_interfaces \
             -v $PWD/.vscode:/home/docker/ros2_ws/src/.vscode \
-            iras_coordinator/ros:humble \
+            aip_coordinator/ros:humble \
             # ros2 run groot Groot
     fi
 }

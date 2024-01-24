@@ -4,7 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/iras_coordinator/include/*",
+                "${workspaceFolder}/aip_coordinator/include/*",
                 "${workspaceFolder}/BehaviorTree.IRAS/include/*",
                 "${workspaceFolder}/../install/iras_interfaces/include/iras_interfaces/*",
                 "/opt/ros/humble/include/**"

@@ -52,7 +52,7 @@
             "id": "package",
             "type": "promptString",
             "description": "Package name",
-            "default": "iras_coordinator"
+            "default": "aip_coordinator"
         },
         {
             "id": "program",

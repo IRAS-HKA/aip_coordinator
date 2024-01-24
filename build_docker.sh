@@ -10,7 +10,7 @@ uid=$(eval "id -u")
 gid=$(eval "id -g")
 
 is_image_build() {
-    if [ "$(docker images -q iras_coordinator/ros:humble 2> /dev/null)" == "" ]; then
+    if [ "$(docker images -q aip_coordinator/ros:humble 2> /dev/null)" == "" ]; then
         echo -e "${GREEN}Image not found.${NC}"
         return 1
     else
@@ -35,7 +35,7 @@ build_image() {
         docker build \
             --build-arg UID="$uid" \
             --build-arg GID="$gid" \
-            -t iras_coordinator/ros:humble \
+            -t aip_coordinator/ros:humble \
             .
     fi
 }

@@ -47,7 +47,7 @@ RUN groupadd -g "$GID" "$USER"  && \
     chown ${UID}:${GID} -R /home/${USER}
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /etc/bash.bashrc
 
-COPY iras_coordinator/config/dds_profile.xml /home/$USER
+COPY aip_coordinator/config/dds_profile.xml /home/$USER
 RUN chown $USER:$USER /home/$USER/dds_profile.xml
 ENV FASTRTPS_DEFAULT_PROFILES_FILE=/home/$USER/dds_profile.xml
 
@@ -62,7 +62,7 @@ RUN git config --global advice.detachedHead false
 RUN git clone --depth 1 https://github.com/BehaviorTree/Groot.git
 
 RUN git clone --depth 1 -b humble https://github.com/AndreasZachariae/BehaviorTree.IRAS.git
-COPY iras_coordinator ./iras_coordinator
+COPY aip_coordinator ./aip_coordinator
 COPY iras_interfaces ./iras_interfaces
 
 ##############################################################################

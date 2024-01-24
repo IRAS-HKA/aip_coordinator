@@ -23,7 +23,7 @@ source start_docker.sh
 
 Inside the container launch the Coordinator node with parameters
 ```bash
-ros2 launch iras_coordinator test.launch.py
+ros2 launch aip_coordinator test.launch.py
 ```
     
 To view or modify the behavior trees, attach a new shell and start Groot
@@ -65,7 +65,7 @@ source start_docker.sh
    ```bash
    # in ~/ros2_ws/
    colcon build
-   ros2 launch iras_coordinator test.launch.py
+   ros2 launch aip_coordinator test.launch.py
    ```
 
 3. Start Groot in Editor mode
@@ -75,21 +75,21 @@ source start_docker.sh
     ```
 4. Load GrootPalette with all custom nodes.  
    Click on ->  <img src="https://raw.githubusercontent.com/BehaviorTree/Groot/master/bt_editor/resources/svg/download.svg" alt="load" width="18"/> to load palette from file.  
-   Choose the file from: `/home/docker/ros2_ws/src/iras_coordinator/behaviors/GrootPalette.xml`
+   Choose the file from: `/home/docker/ros2_ws/src/aip_coordinator/behaviors/GrootPalette.xml`
 5. Build BT via drag and drop
 6. Save tree to file.  
    Click on ->  <img src="https://raw.githubusercontent.com/BehaviorTree/Groot/master/bt_editor/resources/svg/save_dark.svg" alt="load" width="18"/> to save.  
-   Choose location as: `/home/docker/ros2_ws/src/iras_coordinator/behaviors/<your_folder_name>/`
+   Choose location as: `/home/docker/ros2_ws/src/aip_coordinator/behaviors/<your_folder_name>/`
 7. Modify config parameter
     ```yaml
-    # in /home/docker/ros2_ws/src/iras_coordinator/config/params.yaml
-    main_tree_path: "/home/docker/ros2_ws/src/iras_coordinator/behaviors/<your_folder_name>/<your_tree_name>.xml"
+    # in /home/docker/ros2_ws/src/aip_coordinator/config/params.yaml
+    main_tree_path: "/home/docker/ros2_ws/src/aip_coordinator/behaviors/<your_folder_name>/<your_tree_name>.xml"
     ```
     OR create a new launch file with this parameter
     ```python
-    # in /home/docker/ros2_ws/src/iras_coordinator/launch/<your_launch_file>.launch.py>
-    parameters=[{'main_tree_path': "/home/docker/ros2_ws/src/iras_coordinator/behaviors/<your_folder_name>/<your_tree_name>.xml",
-                 'groot_palette_path': "/home/docker/ros2_ws/src/iras_coordinator/behaviors/GrootPalette.xml"}],
+    # in /home/docker/ros2_ws/src/aip_coordinator/launch/<your_launch_file>.launch.py>
+    parameters=[{'main_tree_path': "/home/docker/ros2_ws/src/aip_coordinator/behaviors/<your_folder_name>/<your_tree_name>.xml",
+                 'groot_palette_path': "/home/docker/ros2_ws/src/aip_coordinator/behaviors/GrootPalette.xml"}],
     ```
 8. Launch your node 
    
@@ -104,13 +104,13 @@ There are currently 4 different types of nodes supported:
 
 This instructions gives an example for a ROS2 action client
 
-1. Add a new header file in the corresponding folder at `iras_coordinator/include/iras_coordinator/actions`. For this, copy an existing file from that folder and rename. Use this structure as template. Copy `MoveBase.h` and rename to `MyCustomActionNode.h`.
-2. Add a new source file in `iras_coordinator/src/actions`. Copy `MoveBase.cpp` and rename to `MyCustomActionNode.cpp`.
+1. Add a new header file in the corresponding folder at `aip_coordinator/include/aip_coordinator/actions`. For this, copy an existing file from that folder and rename. Use this structure as template. Copy `MoveBase.h` and rename to `MyCustomActionNode.h`.
+2. Add a new source file in `aip_coordinator/src/actions`. Copy `MoveBase.cpp` and rename to `MyCustomActionNode.cpp`.
 3. In this source file change the first line to include your newly added header.  
-   Replace: ~~`#include <iras_coordinator/actions/MoveBase.h>`~~
+   Replace: ~~`#include <aip_coordinator/actions/MoveBase.h>`~~
     ```cpp
     // in MyCustomActionNode.cpp
-    #include <iras_coordinator/actions/MyCustomActionNode.h>
+    #include <aip_coordinator/actions/MyCustomActionNode.h>
     ```
 4. In your header file `MyCustomActionNode.h` include the header files of your ROS2 interface you want to use. In this example it is located in the `iras_interfaces` package.  
 Replace: ~~`#include <nav2_msgs/action/navigate_to_pose.hpp>`~~  
@@ -194,10 +194,10 @@ Replace: ~~`using NavigateToPoseAction = nav2_msgs::action::NavigateToPose;`~~
         log("Action finished");
     }
     ```
-14. Include your header file in the Coordinator node at `iras_coordinator/src/node.cpp`
+14. Include your header file in the Coordinator node at `aip_coordinator/src/node.cpp`
     ```cpp
     // in node.cpp
-    #include <iras_coordinator/actions/MyCustomActionNode.h>
+    #include <aip_coordinator/actions/MyCustomActionNode.h>
     ```
 15. Register your node in the BehaviorTreeFactory.  
     **Important**: The string given here defines the name of the node in BT XML representation and Groot.
