@@ -89,6 +89,7 @@
         <Condition ID="CheckStop"/>
         <Action ID="ClearLocalCostmap"/>
         <Action ID="MoveArmToPose">
+            <input_port name="cartesian" type="bool"/>
             <input_port name="q_z" type="float"/>
             <input_port name="q_x" type="float"/>
             <input_port name="z" type="float"/>
