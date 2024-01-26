@@ -5,9 +5,9 @@
         <Repeat num_cycles="2">
             <Sequence>
                 <Action ID="MoveArmToJoints" joint1="0" joint2="-1.57" joint3="1.57" joint4="0" joint5="1.57" joint6="0"/>
-                <Action ID="MoveArmToPose" cartesian="False" q_w="0" q_x="0.707" q_y="0" q_z="0.707" x="0.52" y="-0.48" z="2"/>
-                <Action ID="MoveArmToPose" cartesian="False" q_w="0" q_x="0.707" q_y="0" q_z="0.707" x="0.52" y="0.48" z="2"/>
-                <Action ID="MoveArmToPose" cartesian="True" q_w="0" q_x="0.707" q_y="0" q_z="0.707" x="0.52" y="-0.48" z="2"/>
+                <Action ID="MoveArmToPose" cartesian="False" q_w="1" q_x="0" q_y="0" q_z="0" x="0.7" y="0" z="1.6"/>
+                <Action ID="MoveArmToPose" cartesian="False" q_w="1" q_x="0" q_y="0" q_z="0" x="0.7" y="0.8" z="1.6"/>
+                <Action ID="MoveArmToPose" cartesian="True" q_w="1" q_x="0" q_y="0" q_z="0" x="0.7" y="0" z="1.6"/>
                 <Action ID="MoveArmToJoints" joint1="0" joint2="-1.57" joint3="1.57" joint4="0" joint5="1.57" joint6="0"/>
             </Sequence>
         </Repeat>
