@@ -32,10 +32,13 @@ build_image() {
     is_image_build
     if [ $? -eq 1 ]; then
         echo -e "${YELLOW}Building image...${NC}"
+        DOCKER_BUILDKIT=1 \
         docker build \
             --build-arg UID="$uid" \
             --build-arg GID="$gid" \
+            --build-arg CACHE_BUST="$(date +%s)" \
             -t aip_coordinator/ros:humble \
+            --ssh default \
             .
     fi
 }

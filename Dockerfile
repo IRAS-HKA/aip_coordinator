@@ -4,8 +4,8 @@
 ARG ROS_DISTRO=humble
 FROM ros:$ROS_DISTRO-ros-base
 ENV TZ=Europe/Berlin
+ENV TERM=xterm-256color
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN rosdep update --rosdistro $ROS_DISTRO
 
 # Update packages only if necessary, ~250MB
 # RUN apt update && apt -y dist-upgrade
@@ -47,6 +47,7 @@ RUN groupadd -g "$GID" "$USER"  && \
     chown ${UID}:${GID} -R /home/${USER}
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /etc/bash.bashrc
 
+# Set ROS2 DDS profile
 COPY aip_coordinator/config/dds_profile.xml /home/$USER
 RUN chown $USER:$USER /home/$USER/dds_profile.xml
 ENV FASTRTPS_DEFAULT_PROFILES_FILE=/home/$USER/dds_profile.xml
@@ -60,10 +61,24 @@ RUN mkdir -p /home/$USER/ros2_ws/src
 WORKDIR /home/$USER/ros2_ws/src
 RUN git config --global advice.detachedHead false
 RUN git clone --depth 1 https://github.com/BehaviorTree/Groot.git
-
 RUN git clone --depth 1 -b humble https://github.com/AndreasZachariae/BehaviorTree.IRAS.git
+
 COPY aip_coordinator ./aip_coordinator
 COPY iras_interfaces ./iras_interfaces
+
+# Clone private Github repos with ssh key
+USER root
+RUN mkdir -m 700 /root/.ssh && \
+    touch -m /root/.ssh/known_hosts && \
+    ssh-keyscan github.com > /root/.ssh/known_hosts 
+ARG CACHE_BUST
+
+RUN --mount=type=ssh \
+    git clone --depth 1 -b humble git@github.com:IRAS-HKA/object_detector_tensorflow.git
+RUN mv ./object_detector_tensorflow/ros/object_detector_tensorflow_interfaces . && \
+    rm -rf ./object_detector_tensorflow
+
+USER $USER 
 
 ##############################################################################
 ##                                 Build ROS and run                        ##
