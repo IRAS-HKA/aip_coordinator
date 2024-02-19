@@ -3,8 +3,7 @@
 <package format="3">
     <name>aip_coordinator</name>
     <version>1.1.0</version>
-    <description> This package provides the task coordinator for IRAS. It uses the BehaviorTree.CPP
-        framework for abstract planning. </description>
+    <description> This package provides the task coordinator for IRAS. It uses the BehaviorTree.CPP framework for abstract planning. </description>
     <maintainer email="andreas.zachariae@gmail.com">Andreas Zachariae</maintainer>
     <license>TODO</license>
     <author>Andreas Zachariae</author>
@@ -22,6 +21,7 @@
     <depend>geometry2</depend>
     <depend>nav2_msgs</depend>
     <depend>std_srvs</depend>
+    <depend>object_detector_tensorflow_interfaces</depend>
 
     <test_depend>ament_lint_auto</test_depend>
     <test_depend>ament_lint_common</test_depend>

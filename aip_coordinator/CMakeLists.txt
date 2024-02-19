@@ -27,6 +27,7 @@ find_package(tf2_geometry_msgs REQUIRED)
 find_package(geometry2 REQUIRED)
 find_package(nav2_msgs REQUIRED)
 find_package(std_srvs REQUIRED)
+find_package(object_detector_tensorflow_interfaces REQUIRED)
 
 include_directories(
   include 
@@ -44,6 +45,7 @@ set(DEPENDENCIES
   ament_index_cpp
   nav2_msgs
   std_srvs
+  object_detector_tensorflow_interfaces
 )
 
 file (GLOB SOURCES_ACTIONS src/actions/*.cpp)

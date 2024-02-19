@@ -36,6 +36,7 @@
 // Camera
 #include <aip_coordinator/nodes/CalculateOffsets.h>
 #include <aip_coordinator/nodes/GetMarkerPosition.h>
+#include <aip_coordinator/services/DetectObject.h>
 
 // Misc
 #include <aip_coordinator/nodes/Wait.h>
@@ -70,6 +71,7 @@ BT::Tree create_tree(const std::string &main_tree_path, const std::string &groot
     // Camera
     factory.registerNodeType<CalculateOffsets>("CalculateOffsets");
     factory.registerNodeType<GetMarkerPosition>("GetMarkerPosition");
+    factory.registerNodeType<DetectObject>("DetectObject");
 
     // Misc
     factory.registerNodeType<Wait>("Wait");
