@@ -34,7 +34,7 @@ void ClearLocalCostmap::on_send(std::shared_ptr<ClearLocalCostmapSrv::Request>)
 /**
  * @brief Define what happens when recieving the response from the ROS2 service server.
  */
-bool ClearLocalCostmap::on_result(std::shared_future<std::shared_ptr<ClearLocalCostmapSrv::Response>>, std::shared_ptr<ClearLocalCostmapSrv::Request>)
+bool ClearLocalCostmap::on_result(std::shared_ptr<ClearLocalCostmapSrv::Response>, std::shared_ptr<ClearLocalCostmapSrv::Request>)
 {
     log("Local costmap cleared");
     return true;

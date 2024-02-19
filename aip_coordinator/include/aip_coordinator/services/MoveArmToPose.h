@@ -25,5 +25,5 @@ public:
     std::string ros2_service_name() override;
 
     void on_send(std::shared_ptr<MoveToPoseSrv::Request> request) override;
-    bool on_result(std::shared_future<std::shared_ptr<MoveToPoseSrv::Response>> response, std::shared_ptr<MoveToPoseSrv::Request> request) override;
+    bool on_result(std::shared_ptr<MoveToPoseSrv::Response> response, std::shared_ptr<MoveToPoseSrv::Request> request) override;
 };

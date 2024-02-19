@@ -230,3 +230,4 @@ Replace: ~~`using NavigateToPoseAction = nav2_msgs::action::NavigateToPose;`~~
 
 ## Port from FOXY to HUMBLE:
 - declare_parameter needs a type argument `this->declare_parameter("my_str", rclcpp::PARAMETER_STRING);`
+- `what():  std::future_error: No associated state` https://github.com/ros2/rclcpp/issues/1968

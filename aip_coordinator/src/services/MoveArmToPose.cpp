@@ -52,7 +52,7 @@ void MoveArmToPose::on_send(std::shared_ptr<MoveToPoseSrv::Request> request)
 /**
  * @brief Define what happens when recieving the response from the ROS2 service server.
  */
-bool MoveArmToPose::on_result(std::shared_future<std::shared_ptr<MoveToPoseSrv::Response>>, std::shared_ptr<MoveToPoseSrv::Request>)
+bool MoveArmToPose::on_result(std::shared_ptr<MoveToPoseSrv::Response>, std::shared_ptr<MoveToPoseSrv::Request>)
 {
     log("MoveArmToPose completed");
     return true;

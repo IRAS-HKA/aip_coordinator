@@ -47,7 +47,7 @@ void MoveArmToJoints::on_send(std::shared_ptr<MoveToJointPositionSrv::Request> r
 /**
  * @brief Define what happens when recieving the response from the ROS2 service server.
  */
-bool MoveArmToJoints::on_result(std::shared_future<std::shared_ptr<MoveToJointPositionSrv::Response>>, std::shared_ptr<MoveToJointPositionSrv::Request>)
+bool MoveArmToJoints::on_result(std::shared_ptr<MoveToJointPositionSrv::Response>, std::shared_ptr<MoveToJointPositionSrv::Request>)
 {
     log("MoveArmToJoints completed");
     return true;

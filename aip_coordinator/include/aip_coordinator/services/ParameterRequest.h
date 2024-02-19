@@ -88,9 +88,9 @@ public:
         request->data_keys.push_back(data_type);
     }
 
-    bool on_result(std::shared_future<std::shared_ptr<UserDialog::Response>> response, std::shared_ptr<UserDialog::Request>) override
+    bool on_result(std::shared_ptr<UserDialog::Response> response, std::shared_ptr<UserDialog::Request>) override
     {
-        auto data_values = response.get()->data_values;
+        auto data_values = response->data_values;
 
         if (data_values.size() == 1)
         {
