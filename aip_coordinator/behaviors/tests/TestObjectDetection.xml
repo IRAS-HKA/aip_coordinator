@@ -2,7 +2,10 @@
 <root main_tree_to_execute="BehaviorTree">
     <!-- ////////// -->
     <BehaviorTree ID="BehaviorTree">
-        <Action ID="DetectObject" base_frame="base_link" camera_type="roboception" class_name="cat" probability="" x="" y="" z=""/>
+        <Sequence>
+            <Action ID="Wait" seconds="3"/>
+            <Action ID="DetectObject" base_frame="base_link" camera_type="roboception" class_name="box" probability="" x="" y="" z=""/>
+        </Sequence>
     </BehaviorTree>
     <!-- ////////// -->
     <TreeNodesModel>
