@@ -25,7 +25,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     libdw-dev \
     libqt5opengl5-dev \
     qttools5-dev-tools \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    nano \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* 
 
 RUN python3 -m pip install -U pip setuptools
 

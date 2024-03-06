@@ -38,6 +38,11 @@
 #include <aip_coordinator/nodes/GetMarkerPosition.h>
 #include <aip_coordinator/services/DetectObject.h>
 
+// Gripper 
+#include <aip_coordinator/services/OpenGripper.h>
+#include <aip_coordinator/services/CloseGripper.h>
+
+
 // Misc
 #include <aip_coordinator/nodes/Wait.h>
 
@@ -75,6 +80,11 @@ BT::Tree create_tree(const std::string &main_tree_path, const std::string &groot
 
     // Misc
     factory.registerNodeType<Wait>("Wait");
+
+    // Gripper
+    factory.registerNodeType<OpenGripper>("OpenGripper");
+    factory.registerNodeType<CloseGripper>("CloseGripper");
+
 
     XmlGenerator xml_generator(&factory);
     xml_generator.generate_xml_palette(groot_palette_path);
