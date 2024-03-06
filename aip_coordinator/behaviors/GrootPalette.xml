@@ -76,6 +76,9 @@
             <input_port name="joint4" type="float"/>
             <input_port name="joint1" type="float"/>
         </Action>
+        <Action ID="CloseGripper">
+            <input_port name="cylinder_ids" type="undefined"/>
+        </Action>
         <Action ID="FloatParameterRequest">
             <input_port name="max" type="std::string"/>
             <input_port name="min" type="std::string"/>
@@ -87,6 +90,9 @@
             <output_port name="value" type="float"/>
         </Action>
         <Condition ID="CheckStop"/>
+        <Action ID="OpenGripper">
+            <input_port name="cylinder_ids" type="undefined"/>
+        </Action>
         <Action ID="DetectObject">
             <output_port name="probability" type="float"/>
             <output_port name="z" type="float"/>

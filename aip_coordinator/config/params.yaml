@@ -1,4 +1,4 @@
 Coordinator:
   ros__parameters:
-    main_tree_path: "/home/docker/ros2_ws/src/aip_coordinator/behaviors/examples/AIPDemo.xml"
+    main_tree_path: "/home/docker/ros2_ws/src/aip_coordinator/behaviors/examples/AIPDemo_Bosch.xml"
     groot_palette_path: "/home/docker/ros2_ws/src/aip_coordinator/behaviors/GrootPalette.xml"
