@@ -1,17 +1,7 @@
 # IRAS Coordinator
 This package uses the [BehaviorTree.IRAS](https://github.com/AndreasZachariae/BehaviorTree.IRAS) framework which is a wrapper around the [BehaviorTree.cpp v3.8](https://www.behaviortree.dev/) library and extends it for the combined use of behavior trees with ROS 2 Humble.
 
-The IRAS Coordinator offers a starting point for high-level task control of your robotic application. Just clone this package and change the git remote and develop behaviors for your own custom project.
-```bash
-git clone -b humble https://github.com/AndreasZachariae/iras_coordinator.git
-cd iras_coordinator
-git remote remove origin
-git remote add origin <your_repo_adress>
-```
-
 The library of actions can be arranged freely with the graphical user interface [Groot](https://github.com/BehaviorTree/Groot).
-
-![groot](https://github.com/BehaviorTree/Groot/raw/master/groot-screenshot.png)
 
 ## How to start
 
@@ -22,8 +12,11 @@ source start_docker.sh
 ```
 
 Inside the container launch the Coordinator node with parameters
-```bash
-ros2 launch aip_coordinator test.launch.py
+```
+# in aip_coordinator docker
+ros2 launch aip_coordinator aip.launch.py
+
+# the to be executed behavior tree can be adjusted in the params.yaml file located in src/aip_coordinator/config/params.yaml
 ```
     
 To view or modify the behavior trees, attach a new shell and start Groot
@@ -31,28 +24,6 @@ To view or modify the behavior trees, attach a new shell and start Groot
 docker exec -it coordinator bash
 ros2 run groot Groot
 ```
-## How to start with C++ debugging
-
-Install VSCode extension:
-- Remote Development
-- ROS
-- C/C++
-
-Mount settings folder .vscode to target directory for development
-```bash
-# Add parameter to docker run command
--v $PWD/.vscode:/home/docker/ros2_ws/src/.vscode
-```
-
-```bash
-source start_docker.sh
-```
-
-1. Attach to running docker container with VSCode remote extension
-2. Open remote folder where .vscode is mounted to
-3. Install `ROS` and `C/C++` extension in container
-4. Use command palette (strg + shift + p) and `Tasks: Run Task` and `Build`
-5. Use VSCode debugger and stop points for debugging
 
 ## How to design a new Behavior Tree
 
@@ -92,7 +63,8 @@ source start_docker.sh
                  'groot_palette_path': "/home/docker/ros2_ws/src/aip_coordinator/behaviors/GrootPalette.xml"}],
     ```
 8. Launch your node 
-   
+
+For more information, please review the AIP_Wiki, especially "[How to use AIP Coordinator](https://github.com/IRAS-HKA/aip_wiki/blob/main/docs/how_to_use_aip_coordinator.md)".
 
 ## How to create a new custom node
 
