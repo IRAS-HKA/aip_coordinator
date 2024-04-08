@@ -60,9 +60,8 @@ RUN mkdir -p /home/$USER/ros2_ws/src
 ##                                 User Dependecies                         ##
 ##############################################################################
 WORKDIR /home/$USER/ros2_ws/src
-RUN git config --global advice.detachedHead false
-RUN git clone --depth 1 https://github.com/BehaviorTree/Groot.git
-RUN git clone --depth 1 -b humble https://github.com/AndreasZachariae/BehaviorTree.IRAS.git
+RUN git clone https://github.com/BehaviorTree/Groot.git
+RUN git clone -b humble https://github.com/AndreasZachariae/BehaviorTree.IRAS.git
 
 COPY aip_coordinator ./aip_coordinator
 COPY iras_interfaces ./iras_interfaces
@@ -75,7 +74,7 @@ RUN mkdir -m 700 /root/.ssh && \
 ARG CACHE_BUST
 
 RUN --mount=type=ssh \
-    git clone --depth 1 -b humble git@github.com:IRAS-HKA/object_detector_tensorflow.git
+    git clone -b humble git@github.com:IRAS-HKA/object_detector_tensorflow.git
 RUN mv ./object_detector_tensorflow/ros/object_detector_tensorflow_interfaces . && \
     rm -rf ./object_detector_tensorflow
 
