@@ -101,7 +101,7 @@ BT::NodeStatus CalculateOffsets::on_running()
             }
 
             ports.set_value<float>("out_x", transformStamped.transform.translation.x);
-            ports.set_value<float>("out_y", -transformStamped.transform.translation.y);
+            ports.set_value<float>("out_y", transformStamped.transform.translation.y);
             ports.set_value<float>("out_z", transformStamped.transform.translation.z);
             ports.set_value<float>("out_qx", transformStamped.transform.rotation.x);
             ports.set_value<float>("out_qy", transformStamped.transform.rotation.y);
