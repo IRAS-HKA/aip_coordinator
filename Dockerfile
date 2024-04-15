@@ -67,14 +67,15 @@ COPY aip_coordinator ./aip_coordinator
 COPY iras_interfaces ./iras_interfaces
 
 # Clone private Github repos with ssh key
-USER root
-RUN mkdir -m 700 /root/.ssh && \
-    touch -m /root/.ssh/known_hosts && \
-    ssh-keyscan github.com > /root/.ssh/known_hosts 
-ARG CACHE_BUST
+# USER root
+# RUN mkdir -m 700 /root/.ssh && \
+#     touch -m /root/.ssh/known_hosts && \
+#     ssh-keyscan github.com > /root/.ssh/known_hosts 
+# ARG CACHE_BUST
 
-RUN --mount=type=ssh \
-    git clone -b humble git@github.com:IRAS-HKA/object_detector_tensorflow.git
+# RUN --mount=type=ssh \
+#     git clone -b humble git@github.com:IRAS-HKA/object_detector_tensorflow.git
+RUN git clone -b humble https://github.com/IRAS-HKA/object_detector_tensorflow.git
 RUN mv ./object_detector_tensorflow/ros/object_detector_tensorflow_interfaces . && \
     rm -rf ./object_detector_tensorflow
 
