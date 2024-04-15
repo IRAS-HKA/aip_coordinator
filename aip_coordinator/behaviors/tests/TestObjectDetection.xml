@@ -3,8 +3,24 @@
     <!-- ////////// -->
     <BehaviorTree ID="BehaviorTree">
         <Sequence>
-            <Action ID="Wait" seconds="3"/>
-            <Action ID="DetectObject" base_frame="base_link" camera_type="roboception" class_name="box" probability="" x="" y="" z=""/>
+            <Action ID="DetectObject" base_frame="base_link" camera_type="roboception" class_name="" probability="" x="{x}" y="{y}" z="{z}"/>
+
+            <Action ID="CalculateOffsets"
+                base_frame="base_link" marker_frame="detection" max_seconds="5" offset_frame="pick"
+                offset_x="0" offset_y="0" offset_z="0.3"
+                out_x="{x}" out_y="{y}" out_z="{z}" out_qw="{qw}" out_qx="{qx}" out_qy="{qy}" out_qz="{qz}"/>
+
+            <Action ID="MoveArmToPose" cartesian="True" x="{x}" y="{y}" z="{z}" q_w="{qw}" q_x="{qx}" q_y="{qy}" q_z="{qz}"/>
+            <Action ID="Wait" seconds="2"/>
+
+            <Action ID="OpenGripper" cylinder_ids="1"/>
+            <Action ID="Wait" seconds="2"/>
+
+            <Action ID="MoveArmToPose" cartesian="True" q_w="1" q_x="0" q_y="0" q_z="0" x="0.74" y="1" z="1.6"/>
+            <Action ID="Wait" seconds="2"/>
+
+            <Action ID="CloseGripper" cylinder_ids="1"/>
+            <Action ID="Wait" seconds="2"/>
         </Sequence>
     </BehaviorTree>
     <!-- ////////// -->
