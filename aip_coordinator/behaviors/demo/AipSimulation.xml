@@ -3,6 +3,8 @@
     <!-- ////////// -->
     <BehaviorTree ID="BehaviorTree">
         <Sequence>
+            <Action ID="MoveArmToPose" cartesian="True" x="0.74" y="0.4" z="1.6" q_w="1" q_x="0" q_y="0" q_z="0" />
+            <!-- <Action ID="OpenGripper" cylinder_ids="1,2,3,4"/> -->
 
             <Action ID="DetectObject" base_frame="world" camera_type="roboception" class_name="" probability="" x="{x}" y="{y}" z="{z}"/>
 
@@ -11,6 +13,17 @@
                 offset_x="-0.045" offset_y="0.08" offset_z="-0.44"
                 out_x="{x}" out_y="{y}" out_z="{z}" out_qw="{qw}" out_qx="{qx}" out_qy="{qy}" out_qz="{qz}"/>
             <!-- x 0.045, y=-0.09 z=0.33  -->
+
+            <Action ID="MoveArmToPose" cartesian="True" x="{x}" y="{y}" z="1.6" q_w="1" q_x="0" q_y="0" q_z="0"/>
+            <Action ID="MoveArmToPose" cartesian="True" x="{x}" y="{y}" z="{z}" q_w="1" q_x="0" q_y="0" q_z="0"/>
+
+            
+            <!-- <Action ID="CloseGripper" cylinder_ids="3"/> -->
+
+            <Action ID="MoveArmToPose" cartesian="True" x="{x}" y="{y}" z="1.6" q_w="1" q_x="0" q_y="0" q_z="0"/>
+            <Action ID="MoveArmToPose" cartesian="True" x="0.74" y="0.4" z="1.6" q_w="1" q_x="0" q_y="0" q_z="0" />
+
+            <!-- <Action ID="OpenGripper" cylinder_ids="3"/> -->
         </Sequence>
     </BehaviorTree>
     <!-- ////////// -->
