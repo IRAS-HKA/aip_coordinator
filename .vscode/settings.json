@@ -106,4 +106,5 @@
         "forward_list": "cpp",
         "span": "cpp"
     },
+    "ros.distro": "humble",
 }

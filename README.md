@@ -84,18 +84,18 @@ This instructions gives an example for a ROS2 action client
     // in MyCustomActionNode.cpp
     #include <aip_coordinator/actions/MyCustomActionNode.h>
     ```
-4. In your header file `MyCustomActionNode.h` include the header files of your ROS2 interface you want to use. In this example it is located in the `iras_interfaces` package.  
+4. In your header file `MyCustomActionNode.h` include the header files of your ROS2 interface you want to use. In this example it is located in the `aip_interfaces` package.  
 Replace: ~~`#include <nav2_msgs/action/navigate_to_pose.hpp>`~~  
 **Important**: Interface header files are generated automatically. If your Interface file is called `MyCustomAction.action` (PascalCase) the generated header will be `my_custom_action.hpp` (snake_case).
     ```cpp
     // in MyCustomActionNode.h
-    #include <iras_interfaces/action/my_custom_action.hpp>
+    #include <aip_interfaces/action/my_custom_action.hpp>
     ```
 5. Give an alias as shorter name.  
 Replace: ~~`using NavigateToPoseAction = nav2_msgs::action::NavigateToPose;`~~
     ```cpp
     // in MyCustomActionNode.h
-    using MyCustomAction = iras_interfaces::action::MyCustomAction;
+    using MyCustomAction = aip_interfaces::action::MyCustomAction;
     ```
 6. Replace all occurences where old alias is used with new one in `.ccp` and `.h` file. Use VSCode find and replace (strg + f) or rename symbol (F2) shortcut.
 7. Change the class name to the same name as the file.  

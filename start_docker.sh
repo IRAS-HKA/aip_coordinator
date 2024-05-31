@@ -30,7 +30,7 @@ run_docker() {
             --env-file .env \
             --rm \
             -v $PWD/aip_coordinator:/home/docker/ros2_ws/src/aip_coordinator \
-            -v $PWD/iras_interfaces:/home/docker/ros2_ws/src/iras_interfaces \
+            -v $PWD/aip_interfaces:/home/docker/ros2_ws/src/aip_interfaces \
             -v $PWD/.vscode:/home/docker/ros2_ws/src/.vscode \
             aip_coordinator/ros:humble \
             # ros2 run groot Groot

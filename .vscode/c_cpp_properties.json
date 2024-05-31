@@ -6,7 +6,7 @@
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/aip_coordinator/include/*",
                 "${workspaceFolder}/BehaviorTree.IRAS/include/*",
-                "${workspaceFolder}/../install/iras_interfaces/include/iras_interfaces/*",
+                "${workspaceFolder}/../install/aip_interfaces/include/aip_interfaces/*",
                 "/opt/ros/humble/include/**"
             ],
             "defines": [],

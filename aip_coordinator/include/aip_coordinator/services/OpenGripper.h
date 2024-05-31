@@ -11,9 +11,9 @@
 #include <aip_coordinator/default.h>
 
 #include <iras_behaviortree_ros2/components/RosService.h>
-#include <iras_interfaces/srv/move_gripper.hpp> 
+#include <aip_interfaces/srv/move_gripper.hpp> 
 
-using OpenGripperSrv = iras_interfaces::srv::MoveGripper;
+using OpenGripperSrv = aip_interfaces::srv::MoveGripper;
 
 class OpenGripper : public RosService<OpenGripperSrv>
 {

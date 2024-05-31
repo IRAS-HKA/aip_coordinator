@@ -11,9 +11,9 @@
 #include <aip_coordinator/default.h>
 
 #include <iras_behaviortree_ros2/components/RosService.h>
-#include <iras_interfaces/srv/move_to_joint_position.hpp>
+#include <aip_interfaces/srv/move_to_joint_position.hpp>
 
-using MoveToJointPositionSrv = iras_interfaces::srv::MoveToJointPosition;
+using MoveToJointPositionSrv = aip_interfaces::srv::MoveToJointPosition;
 
 class MoveArmToJoints : public RosService<MoveToJointPositionSrv>
 {

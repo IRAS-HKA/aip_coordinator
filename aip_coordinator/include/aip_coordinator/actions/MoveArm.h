@@ -11,11 +11,11 @@
 #include <aip_coordinator/default.h>
 
 #include <iras_behaviortree_ros2/components/RosAction.h>
-#include <iras_interfaces/action/move_arm_move_it.hpp>
+#include <aip_interfaces/action/move_arm_move_it.hpp>
 #include <tf2/LinearMath/Quaternion.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 
-using MoveArmMoveIt = iras_interfaces::action::MoveArmMoveIt;
+using MoveArmMoveIt = aip_interfaces::action::MoveArmMoveIt;
 
 class MoveArm : public RosAction<MoveArmMoveIt>
 {

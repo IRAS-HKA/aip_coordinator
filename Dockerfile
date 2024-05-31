@@ -64,7 +64,7 @@ RUN git clone https://github.com/BehaviorTree/Groot.git
 RUN git clone -b humble https://github.com/AndreasZachariae/BehaviorTree.IRAS.git
 
 COPY aip_coordinator ./aip_coordinator
-COPY iras_interfaces ./iras_interfaces
+COPY aip_interfaces ./aip_interfaces
 
 # Clone private Github repos with ssh key
 # USER root

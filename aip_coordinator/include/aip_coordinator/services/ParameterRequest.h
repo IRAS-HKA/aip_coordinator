@@ -14,11 +14,11 @@
 #include <functional>
 
 #include <iras_behaviortree_ros2/components/RosService.h>
-#include <iras_interfaces/srv/user_dialog.hpp>
-#include <iras_interfaces/msg/dialog_data_type.hpp>
+#include <aip_interfaces/srv/user_dialog.hpp>
+#include <aip_interfaces/msg/dialog_data_type.hpp>
 
-using UserDialog = iras_interfaces::srv::UserDialog;
-using DialogDataType = iras_interfaces::msg::DialogDataType;
+using UserDialog = aip_interfaces::srv::UserDialog;
+using DialogDataType = aip_interfaces::msg::DialogDataType;
 
 template <typename T>
 class ParameterRequest : public RosService<UserDialog>
@@ -51,7 +51,7 @@ public:
 
         getInput("title", request->title);
         getInput("msg", request->msg);
-        request->importance = iras_interfaces::srv::UserDialog::Request::NORMAL;
+        request->importance = aip_interfaces::srv::UserDialog::Request::NORMAL;
 
         DialogDataType data_type;
 

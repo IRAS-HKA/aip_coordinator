@@ -6,7 +6,7 @@
         "limitSymbolsToIncludedHeaders": false
       },
       "includePath": [
-        "/home/docker/ros2_ws/install/iras_interfaces/include/**",
+        "/home/docker/ros2_ws/install/aip_interfaces/include/**",
         "/home/docker/ros2_ws/install/iras_behaviortree_ros2/include/**",
         "/opt/ros/humble/include/**",
         "/home/docker/ros2_ws/src/BehaviorTree.IRAS/include/**",
