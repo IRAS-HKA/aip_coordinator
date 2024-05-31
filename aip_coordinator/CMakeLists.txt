@@ -21,13 +21,20 @@ find_package(ament_index_cpp REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_action REQUIRED)
 find_package(iras_behaviortree_ros2 REQUIRED)
-find_package(aip_interfaces REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(geometry2 REQUIRED)
 find_package(nav2_msgs REQUIRED)
 find_package(std_srvs REQUIRED)
 find_package(object_detector_tensorflow_interfaces REQUIRED)
+find_package(aip_packing_planning_interfaces REQUIRED)
+find_package(aip_grasp_planning_interfaces REQUIRED)
+find_package(aip_interfaces REQUIRED)
+find_package(llm_interfaces REQUIRED)
+
+
+
+
 
 include_directories(
   include 
@@ -45,6 +52,10 @@ set(DEPENDENCIES
   ament_index_cpp
   nav2_msgs
   std_srvs
+  aip_grasp_planning_interfaces
+  aip_interfaces
+  aip_packing_planning_interfaces
+  llm_interfaces
   object_detector_tensorflow_interfaces
 )
 

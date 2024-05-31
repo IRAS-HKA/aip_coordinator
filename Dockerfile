@@ -75,9 +75,36 @@ COPY aip_interfaces ./aip_interfaces
 
 # RUN --mount=type=ssh \
 #     git clone -b humble git@github.com:IRAS-HKA/object_detector_tensorflow.git
-RUN git clone -b humble https://github.com/IRAS-HKA/object_detector_tensorflow.git
+
+# ODTF Interfaces origin AIP_Demo April
+# RUN git clone -b humble https://github.com/IRAS-HKA/object_detector_tensorflow.git
+# RUN mv ./object_detector_tensorflow/ros/object_detector_tensorflow_interfaces . && \
+#     rm -rf ./object_detector_tensorflow
+
+# ODTF Interfaces forked by AIP2
+RUN git clone -b devel https://github.com/eshan-savla/object_detector_tensorflow.git
 RUN mv ./object_detector_tensorflow/ros/object_detector_tensorflow_interfaces . && \
     rm -rf ./object_detector_tensorflow
+
+# User Interaction Interfaces
+# RUN git clone -b humble
+# RUN mv ./. && \
+#     rm -rf ./
+
+# LLM Interfaces
+RUN git clone https://github.com/maudetroll/LLM_Scene_Docker.git
+RUN mv ./LLM_Scene_Docker/src/llm_interfaces . && \
+    rm -rf ./LLM_Scene_Docker
+
+# Packing Planning Interfaces
+RUN git clone https://github.com/SchmittAndreas/aip_packing_algorithm.git
+RUN mv ./aip_packing_algorithm/aip_packing_planning_interfaces . && \
+    rm -rf ./aip_packing_algorithm
+
+# Grasp Planning Interfaces
+RUN git clone https://github.com/LeoSc4/aip_grasp_planning.git
+RUN mv ./aip_grasp_planning/aip_grasp_planning_interfaces . && \
+    rm -rf ./aip_grasp_planning
 
 USER $USER 
 
