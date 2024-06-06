@@ -106,6 +106,9 @@ RUN git clone https://github.com/LeoSc4/aip_grasp_planning.git
 RUN mv ./aip_grasp_planning/aip_grasp_planning_interfaces . && \
     rm -rf ./aip_grasp_planning
 
+# Communication Modules
+RUN git clone https://github.com/IRAS-HKA/petra_communication.git
+
 USER $USER 
 
 ##############################################################################
