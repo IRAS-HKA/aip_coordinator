@@ -42,6 +42,8 @@
 #include <aip_coordinator/services/OpenGripper.h>
 #include <aip_coordinator/services/CloseGripper.h>
 
+// ODTF
+#include <aip_coordinator/services/DetectObjects.h>
 
 // LLM
 // #include <aip_coordinator/services/LLMProcessing.h>
@@ -91,6 +93,9 @@ BT::Tree create_tree(const std::string &main_tree_path, const std::string &groot
     // Gripper
     factory.registerNodeType<OpenGripper>("OpenGripper");
     factory.registerNodeType<CloseGripper>("CloseGripper");
+
+    // ODTF
+    factory.registerNodeType<DetectObjects>("DetectObjects");
 
     //LLM
     // factory.registerNodeType<LLMProcessing>("LLMProcessing");
