@@ -43,6 +43,13 @@
 #include <aip_coordinator/services/CloseGripper.h>
 
 
+// LLM
+// #include <aip_coordinator/services/LLMProcessing.h>
+
+// Pack Planning
+#include <aip_coordinator/services/PackPlanning.h>
+
+
 // Misc
 #include <aip_coordinator/nodes/Wait.h>
 
@@ -85,6 +92,11 @@ BT::Tree create_tree(const std::string &main_tree_path, const std::string &groot
     factory.registerNodeType<OpenGripper>("OpenGripper");
     factory.registerNodeType<CloseGripper>("CloseGripper");
 
+    //LLM
+    // factory.registerNodeType<LLMProcessing>("LLMProcessing");
+
+    // Pack Planning
+    factory.registerNodeType<PackPlanning>("PackPlanning");
 
     XmlGenerator xml_generator(&factory);
     xml_generator.generate_xml_palette(groot_palette_path);
