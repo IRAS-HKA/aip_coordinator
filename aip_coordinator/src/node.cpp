@@ -51,7 +51,8 @@
 // Pack Planning
 #include <aip_coordinator/services/PackPlanning.h>
 
-
+// Grasp Planning
+#include <aip_coordinator/services/GraspPlanning.h>
 // Misc
 #include <aip_coordinator/nodes/Wait.h>
 
@@ -102,6 +103,9 @@ BT::Tree create_tree(const std::string &main_tree_path, const std::string &groot
 
     // Pack Planning
     factory.registerNodeType<PackPlanning>("PackPlanning");
+
+    // Grasp Planning
+    factory.registerNodeType<GraspPlanning>("GraspPlanning");
 
     XmlGenerator xml_generator(&factory);
     xml_generator.generate_xml_palette(groot_palette_path);
