@@ -22,7 +22,7 @@ std::string PackPlanning::ros2_service_name()
 BT::PortsList PackPlanning::providedPorts()
 {
     return {BT::InputPort<std::vector<std::string>>("objects_to_pick"),
-            BT::OutputPort<aip_packing_planning_interfaces::srv::PackSequence>("PackSequence"),};
+            BT::OutputPort<aip_packing_planning_interfaces::srv::PackSequence>("PackSequence"),}; // ::Response
 }
 
 /**
