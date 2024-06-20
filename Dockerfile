@@ -63,6 +63,8 @@ WORKDIR /home/$USER/ros2_ws/src
 RUN git clone https://github.com/BehaviorTree/Groot.git
 RUN git clone -b humble https://github.com/AndreasZachariae/BehaviorTree.IRAS.git
 
+
+
 COPY aip_coordinator ./aip_coordinator
 COPY aip_interfaces ./aip_interfaces
 
@@ -71,7 +73,8 @@ COPY aip_interfaces ./aip_interfaces
 # RUN mkdir -m 700 /root/.ssh && \
 #     touch -m /root/.ssh/known_hosts && \
 #     ssh-keyscan github.com > /root/.ssh/known_hosts 
-# ARG CACHE_BUST
+
+ARG CACHE_BUST
 
 # RUN --mount=type=ssh \
 #     git clone -b humble git@github.com:IRAS-HKA/object_detector_tensorflow.git
