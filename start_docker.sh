@@ -6,10 +6,9 @@ BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
 NC='\033[0m' # No Color
 
-
 is_image_build() {
     if [ "$(docker images -q aip_coordinator/ros:humble 2> /dev/null)" == "" ]; then
-        echo -e "${RED}Image not found. Have you build the image?${NC}"
+        echo -e "${RED}Image not found. Have you built the image?${NC}"
         echo -e "${BLUE}Try running: ./build_docker.sh${NC}"
         return 1
     else
@@ -17,11 +16,12 @@ is_image_build() {
         return 0
     fi
 }
+
 run_docker() {
     is_image_build
     if [ $? -eq 0 ]; then
         echo -e "${YELLOW}Running docker...${NC}"
-        xhost + local:root
+        xhost +local:root
         docker run \
             --name aip_coordinator \
             -it \
@@ -29,12 +29,13 @@ run_docker() {
             -e DISPLAY=$DISPLAY \
             --env-file .env \
             --rm \
-            -v $PWD/aip_coordinator:/home/docker/ros2_ws/src/aip_coordinator \
-            -v $PWD/aip_interfaces:/home/docker/ros2_ws/src/aip_interfaces \
-            -v $PWD/.vscode:/home/docker/ros2_ws/src/.vscode \
-            aip_coordinator/ros:humble \
+            -v "${PWD}/aip_coordinator:/home/docker/ros2_ws/src/aip_coordinator" \
+            -v "${PWD}/aip_interfaces:/home/docker/ros2_ws/src/aip_interfaces" \
+            -v "${PWD}/.vscode:/home/docker/ros2_ws/src/.vscode" \
+            aip_coordinator/ros:humble
             # ros2 run groot Groot
     fi
 }
 
 run_docker
+

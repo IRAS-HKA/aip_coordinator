@@ -56,6 +56,10 @@
 
 // Grasp Planning
 #include <aip_coordinator/services/GraspPlanning.h>
+
+// User Interaction
+#include <aip_coordinator/services/UserInteraction.h>
+
 // Misc
 #include <aip_coordinator/nodes/Wait.h>
 
@@ -97,6 +101,9 @@ BT::Tree create_tree(const std::string &main_tree_path, const std::string &groot
 
     // Misc
     factory.registerNodeType<Wait>("Wait");
+
+    // User Interaction
+    factory.registerNodeType<UserInteraction>("UserInteraction");
 
     // Gripper
     factory.registerNodeType<OpenGripper>("OpenGripper");
