@@ -6,7 +6,7 @@
  */
 std::string DetectObjects::ros2_service_name()
 {
-    return "/detect_and_transform_node/detect_objects";   // ROS2 service server name -> may be changed to detect_objects
+    return "detection_node/detect_objects";   // ROS2 service server name -> may be changed to detect_objects
 }
 
 /**

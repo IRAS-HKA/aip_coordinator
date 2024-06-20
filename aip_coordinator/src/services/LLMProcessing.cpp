@@ -35,8 +35,7 @@ void LLMProcessing::on_send(std::shared_ptr<LLMProcessingSrv::Request> request)
 {
     request->user_input = ports.get_value<std::string>("user_input");
 
-    auto detections = ports.get_value<object_detector_tensorflow_interfaces::msg::Detections>("detections");
-    request->detections = detections.detections;
+    request->detections = ports.get_value<object_detector_tensorflow_interfaces::msg::Detections>("detections");
 
     // request->detections = ports.get_value<object_detector_tensorflow_interfaces::msg::Detections>("detections");
 
