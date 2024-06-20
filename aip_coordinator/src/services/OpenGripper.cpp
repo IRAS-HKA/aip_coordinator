@@ -21,7 +21,7 @@ std::string OpenGripper::ros2_service_name()
  */
 BT::PortsList OpenGripper::providedPorts()
 {
-    return {BT::InputPort<std::vector<int>>("cylinder_ids")
+    return {BT::InputPort<std::vector<aip_grasp_planning_interfaces::msg::CylinderCombination>>("cylinder_ids")
     };      
 }
 
@@ -30,13 +30,13 @@ BT::PortsList OpenGripper::providedPorts()
  */
 void OpenGripper::on_send(std::shared_ptr<OpenGripperSrv::Request> request)
 {
+    // Get FIRST cylinder_id combination from Vector of input port cylinder_ids
 
-    request->cylinder_ids = ports.get_value<std::vector<int>>("cylinder_ids");
+    request->cylinder_ids = ports.get_value<std::vector<std::vector<int>>>("cylinder_ids")[0];
 
     log("Request for Open Gripper: Length of call " + std::to_string(request->cylinder_ids.size()));
 
-
-    log("Request for Open Gripper " + std::to_string(request->cylinder_ids.at(0)));
+    log("Request for Open Gripper of first cylinder_id combination" + std::to_string(request->cylinder_ids.at(0)));
     //log("Request for Open Gripper " + std::to_string(request->cylinder_ids.at(1)));
 
 }
@@ -44,10 +44,10 @@ void OpenGripper::on_send(std::shared_ptr<OpenGripperSrv::Request> request)
 /**
  * @brief Define what happens when recieving the response from the ROS2 service server.
  */
-bool OpenGripper::on_result(std::shared_ptr<OpenGripperSrv::Response> response, std::shared_ptr<OpenGripperSrv::Request>)
+bool OpenGripper::on_result(std::shared_ptr<OpenGripperSrv::Response>, std::shared_ptr<OpenGripperSrv::Request>)
 {
 
-    log("Opened Gripper");
+    log("Opened Gripper successfully.");
 
     return true;
 }

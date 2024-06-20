@@ -12,6 +12,7 @@
 
 #include <iras_behaviortree_ros2/components/RosService.h>
 #include <llm_interfaces/srv/scene_interpretation.hpp>
+#include <object_detector_tensorflow_interfaces/msg/detections.hpp>
 
 using LLMProcessingSrv = llm_interfaces::srv::SceneInterpretation;
 

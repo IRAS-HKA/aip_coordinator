@@ -24,11 +24,12 @@ std::string GraspPlanning::ros2_service_name()
 BT::PortsList GraspPlanning::providedPorts()
 {
     return {BT::InputPort<std::vector<std::string>>("objects_to_pick"),
+            BT::InputPort<aip_packing_planning_interfaces::msg::PackageSequence>("package_sequence"),
+            BT::InputPort<object_detector_tensorflow_interfaces::msg::Detections>("detections"),
             BT::InputPort<sensor_msgs::msg::Image>("depth_image"),
-            BT::InputPort<std::vector<sensor_msgs::msg::Image>>("masks"),
-            BT::OutputPort<std::vector<geometry_msgs::msg::Pose>>("grasp_pose"),
-            BT::OutputPort<std::vector<std_msgs::msg::Int32>>("cylinder_ids"),
-            BT::OutputPort<std::vector<geometry_msgs::msg::Pose>>("place_pose")}; // ::Response
+            BT::OutputPort<std::vector<geometry_msgs::msg::Pose>>("grasp_poses"),
+            BT::OutputPort<std::vector<aip_grasp_planning_interfaces::msg::CylinderCombination>>("cylinder_ids"),
+            BT::OutputPort<std::vector<geometry_msgs::msg::Pose>>("place_poses")}; // ::Response
             
 }
 
@@ -37,10 +38,10 @@ BT::PortsList GraspPlanning::providedPorts()
  */
 void GraspPlanning::on_send(std::shared_ptr<GraspPlanningSrv::Request> request)
 {
-  
     request->objects_to_pick = ports.get_value<std::vector<std::string>>("objects_to_pick");
+    request->package_sequence = ports.get_value<aip_packing_planning_interfaces::msg::PackageSequence>("package_sequence");
+    request->detections = ports.get_value<object_detector_tensorflow_interfaces::msg::Detections>("detections");
     request->depth_image = ports.get_value<sensor_msgs::msg::Image>("depth_image");
-    request->masks = ports.get_value<std::vector<sensor_msgs::msg::Image>>("masks");
 
      std::string objects_to_pick_str = std::accumulate(request->objects_to_pick.begin(), request->objects_to_pick.end(), std::string(),
         [](const std::string& a, const std::string& b) -> std::string {
@@ -56,9 +57,9 @@ void GraspPlanning::on_send(std::shared_ptr<GraspPlanningSrv::Request> request)
  */
 bool GraspPlanning::on_result(std::shared_ptr<GraspPlanningSrv::Response> response, std::shared_ptr<GraspPlanningSrv::Request> request)
 {
-    ports.set_value<std::vector<geometry_msgs::msg::Pose>>("grasp_pose", response->grasp_pose);
-    ports.set_value<std::vector<std_msgs::msg::Int32>>("cylinder_ids", response->cylinder_ids);
-    ports.set_value<std::vector<geometry_msgs::msg::Pose>>("place_pose", response->place_pose);
+    ports.set_value<std::vector<geometry_msgs::msg::Pose>>("grasp_poses", response->grasp_pose);
+    ports.set_value<std::vector<aip_grasp_planning_interfaces::msg::CylinderCombination>>("cylinder_ids", response->cylinder_ids);
+    ports.set_value<std::vector<geometry_msgs::msg::Pose>>("place_poses", response->place_pose);
 
     log("Received a Grasping planning containing " + std::to_string(request->objects_to_pick.size()) + " packages");
     

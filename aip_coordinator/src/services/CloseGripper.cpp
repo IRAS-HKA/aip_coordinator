@@ -21,7 +21,7 @@ std::string CloseGripper::ros2_service_name()
  */
 BT::PortsList CloseGripper::providedPorts()
 {
-    return {BT::InputPort<std::vector<int>>("cylinder_ids")
+    return {BT::InputPort<std::vector<aip_grasp_planning_interfaces::msg::CylinderCombination>>("cylinder_ids")
     };      
 }
 
@@ -30,21 +30,23 @@ BT::PortsList CloseGripper::providedPorts()
  */
 void CloseGripper::on_send(std::shared_ptr<CloseGripperSrv::Request> request)
 {
-    request->cylinder_ids = ports.get_value<std::vector<int>>("cylinder_ids");
+    // Get FIRST cylinder_id combination from Vector of input port cylinder_ids
+
+    request->cylinder_ids = ports.get_value<std::vector<std::vector<int>>>("cylinder_ids")[0];
 
     log("Request for Close Gripper: Length of call " + std::to_string(request->cylinder_ids.size()));
 
-    log("Request for Close Gripper " + std::to_string(request->cylinder_ids.at(0)));
+    log("Request for Close Gripper of first cylinder_id combination: " + std::to_string(request->cylinder_ids.at(0)));
 
 }
 
 /**
  * @brief Define what happens when recieving the response from the ROS2 service server.
  */
-bool CloseGripper::on_result(std::shared_ptr<CloseGripperSrv::Response> response, std::shared_ptr<CloseGripperSrv::Request>)
+bool CloseGripper::on_result(std::shared_ptr<CloseGripperSrv::Response>, std::shared_ptr<CloseGripperSrv::Request>)
 {
 
-    log("Closed Gripper");
+    log("Closed Gripper successfully.");
 
     return true;
 }

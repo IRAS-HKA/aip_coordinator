@@ -23,8 +23,8 @@ BT::PortsList LLMProcessing::providedPorts()
 {
     return {
             BT::InputPort<std::string>("user_input"),
-            BT::InputPort<std::vector<object_detector_tensorflow_interfaces::msg::Detection>>("detections"),        
-            BT::OutputPort<llm_interfaces::srv::SceneInterpretation::Response>("objects_to_pick")
+            BT::InputPort<object_detector_tensorflow_interfaces::msg::Detections>("detections"),        
+            BT::OutputPort<std::vector<std::string>>("objects_to_pick")
             };
 }
 
@@ -34,22 +34,26 @@ BT::PortsList LLMProcessing::providedPorts()
 void LLMProcessing::on_send(std::shared_ptr<LLMProcessingSrv::Request> request)
 {
     request->user_input = ports.get_value<std::string>("user_input");
-    request->detections = ports.get_value<std::vector<object_detector_tensorflow_interfaces::msg::Detection>>("detections");
+
+    auto detections = ports.get_value<object_detector_tensorflow_interfaces::msg::Detections>("detections");
+    request->detections = detections.detections;
+
+    // request->detections = ports.get_value<object_detector_tensorflow_interfaces::msg::Detections>("detections");
 
     log("Sending Request for User Input: " + request->user_input + " to LLM Processing Service");
 
     std::stringstream ss;
     ss << "Detections:" << std::endl;
 
-    for (const auto& detection : request->detections) {
-        ss << "  Detection:" << std::endl;
-        ss << "    Class ID: " << detection.class_id << std::endl;
-        ss << "    Class Name: " << detection.class_name << std::endl;
-        ss << "    Probability: " << detection.probability << std::endl;
-        ss << "    Center: (" << detection.center.x << ", " << detection.center.y << ", " << detection.center.z << ")" << std::endl;
-        ss << "    Bounding Box: [x: " << detection.bounding_box.x_offset << ", y: " << detection.bounding_box.y_offset 
-           << ", width: " << detection.bounding_box.width << ", height: " << detection.bounding_box.height << "]" << std::endl;
-    }
+    // for (const auto& detection : request->detections.detections) {
+    //     ss << "  Detection:" << std::endl;
+    //     ss << "    Class ID: " << detection.class_id << std::endl;
+    //     ss << "    Class Name: " << detection.class_name << std::endl;
+    //     ss << "    Probability: " << detection.probability << std::endl;
+    //     ss << "    Center: (" << detection.center.x << ", " << detection.center.y << ", " << detection.center.z << ")" << std::endl;
+    //     ss << "    Bounding Box: [x: " << detection.bounding_box.x_offset << ", y: " << detection.bounding_box.y_offset 
+    //        << ", width: " << detection.bounding_box.width << ", height: " << detection.bounding_box.height << "]" << std::endl;
+    // }
 
     log(ss.str());
 

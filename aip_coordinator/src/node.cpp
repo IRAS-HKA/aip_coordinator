@@ -27,6 +27,9 @@
 #include <aip_coordinator/services/MoveArmToJoints.h>
 #include <aip_coordinator/services/MoveArmToPose.h>
 
+#include <aip_coordinator/services/MoveArmToGraspPose.h>
+#include <aip_coordinator/services/MoveArmToPlacePose.h>
+
 // Navigation
 #include <aip_coordinator/actions/MoveBase.h>
 #include <aip_coordinator/services/ClearGlobalCostmap.h>
@@ -76,6 +79,10 @@ BT::Tree create_tree(const std::string &main_tree_path, const std::string &groot
     factory.registerNodeType<MoveArm>("MoveArm");
     factory.registerNodeType<MoveArmToJoints>("MoveArmToJoints");
     factory.registerNodeType<MoveArmToPose>("MoveArmToPose");
+
+    factory.registerNodeType<MoveArmToGraspPose>("MoveArmToGraspPose");
+    factory.registerNodeType<MoveArmToPlacePose>("MoveArmToPlacePose");
+    
 
     // Navigation
     factory.registerNodeType<MoveBase>("MoveBase");

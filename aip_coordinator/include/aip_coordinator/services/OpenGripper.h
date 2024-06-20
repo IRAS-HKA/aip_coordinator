@@ -12,6 +12,7 @@
 
 #include <iras_behaviortree_ros2/components/RosService.h>
 #include <aip_interfaces/srv/move_gripper.hpp> 
+#include <aip_grasp_planning_interfaces/msg/cylinder_combination.hpp>
 
 using OpenGripperSrv = aip_interfaces::srv::MoveGripper;
 

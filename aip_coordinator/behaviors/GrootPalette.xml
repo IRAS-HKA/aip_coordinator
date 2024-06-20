@@ -1,5 +1,18 @@
 <root>
     <TreeNodesModel>
+        <Action ID="GraspPlanning">
+            <output_port name="cylinder_ids" type="undefined"/>
+            <input_port name="depth_image" type="undefined"/>
+            <output_port name="place_poses" type="undefined"/>
+            <input_port name="detections" type="undefined"/>
+            <output_port name="grasp_poses" type="undefined"/>
+            <input_port name="package_sequence" type="undefined"/>
+            <input_port name="objects_to_pick" type="undefined"/>
+        </Action>
+        <Action ID="PackPlanning">
+            <output_port name="package_sequence" type="undefined"/>
+            <input_port name="objects_to_pick" type="undefined"/>
+        </Action>
         <Action ID="GetMarkerPosition">
             <output_port name="y" type="float"/>
             <output_port name="rotation_y" type="float"/>
@@ -19,6 +32,10 @@
             <input_port name="y" type="float"/>
             <input_port name="x" type="float"/>
             <input_port name="frame_id" type="std::string"/>
+        </Action>
+        <Action ID="MoveArmToPlacePose">
+            <input_port name="cartesian" type="bool"/>
+            <input_port name="place_poses" type="undefined"/>
         </Action>
         <Action ID="IntParameterRequest">
             <input_port name="max" type="std::string"/>
@@ -93,6 +110,10 @@
         <Action ID="OpenGripper">
             <input_port name="cylinder_ids" type="undefined"/>
         </Action>
+        <Action ID="MoveArmToGraspPose">
+            <input_port name="cartesian" type="bool"/>
+            <input_port name="grasp_poses" type="undefined"/>
+        </Action>
         <Action ID="DetectObject">
             <output_port name="probability" type="float"/>
             <output_port name="z" type="float"/>
@@ -117,6 +138,11 @@
         <Action ID="Wait">
             <input_port name="seconds" type="int"/>
         </Action>
+        <Action ID="LLMProcessing">
+            <output_port name="objects_to_pick" type="undefined"/>
+            <input_port name="detections" type="undefined"/>
+            <input_port name="user_input" type="std::string"/>
+        </Action>
         <Action ID="CalculateOffsets">
             <input_port name="max_seconds" type="int"/>
             <output_port name="out_qy" type="float"/>
@@ -137,6 +163,11 @@
             <input_port name="compare_to" type="std::string"/>
             <input_port name="input" type="std::string"/>
         </Condition>
+        <Action ID="DetectObjects">
+            <output_port name="reference_image" type="undefined"/>
+            <output_port name="result_image" type="undefined"/>
+            <output_port name="detections" type="undefined"/>
+        </Action>
         <Action ID="SetInitialPose">
             <input_port name="quaternion_z" type="float"/>
             <input_port name="quaternion_y" type="float"/>

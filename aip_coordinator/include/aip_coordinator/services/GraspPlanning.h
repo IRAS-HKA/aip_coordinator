@@ -12,6 +12,9 @@
 
 #include <iras_behaviortree_ros2/components/RosService.h>
 #include <aip_grasp_planning_interfaces/srv/grasp_planning.hpp>
+#include <aip_grasp_planning_interfaces/msg/cylinder_combination.hpp>
+#include <object_detector_tensorflow_interfaces/msg/detections.hpp>
+#include <aip_packing_planning_interfaces/msg/package_sequence.hpp>
 
 using GraspPlanningSrv = aip_grasp_planning_interfaces::srv::GraspPlanning;
 
