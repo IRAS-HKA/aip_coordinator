@@ -46,9 +46,11 @@
         <Action ID="ClearLocalCostmap"/>
         <Action ID="MoveArmToGraspPose">
             <input_port name="cartesian" type="bool"/>
+            <input_port name="object_no" type="int"/>
             <input_port name="grasp_poses" type="undefined"/>
         </Action>
         <Action ID="OpenGripper">
+            <input_port name="object_no" type="int"/>
             <input_port name="cylinder_ids" type="undefined"/>
         </Action>
         <Condition ID="CheckStop"/>
@@ -63,6 +65,7 @@
             <output_port name="value" type="float"/>
         </Action>
         <Action ID="CloseGripper">
+            <input_port name="object_no" type="int"/>
             <input_port name="cylinder_ids" type="undefined"/>
         </Action>
         <Action ID="MoveArmToJoints">
@@ -135,6 +138,7 @@
         </Action>
         <Action ID="MoveArmToPlacePose">
             <input_port name="cartesian" type="bool"/>
+            <input_port name="object_no" type="int"/>
             <input_port name="place_poses" type="undefined"/>
         </Action>
         <Action ID="MoveBase">

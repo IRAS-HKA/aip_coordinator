@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Sequence>
+            <Action ID="DetectObjects" detections="{detections}" reference_image="{reference_image}" result_image="{depth_image}"/>
+            <Action ID="UserInteraction" detections="{detections}" user_input="{user_input}"/>
+            <Action ID="LLMProcessing" detections="{detections}" objects_to_pick="{objects_to_pick}" user_input="{user_input}"/>
+            <!-- <Action ID="PackPlanning" objects_to_pick="{objects_to_pick}" package_sequence="{package_sequence}"/> -->
+            <Action ID="GraspPlanning" cylinder_ids="{cylinder_ids}" depth_image="{depth_image}" detections="{detections}" grasp_poses="{grasp_poses}" objects_to_pick="{objects_to_pick}" package_sequence="{package_sequence}" place_poses="{place_poses}"/>
+            <Action ID="MoveArmToGraspPose" object_no="1" cartesian="True" grasp_poses="{grasp_poses}"/>
+            <Action ID="Wait" seconds="10"/>
+            <Action ID="CloseGripper" object_no="1" cylinder_ids="{cylinder_ids}"/>
+            <Action ID="MoveArmToPlacePose" object_no="1" cartesian="True" place_poses="{place_poses}"/>
+            <Action ID="Wait" seconds="10"/>
+            <Action ID="OpenGripper" object_no="1" cylinder_ids="{cylinder_ids}"/>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="BoolParameterRequest">
+            <input_port name="default_value" type="std::string"/>
+            <input_port name="key" type="std::string"/>
+            <input_port name="max" type="std::string"/>
+            <input_port name="min" type="std::string"/>
+            <input_port name="msg" type="std::string"/>
+            <input_port name="options" type="std::string"/>
+            <input_port name="title" type="std::string"/>
+            <output_port name="value" type="bool"/>
+        </Action>
+        <Action ID="CalculateOffsets">
+            <input_port name="base_frame" type="std::string"/>
+            <input_port name="marker_frame" type="std::string"/>
+            <input_port name="max_seconds" type="int"/>
+            <input_port name="offset_frame" type="std::string"/>
+            <input_port name="offset_x" type="float"/>
+            <input_port name="offset_y" type="float"/>
+            <input_port name="offset_z" type="float"/>
+            <output_port name="out_qw" type="float"/>
+            <output_port name="out_qx" type="float"/>
+            <output_port name="out_qy" type="float"/>
+            <output_port name="out_qz" type="float"/>
+            <output_port name="out_x" type="float"/>
+            <output_port name="out_y" type="float"/>
+            <output_port name="out_z" type="float"/>
+        </Action>
+        <Condition ID="CheckBattery">
+            <input_port name="battery_level" type="float"/>
+        </Condition>
+        <Condition ID="CheckBlackboard">
+            <input_port name="compare_to" type="std::string"/>
+            <input_port name="input" type="std::string"/>
+        </Condition>
+        <Condition ID="CheckBlackboardInt">
+            <input_port name="compare_to" type="int"/>
+            <input_port name="input" type="int"/>
+        </Condition>
+        <Condition ID="CheckDiagnosticStatus"/>
+        <Condition ID="CheckStop"/>
+        <Action ID="ClearGlobalCostmap"/>
+        <Action ID="ClearLocalCostmap"/>
+        <Action ID="CloseGripper">
+            <input_port name="cylinder_ids" type="std::vector&lt;aip_grasp_planning_interfaces::msg::CylinderCombination_&lt;std::allocator&lt;void&gt; &gt;, std::allocator&lt;aip_grasp_planning_interfaces::msg::CylinderCombination_&lt;std::allocator&lt;void&gt; &gt; &gt; &gt;"/>
+        </Action>
+        <Action ID="DetectObject">
+            <input_port name="base_frame" type="std::string"/>
+            <input_port name="camera_type" type="std::string"/>
+            <input_port name="class_name" type="std::string"/>
+            <output_port name="probability" type="float"/>
+            <output_port name="x" type="float"/>
+            <output_port name="y" type="float"/>
+            <output_port name="z" type="float"/>
+        </Action>
+        <Action ID="DetectObjects">
+            <output_port name="detections" type="object_detector_tensorflow_interfaces::msg::Detections_&lt;std::allocator&lt;void&gt; &gt;"/>
+            <output_port name="reference_image" type="sensor_msgs::msg::Image_&lt;std::allocator&lt;void&gt; &gt;"/>
+            <output_port name="result_image" type="sensor_msgs::msg::Image_&lt;std::allocator&lt;void&gt; &gt;"/>
+        </Action>
+        <Action ID="FloatParameterRequest">
+            <input_port name="default_value" type="std::string"/>
+            <input_port name="key" type="std::string"/>
+            <input_port name="max" type="std::string"/>
+            <input_port name="min" type="std::string"/>
+            <input_port name="msg" type="std::string"/>
+            <input_port name="options" type="std::string"/>
+            <input_port name="title" type="std::string"/>
+            <output_port name="value" type="float"/>
+        </Action>
+        <Action ID="GetMarkerPosition">
+            <input_port name="base_frame" type="std::string"/>
+            <input_port name="marker_frame" type="std::string"/>
+            <input_port name="max_seconds" type="int"/>
+            <output_port name="rotation_x" type="float"/>
+            <output_port name="rotation_y" type="float"/>
+            <output_port name="rotation_z" type="float"/>
+            <output_port name="x" type="float"/>
+            <output_port name="y" type="float"/>
+            <output_port name="z" type="float"/>
+        </Action>
+        <Action ID="GraspPlanning">
+            <output_port name="cylinder_ids" type="std::vector&lt;aip_grasp_planning_interfaces::msg::CylinderCombination_&lt;std::allocator&lt;void&gt; &gt;, std::allocator&lt;aip_grasp_planning_interfaces::msg::CylinderCombination_&lt;std::allocator&lt;void&gt; &gt; &gt; &gt;"/>
+            <input_port name="depth_image" type="sensor_msgs::msg::Image_&lt;std::allocator&lt;void&gt; &gt;"/>
+            <input_port name="detections" type="object_detector_tensorflow_interfaces::msg::Detections_&lt;std::allocator&lt;void&gt; &gt;"/>
+            <output_port name="grasp_poses" type="std::vector&lt;geometry_msgs::msg::Pose_&lt;std::allocator&lt;void&gt; &gt;, std::allocator&lt;geometry_msgs::msg::Pose_&lt;std::allocator&lt;void&gt; &gt; &gt; &gt;"/>
+            <input_port name="objects_to_pick" type="std::vector&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, std::allocator&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; &gt;"/>
+            <input_port name="package_sequence" type="aip_packing_planning_interfaces::msg::PackageSequence_&lt;std::allocator&lt;void&gt; &gt;"/>
+            <output_port name="place_poses" type="std::vector&lt;geometry_msgs::msg::Pose_&lt;std::allocator&lt;void&gt; &gt;, std::allocator&lt;geometry_msgs::msg::Pose_&lt;std::allocator&lt;void&gt; &gt; &gt; &gt;"/>
+        </Action>
+        <Action ID="IntParameterRequest">
+            <input_port name="default_value" type="std::string"/>
+            <input_port name="key" type="std::string"/>
+            <input_port name="max" type="std::string"/>
+            <input_port name="min" type="std::string"/>
+            <input_port name="msg" type="std::string"/>
+            <input_port name="options" type="std::string"/>
+            <input_port name="title" type="std::string"/>
+            <output_port name="value" type="int"/>
+        </Action>
+        <Action ID="LLMProcessing">
+            <input_port name="detections" type="object_detector_tensorflow_interfaces::msg::Detections_&lt;std::allocator&lt;void&gt; &gt;"/>
+            <output_port name="objects_to_pick" type="std::vector&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, std::allocator&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; &gt;"/>
+            <input_port name="user_input" type="std::string"/>
+        </Action>
+        <Action ID="MoveArm">
+            <input_port name="cartesian" type="bool"/>
+            <input_port name="rotation_x" type="float"/>
+            <input_port name="rotation_y" type="float"/>
+            <input_port name="rotation_z" type="float"/>
+            <input_port name="speed" type="float"/>
+            <input_port name="x" type="float"/>
+            <input_port name="y" type="float"/>
+            <input_port name="z" type="float"/>
+        </Action>
+        <Action ID="MoveArmToGraspPose">
+            <input_port name="cartesian" type="bool"/>
+            <input_port name="grasp_poses" type="std::vector&lt;geometry_msgs::msg::Pose_&lt;std::allocator&lt;void&gt; &gt;, std::allocator&lt;geometry_msgs::msg::Pose_&lt;std::allocator&lt;void&gt; &gt; &gt; &gt;"/>
+        </Action>
+        <Action ID="MoveArmToJoints">
+            <input_port name="joint1" type="float"/>
+            <input_port name="joint2" type="float"/>
+            <input_port name="joint3" type="float"/>
+            <input_port name="joint4" type="float"/>
+            <input_port name="joint5" type="float"/>
+            <input_port name="joint6" type="float"/>
+        </Action>
+        <Action ID="MoveArmToPlacePose">
+            <input_port name="cartesian" type="bool"/>
+            <input_port name="place_poses" type="std::vector&lt;geometry_msgs::msg::Pose_&lt;std::allocator&lt;void&gt; &gt;, std::allocator&lt;geometry_msgs::msg::Pose_&lt;std::allocator&lt;void&gt; &gt; &gt; &gt;"/>
+        </Action>
+        <Action ID="MoveArmToPose">
+            <input_port name="cartesian" type="bool"/>
+            <input_port name="q_w" type="float"/>
+            <input_port name="q_x" type="float"/>
+            <input_port name="q_y" type="float"/>
+            <input_port name="q_z" type="float"/>
+            <input_port name="x" type="float"/>
+            <input_port name="y" type="float"/>
+            <input_port name="z" type="float"/>
+        </Action>
+        <Action ID="MoveBase">
+            <input_port name="frame_id" type="std::string"/>
+            <input_port name="quaternion_w" type="float"/>
+            <input_port name="quaternion_x" type="float"/>
+            <input_port name="quaternion_y" type="float"/>
+            <input_port name="quaternion_z" type="float"/>
+            <input_port name="x" type="float"/>
+            <input_port name="y" type="float"/>
+        </Action>
+        <Action ID="OpenGripper">
+            <input_port name="cylinder_ids" type="std::vector&lt;aip_grasp_planning_interfaces::msg::CylinderCombination_&lt;std::allocator&lt;void&gt; &gt;, std::allocator&lt;aip_grasp_planning_interfaces::msg::CylinderCombination_&lt;std::allocator&lt;void&gt; &gt; &gt; &gt;"/>
+        </Action>
+        <Action ID="PackPlanning">
+            <input_port name="objects_to_pick" type="std::vector&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, std::allocator&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; &gt;"/>
+            <output_port name="package_sequence" type="aip_packing_planning_interfaces::msg::PackageSequence_&lt;std::allocator&lt;void&gt; &gt;"/>
+        </Action>
+        <Action ID="SetInitialPose">
+            <input_port name="quaternion_w" type="float"/>
+            <input_port name="quaternion_x" type="float"/>
+            <input_port name="quaternion_y" type="float"/>
+            <input_port name="quaternion_z" type="float"/>
+            <input_port name="x" type="float"/>
+            <input_port name="y" type="float"/>
+            <input_port name="z" type="float"/>
+        </Action>
+        <Action ID="StringParameterRequest">
+            <input_port name="default_value" type="std::string"/>
+            <input_port name="key" type="std::string"/>
+            <input_port name="max" type="std::string"/>
+            <input_port name="min" type="std::string"/>
+            <input_port name="msg" type="std::string"/>
+            <input_port name="options" type="std::string"/>
+            <input_port name="title" type="std::string"/>
+            <output_port name="value" type="std::string"/>
+        </Action>
+        <Action ID="UserInteraction">
+            <input_port name="detections" type="object_detector_tensorflow_interfaces::msg::Detections_&lt;std::allocator&lt;void&gt; &gt;"/>
+            <output_port name="user_input" type="std::string"/>
+        </Action>
+        <Action ID="Wait">
+            <input_port name="seconds" type="int"/>
+        </Action>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
