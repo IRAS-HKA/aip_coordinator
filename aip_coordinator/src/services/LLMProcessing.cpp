@@ -6,7 +6,7 @@
  */
 std::string LLMProcessing::ros2_service_name()
 {
-    return "/sene_interpretation";   
+    return "/scene_interpretation";   
 }
 
 /**
@@ -36,8 +36,6 @@ void LLMProcessing::on_send(std::shared_ptr<LLMProcessingSrv::Request> request)
     request->user_input = ports.get_value<std::string>("user_input");
 
     request->detections = ports.get_value<object_detector_tensorflow_interfaces::msg::Detections>("detections");
-
-    // request->detections = ports.get_value<object_detector_tensorflow_interfaces::msg::Detections>("detections");
 
     log("Sending Request for User Input: " + request->user_input + " to LLM Processing Service");
 
