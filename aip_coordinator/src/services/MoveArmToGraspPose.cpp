@@ -21,8 +21,11 @@ std::string MoveArmToGraspPose::ros2_service_name()
  */
 BT::PortsList MoveArmToGraspPose::providedPorts()
 {
-    return {BT::InputPort<std::vector<geometry_msgs::msg::Pose>>("grasp_poses"),
-            BT::InputPort<bool>("cartesian")};
+    return {
+        BT::InputPort<std::vector<geometry_msgs::msg::Pose>>("grasp_poses"),
+        BT::InputPort<int>("object_no"),
+        BT::InputPort<bool>("cartesian")
+        };
 }
 
 /**
@@ -31,20 +34,29 @@ BT::PortsList MoveArmToGraspPose::providedPorts()
 void MoveArmToGraspPose::on_send(std::shared_ptr<MoveArmToGraspPoseSrv::Request> request)
 {
     // Get First Pose from Vector of input port grasp_pose
-    geometry_msgs::msg::Pose first_grasp_pose; 
+    int object_no;
+    object_no = ports.get_value<int>("object_no");
     
-    first_grasp_pose = ports.get_value<std::vector<geometry_msgs::msg::Pose>>("grasp_poses")[0];
+    geometry_msgs::msg::Pose grasp_pose; 
+    
+    grasp_pose = ports.get_value<std::vector<geometry_msgs::msg::Pose>>("grasp_poses")[object_no];
 
-    request->pose.position.x = first_grasp_pose.position.x;
-    request->pose.position.y = first_grasp_pose.position.y;
-    request->pose.position.z = first_grasp_pose.position.z;
-    request->pose.orientation.x = first_grasp_pose.orientation.x;
-    request->pose.orientation.y = first_grasp_pose.orientation.y;
-    request->pose.orientation.z = first_grasp_pose.orientation.z;
-    request->pose.orientation.w = first_grasp_pose.orientation.w;
+    request->pose.position.x = grasp_pose.position.x;
+    request->pose.position.y = grasp_pose.position.y;
+    request->pose.position.z = grasp_pose.position.z;
+    request->pose.orientation.x = grasp_pose.orientation.x;
+    request->pose.orientation.y = grasp_pose.orientation.y;
+    request->pose.orientation.z = grasp_pose.orientation.z;
+    request->pose.orientation.w = grasp_pose.orientation.w;
     
-    log("Move arm to first grasp pose (" + Converter::ftos(request->pose.position.x) + ", " + Converter::ftos(request->pose.position.y) + ", " + Converter::ftos(request->pose.position.z) + ")");
+    log("Requesting MoveArmToGraspPose for object_no" + std::to_string(object_no));
+    log("Move arm to grasp pose (" + Converter::ftos(request->pose.position.x) + ", " + Converter::ftos(request->pose.position.y) + ", " + Converter::ftos(request->pose.position.z) + ")");
     log("Orientation (" + Converter::ftos(request->pose.orientation.x) + ", " + Converter::ftos(request->pose.orientation.y) + ", " + Converter::ftos(request->pose.orientation.z) + ", " + Converter::ftos(request->pose.orientation.w) + ")");
+
+    request->cart = ports.get_value<bool>("cartesian");
+
+    log("Cartesian: " + std::to_string(request->cart));
+
 }
 
 /**

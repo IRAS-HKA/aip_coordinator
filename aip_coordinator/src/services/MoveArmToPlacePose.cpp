@@ -22,6 +22,7 @@ std::string MoveArmToPlacePose::ros2_service_name()
 BT::PortsList MoveArmToPlacePose::providedPorts()
 {
     return {BT::InputPort<std::vector<geometry_msgs::msg::Pose>>("place_poses"),
+            BT::InputPort<int>("object_no"),
             BT::InputPort<bool>("cartesian")};
 }
 
@@ -31,20 +32,26 @@ BT::PortsList MoveArmToPlacePose::providedPorts()
 void MoveArmToPlacePose::on_send(std::shared_ptr<MoveArmToPlacePoseSrv::Request> request)
 {
     // Get First Pose from Vector of input port grasp_pose
-    geometry_msgs::msg::Pose first_place_pose; 
+    int object_no;
+    object_no = ports.get_value<int>("object_no");
     
-    first_place_pose = ports.get_value<std::vector<geometry_msgs::msg::Pose>>("place_poses")[0];
+    geometry_msgs::msg::Pose place_pose; 
+    
+    place_pose = ports.get_value<std::vector<geometry_msgs::msg::Pose>>("place_poses")[object_no];
 
-    request->pose.position.x = first_place_pose.position.x;
-    request->pose.position.y = first_place_pose.position.y;
-    request->pose.position.z = first_place_pose.position.z;
-    request->pose.orientation.x = first_place_pose.orientation.x;
-    request->pose.orientation.y = first_place_pose.orientation.y;
-    request->pose.orientation.z = first_place_pose.orientation.z;
-    request->pose.orientation.w = first_place_pose.orientation.w;
-    
-    log("Move arm to first place pose (" + Converter::ftos(request->pose.position.x) + ", " + Converter::ftos(request->pose.position.y) + ", " + Converter::ftos(request->pose.position.z) + ")");
+    request->pose.position.x = place_pose.position.x;
+    request->pose.position.y = place_pose.position.y;
+    request->pose.position.z = place_pose.position.z;
+    request->pose.orientation.x = place_pose.orientation.x;
+    request->pose.orientation.y = place_pose.orientation.y;
+    request->pose.orientation.z = place_pose.orientation.z;
+    request->pose.orientation.w = place_pose.orientation.w;
+
+    log("Requesting MoveArmToPlacePose for object_no" + std::to_string(object_no));  
+    log("Move arm to place pose (" + Converter::ftos(request->pose.position.x) + ", " + Converter::ftos(request->pose.position.y) + ", " + Converter::ftos(request->pose.position.z) + ")");
     log("Orientation (" + Converter::ftos(request->pose.orientation.x) + ", " + Converter::ftos(request->pose.orientation.y) + ", " + Converter::ftos(request->pose.orientation.z) + ", " + Converter::ftos(request->pose.orientation.w) + ")");
+
+    request->cart = ports.get_value<bool>("cartesian");
 }
 
 /**

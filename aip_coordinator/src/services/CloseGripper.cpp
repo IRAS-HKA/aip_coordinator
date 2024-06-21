@@ -21,7 +21,9 @@ std::string CloseGripper::ros2_service_name()
  */
 BT::PortsList CloseGripper::providedPorts()
 {
-    return {BT::InputPort<std::vector<aip_grasp_planning_interfaces::msg::CylinderCombination>>("cylinder_ids")
+    return {
+        BT::InputPort<std::vector<aip_grasp_planning_interfaces::msg::CylinderCombination>>("cylinder_ids"),
+        BT::InputPort<int>("object_no")
     };      
 }
 
@@ -31,14 +33,19 @@ BT::PortsList CloseGripper::providedPorts()
 void CloseGripper::on_send(std::shared_ptr<CloseGripperSrv::Request> request)
 {
     // Get FIRST cylinder_id combination from Vector of input port cylinder_ids
-    aip_grasp_planning_interfaces::msg::CylinderCombination cylinder_combination1;
 
-    cylinder_combination1 = ports.get_value<std::vector<aip_grasp_planning_interfaces::msg::CylinderCombination>>("cylinder_ids")[1];
+    int object_no;
+    object_no = ports.get_value<int>("object_no");
+    
+    aip_grasp_planning_interfaces::msg::CylinderCombination cylinder_combination;
 
-    request->cylinder_ids = cylinder_combination1;
+    cylinder_combination = ports.get_value<std::vector<aip_grasp_planning_interfaces::msg::CylinderCombination>>("cylinder_ids")[object_no];
+
+    request->cylinder_ids = cylinder_combination;
 
     // log the content of the request message
-    log("Request for Close Gripper: Length of call " + std::to_string(request->cylinder_ids.cylinder_ids.size()));
+    log("Requesting Close Gripper for object_no" + std::to_string(object_no) + "with Length of call " + std::to_string(request->cylinder_ids.cylinder_ids.size()));
+    // log("Request for Close Gripper: Length of call " + std::to_string(request->cylinder_ids.cylinder_ids.size()));
 
     std::string cylinder_ids_str;
     for (std::vector<int>::size_type i = 0; i < request->cylinder_ids.cylinder_ids.size(); ++i) {
