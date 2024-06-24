@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Sequence>
+            <Action ID="DetectObjects" detections="{detections}" reference_image="{reference_image}" result_image="{depth_image}"/>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="DetectObjects">
+            <output_port name="detections" type="object_detector_tensorflow_interfaces::msg::Detections_&lt;std::allocator&lt;void&gt; &gt;"/>
+            <output_port name="reference_image" type="sensor_msgs::msg::Image_&lt;std::allocator&lt;void&gt; &gt;"/>
+            <output_port name="result_image" type="sensor_msgs::msg::Image_&lt;std::allocator&lt;void&gt; &gt;"/>
+        </Action>
+        <Action ID="LLMProcessing">
+            <input_port name="detections" type="object_detector_tensorflow_interfaces::msg::Detections_&lt;std::allocator&lt;void&gt; &gt;"/>
+            <output_port name="objects_to_pick" type="std::vector&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, std::allocator&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; &gt;"/>
+            <input_port name="user_input" type="std::string"/>
+        </Action>
+        <Action ID="UserInteraction">
+            <input_port name="detections" type="object_detector_tensorflow_interfaces::msg::Detections_&lt;std::allocator&lt;void&gt; &gt;"/>
+            <output_port name="user_input" type="std::string"/>
+        </Action>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
