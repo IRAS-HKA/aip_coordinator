@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     ros-$ROS_DISTRO-nav2-msgs \
     qtbase5-dev \
     libqt5svg5-dev \
+    libboost-dev \
     libzmq3-dev \
     libdw-dev \
     libqt5opengl5-dev \
@@ -28,7 +29,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     nano \
     && apt-get clean && rm -rf /var/lib/apt/lists/* 
 
-RUN python3 -m pip install -U pip setuptools
+#RUN python3 -m pip install --upgrade -U pip setuptools 
+RUN python3 -m pip install --upgrade setuptools packaging
+# 
 
 ##############################################################################
 ##                                 Create User                              ##

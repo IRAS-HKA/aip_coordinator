@@ -19,10 +19,10 @@
     <BehaviorTree ID="PickAndPlace_Object_0">
         <Sequence>
             <Action ID="MoveArmToGraspPose" object_no="0" cartesian="True" grasp_poses="{grasp_poses}"/>
-            <Action ID="Wait" seconds="10"/>
+            <Action ID="Wait" seconds="3"/>
             <Action ID="CloseGripper" object_no="0" cylinder_ids="{cylinder_ids}"/>
             <Action ID="MoveArmToPlacePose" object_no="0" cartesian="True" place_poses="{place_poses}"/>
-            <Action ID="Wait" seconds="10"/>
+            <Action ID="Wait" seconds="3"/>
             <Action ID="OpenGripper" object_no="0" cylinder_ids="{cylinder_ids}"/>
         </Sequence>
     </BehaviorTree>
@@ -30,10 +30,10 @@
     <BehaviorTree ID="PickAndPlace_Object_1">
         <Sequence>
             <Action ID="MoveArmToGraspPose" object_no="1" cartesian="True" grasp_poses="{grasp_poses}"/>
-            <Action ID="Wait" seconds="10"/>
+            <Action ID="Wait" seconds="3"/>
             <Action ID="CloseGripper" object_no="1" cylinder_ids="{cylinder_ids}"/>
             <Action ID="MoveArmToPlacePose" object_no="1" cartesian="True" place_poses="{place_poses}"/>
-            <Action ID="Wait" seconds="10"/>
+            <Action ID="Wait" seconds="3"/>
             <Action ID="OpenGripper" object_no="1" cylinder_ids="{cylinder_ids}"/>
         </Sequence>
     </BehaviorTree>
