@@ -31,6 +31,7 @@ find_package(aip_packing_planning_interfaces REQUIRED)
 find_package(aip_grasp_planning_interfaces REQUIRED)
 find_package(aip_interfaces REQUIRED)
 find_package(llm_interfaces REQUIRED)
+find_package(point_transformation_interfaces REQUIRED)
 
 
 
@@ -57,6 +58,7 @@ set(DEPENDENCIES
   aip_packing_planning_interfaces
   llm_interfaces
   object_detector_tensorflow_interfaces
+  point_transformation_interfaces
 )
 
 file (GLOB SOURCES_ACTIONS src/actions/*.cpp)
