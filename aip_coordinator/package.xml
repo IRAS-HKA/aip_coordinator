@@ -25,6 +25,7 @@
     <depend>aip_packing_planning_interfaces</depend>
     <depend>llm_interfaces</depend>
     <depend>object_detector_tensorflow_interfaces</depend>
+    <depend>point_transformation_interfaces</depend>
 
 
 

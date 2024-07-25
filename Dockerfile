@@ -115,6 +115,10 @@ RUN mv ./aip_grasp_planning/aip_grasp_planning_interfaces . && \
 # Communication Modules
 RUN git clone https://github.com/IRAS-HKA/petra_communication.git
 
+RUN git clone https://github.com/IRAS-HKA/point_transformation.git
+RUN mv ./point_transformation/ros/point_transformation_interfaces . && \
+    rm -rf ./point_transformation
+
 USER $USER 
 
 ##############################################################################
