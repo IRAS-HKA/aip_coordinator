@@ -38,10 +38,10 @@ BT::PortsList GraspPlanning::providedPorts()
  */
 void GraspPlanning::on_send(std::shared_ptr<GraspPlanningSrv::Request> request)
 {
-    // request->objects_to_pick = ports.get_value<std::vector<std::string>>("objects_to_pick");
-    // request->package_sequence = ports.get_value<aip_packing_planning_interfaces::msg::PackageSequence>("package_sequence");
-    // request->detections = ports.get_value<object_detector_tensorflow_interfaces::msg::Detections>("detections");
-    // request->depth_image = ports.get_value<sensor_msgs::msg::Image>("depth_image");
+    request->objects_to_pick = ports.get_value<std::vector<std::string>>("objects_to_pick");
+    request->package_sequence = ports.get_value<aip_packing_planning_interfaces::msg::PackageSequence>("package_sequence");
+    request->detections = ports.get_value<object_detector_tensorflow_interfaces::msg::Detections>("detections");
+    request->depth_image = ports.get_value<sensor_msgs::msg::Image>("depth_image");
 
     //  std::string objects_to_pick_str = std::accumulate(request->objects_to_pick.begin(), request->objects_to_pick.end(), std::string(),
     //     [](const std::string& a, const std::string& b) -> std::string {
