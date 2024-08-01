@@ -8,8 +8,8 @@
             <Action ID="Wait" seconds="5"/>
             <Action ID="OpenGripper" object_no="0" cylinder_ids="1"/> -->
 
-            <!-- <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="0.7" y="0.4" z="1.50"/> -->
-            <Action ID="Wait" seconds="1"/>
+            <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="0.7" y="0.4" z="1.50"/>
+            <!-- <Action ID="Wait" seconds="1"/> -->
 
             <Action ID="DetectObjects" detections="{detections}" depth_image="{depth_image}" result_image="{result_image}"/>
             <Action ID="UserInteraction" detections="{detections}" user_input="{user_input}"/>
@@ -34,6 +34,9 @@
             <Action ID="Wait" seconds="1"/>
             <Action ID="MoveArmToGraspPose" object_no="0" cartesian="true" grasp_poses="{grasp_poses}"/>
             <Action ID="Wait" seconds="4"/> -->
+
+            <!-- <Action ID="MoveArmToExitGraspPose" object_no="0" cartesian="true" grasp_poses="{grasp_poses}"/> -->
+            <!-- <Action ID="Wait" seconds="3"/> -->
             
             <!-- <Action ID="CloseGripper" object_no="0" cylinder_ids="{cylinder_ids}"/> -->
             <!-- <Action ID="Wait" seconds="1"/> -->
@@ -46,7 +49,7 @@
             <Action ID="Wait" seconds="1"/>
             <Action ID="MoveArmToPlacePose" object_no="0" cartesian="true" place_poses="{place_poses}"/>
             <Action ID="Wait" seconds="5"/>
-            <Action ID="OpenGripper" object_no="0" cylinder_ids="{cylinder_ids}"/>
+            <!-- <Action ID="OpenGripper" object_no="0" cylinder_ids="{cylinder_ids}"/> -->
         </Sequence>
     </BehaviorTree>
     
@@ -55,13 +58,17 @@
             <!-- <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="0.7" y="1.05" z="1.42"/>
             <Action ID="Wait" seconds="1"/>
 
-            <Action ID="MoveArmToPreGraspPose" object_no="0" cartesian="true" grasp_poses="{grasp_poses}"/>
+            <Action ID="MoveArmToPreGraspPose" object_no="1" cartesian="true" grasp_poses="{grasp_poses}"/>
 
             <Action ID="Wait" seconds="1"/>
-            <Action ID="MoveArmToGraspPose" object_no="0" cartesian="true" grasp_poses="{grasp_poses}"/>
+            <Action ID="MoveArmToGraspPose" object_no="1" cartesian="true" grasp_poses="{grasp_poses}"/>
             <Action ID="Wait" seconds="4"/> -->
+
+            <!-- <Action ID="MoveArmToExitGraspPose" object_no="0" cartesian="true" grasp_poses="{grasp_poses}"/> -->
+            <!-- <Action ID="Wait" seconds="3"/> -->
             
-            <!-- <Action ID="CloseGripper" object_no="0" cylinder_ids="{cylinder_ids}"/> -->
+            
+            <!-- <Action ID="CloseGripper" object_no="1" cylinder_ids="{cylinder_ids}"/> -->
             <!-- <Action ID="Wait" seconds="1"/> -->
 <!-- 
             <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="0.7" y="1.05" z="1.42"/>
@@ -72,7 +79,7 @@
             <Action ID="Wait" seconds="1"/>
             <Action ID="MoveArmToPlacePose" object_no="1" cartesian="true" place_poses="{place_poses}"/>
             <Action ID="Wait" seconds="5"/>
-            <Action ID="OpenGripper" object_no="0" cylinder_ids="{cylinder_ids}"/>
+            <!-- <Action ID="OpenGripper" object_no="1" cylinder_ids="{cylinder_ids}"/> -->
         </Sequence>
     </BehaviorTree>
     <!-- ////////// -->

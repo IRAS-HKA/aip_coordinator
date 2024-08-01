@@ -13,6 +13,11 @@
             <output_port name="package_sequence" type="undefined"/>
             <input_port name="objects_to_pick" type="undefined"/>
         </Action>
+        <Action ID="LLMProcessing">
+            <output_port name="objects_to_pick" type="undefined"/>
+            <input_port name="detections" type="undefined"/>
+            <input_port name="user_input" type="std::string"/>
+        </Action>
         <Action ID="SetInitialPose">
             <input_port name="quaternion_z" type="float"/>
             <input_port name="quaternion_y" type="float"/>
@@ -31,11 +36,6 @@
             <input_port name="compare_to" type="std::string"/>
             <input_port name="input" type="std::string"/>
         </Condition>
-        <Action ID="LLMProcessing">
-            <output_port name="objects_to_pick" type="undefined"/>
-            <input_port name="detections" type="undefined"/>
-            <input_port name="user_input" type="std::string"/>
-        </Action>
         <Action ID="ClearGlobalCostmap"/>
         <Action ID="MoveArmToPose">
             <input_port name="cartesian" type="bool"/>
@@ -149,6 +149,11 @@
             <input_port name="cartesian" type="bool"/>
             <input_port name="object_no" type="int"/>
             <input_port name="place_poses" type="undefined"/>
+        </Action>
+        <Action ID="MoveArmToExitGraspPose">
+            <input_port name="cartesian" type="bool"/>
+            <input_port name="object_no" type="int"/>
+            <input_port name="grasp_poses" type="undefined"/>
         </Action>
         <Action ID="MoveBase">
             <input_port name="quaternion_z" type="float"/>

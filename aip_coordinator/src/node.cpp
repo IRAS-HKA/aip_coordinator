@@ -29,6 +29,8 @@
 
 #include <aip_coordinator/services/MoveArmToPreGraspPose.h>
 #include <aip_coordinator/services/MoveArmToGraspPose.h>
+#include <aip_coordinator/services/MoveArmToExitGraspPose.h>
+
 #include <aip_coordinator/services/MoveArmToPlacePose.h>
 
 // Navigation
@@ -87,6 +89,8 @@ BT::Tree create_tree(const std::string &main_tree_path, const std::string &groot
 
     factory.registerNodeType<MoveArmToPreGraspPose>("MoveArmToPreGraspPose");
     factory.registerNodeType<MoveArmToGraspPose>("MoveArmToGraspPose");
+    factory.registerNodeType<MoveArmToExitGraspPose>("MoveArmToExitGraspPose");
+
     factory.registerNodeType<MoveArmToPlacePose>("MoveArmToPlacePose");
     
 
