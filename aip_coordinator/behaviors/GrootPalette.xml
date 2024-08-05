@@ -10,8 +10,8 @@
             <input_port name="objects_to_pick" type="undefined"/>
         </Action>
         <Action ID="PackPlanning">
-            <output_port name="package_sequence" type="undefined"/>
             <output_port name="feedback" type="undefined"/>
+            <output_port name="package_sequence" type="undefined"/>
             <input_port name="objects_to_pick" type="undefined"/>
         </Action>
         <Action ID="LLMProcessing">
