@@ -54,6 +54,13 @@
             <input_port name="object_no" type="int"/>
             <input_port name="grasp_poses" type="undefined"/>
         </Action>
+        <Action ID="WebsiteFeedback">
+            <input_port name="place_poses" type="undefined"/>
+            <input_port name="cylinder_ids" type="undefined"/>
+            <input_port name="feedback" type="undefined"/>
+            <input_port name="grasp_poses" type="undefined"/>
+            <input_port name="package_sequence" type="undefined"/>
+        </Action>
         <Action ID="OpenGripper">
             <input_port name="object_no" type="int"/>
             <input_port name="cylinder_ids" type="undefined"/>
