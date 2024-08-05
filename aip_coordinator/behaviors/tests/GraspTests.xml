@@ -242,6 +242,7 @@
         <Action ID="PackPlanning">
             <input_port name="objects_to_pick" type="std::vector&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, std::allocator&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt; &gt;"/>
             <output_port name="package_sequence" type="aip_packing_planning_interfaces::msg::PackageSequence_&lt;std::allocator&lt;void&gt; &gt;"/>
+            <output_port name="feedback" type="aip_packing_planning_interfaces::msg::SolutionFeedback_&lt;std::allocator&lt;void&gt; &gt;"/>
         </Action>
         <Action ID="SetInitialPose">
             <input_port name="quaternion_w" type="float"/>

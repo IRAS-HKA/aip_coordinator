@@ -22,7 +22,8 @@ std::string PackPlanning::ros2_service_name()
 BT::PortsList PackPlanning::providedPorts()
 {
     return {BT::InputPort<std::vector<std::string>>("objects_to_pick"),
-            BT::OutputPort<aip_packing_planning_interfaces::msg::PackageSequence>("package_sequence"),}; // ::Response
+            BT::OutputPort<aip_packing_planning_interfaces::msg::PackageSequence>("package_sequence"),
+            BT::OutputPort<aip_packing_planning_interfaces::msg::SolutionFeedback>("feedback")}; // ::Response
 }
 
 /**
@@ -48,6 +49,7 @@ void PackPlanning::on_send(std::shared_ptr<PackPlanningSrv::Request> request)
 bool PackPlanning::on_result(std::shared_ptr<PackPlanningSrv::Response> response, std::shared_ptr<PackPlanningSrv::Request>)
 {
     ports.set_value<aip_packing_planning_interfaces::msg::PackageSequence>("package_sequence", response->package);
+    ports.set_value<aip_packing_planning_interfaces::msg::SolutionFeedback>("feedback", response->feedback);
 
     log("Received a PackingPlan containing " + std::to_string(response->package.packages.size()) + " packages");
     
