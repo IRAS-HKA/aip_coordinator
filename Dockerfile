@@ -103,7 +103,7 @@ RUN mv ./LLM_Scene_Docker/src/llm_interfaces . && \
     rm -rf ./LLM_Scene_Docker
 
 # Packing Planning Interfaces
-RUN git clone https://github.com/SchmittAndreas/aip_packing_algorithm.git
+RUN git clone --branch website_feedback_test https://github.com/SchmittAndreas/aip_packing_algorithm.git
 RUN mv ./aip_packing_algorithm/aip_packing_planning_interfaces . && \
     rm -rf ./aip_packing_algorithm
 
