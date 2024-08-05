@@ -15,6 +15,7 @@
             <Action ID="UserInteraction" detections="{detections}" user_input="{user_input}"/>
             <Action ID="LLMProcessing" detections="{detections}" objects_to_pick="{objects_to_pick}" user_input="{user_input}"/>
             <Action ID="PackPlanning" objects_to_pick="{objects_to_pick}" package_sequence="{package_sequence}"/>
+            <!-- <Action ID="WebsiteFeedback" feedback="{feedback}" package_sequence="{package_sequence}"/> -->
             <Action ID="GraspPlanning" cylinder_ids="{cylinder_ids}" depth_image="{depth_image}" detections="{detections}" grasp_poses="{grasp_poses}" objects_to_pick="{objects_to_pick}" package_sequence="{package_sequence}" place_poses="{place_poses}"/>
 
             <SubTree ID="PickAndPlace_Object_0" name="PickAndPlace_Object_0" __shared_blackboard="true"/>
