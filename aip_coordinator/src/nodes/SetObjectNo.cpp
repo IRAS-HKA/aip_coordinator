@@ -21,11 +21,7 @@ BT::PortsList SetObjectNo::providedPorts()
  */
 BT::NodeStatus SetObjectNo::on_start()
 {
-    int object_no = ports.get_value<int>("object_no");
 
-    object_no++;
-
-    ports.set_value<int>("object_no", object_no);    
 
     return BT::NodeStatus::RUNNING;
 }
@@ -36,7 +32,17 @@ BT::NodeStatus SetObjectNo::on_start()
  */
 BT::NodeStatus SetObjectNo::on_running()
 {
-    return BT::NodeStatus::RUNNING;
+
+    int object_no = ports.get_value<int>("object_no");
+
+    object_no++;
+    log("increased object_no to: " + std::to_string(object_no));
+
+
+    ports.set_value<int>("object_no", object_no);
+    
+    return BT::NodeStatus::SUCCESS;
+    // return BT::NodeStatus::RUNNING;
 }
 
 /**

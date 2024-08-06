@@ -21,9 +21,7 @@ BT::PortsList SetInitialObjectNo::providedPorts()
  */
 BT::NodeStatus SetInitialObjectNo::on_start()
 {
-    int object_no = 0;
 
-    ports.set_value<int>("object_no", object_no);    
 
     return BT::NodeStatus::RUNNING;
 }
@@ -34,7 +32,11 @@ BT::NodeStatus SetInitialObjectNo::on_start()
  */
 BT::NodeStatus SetInitialObjectNo::on_running()
 {
-    return BT::NodeStatus::RUNNING;
+
+    int object_no = 0;
+
+    ports.set_value<int>("object_no", object_no);    
+    return BT::NodeStatus::SUCCESS;
 }
 
 /**
