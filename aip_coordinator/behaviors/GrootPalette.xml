@@ -36,6 +36,10 @@
             <output_port name="depth_image" type="undefined"/>
             <output_port name="result_image" type="undefined"/>
             <output_port name="detections" type="undefined"/>
+            <input_port name="height" type="int"/>
+            <input_port name="width" type="int"/>
+            <input_port name="y_offset" type="int"/>
+            <input_port name="x_offset" type="int"/>
         </Action>
         <Condition ID="CheckBlackboard">
             <input_port name="compare_to" type="std::string"/>

@@ -43,7 +43,7 @@ void MoveArmToExitGraspPose::on_send(std::shared_ptr<MoveArmToExitGraspPoseSrv::
 
     request->pose.position.x = grasp_pose.position.x;
     request->pose.position.y = grasp_pose.position.y;
-    request->pose.position.z = grasp_pose.position.z + 0.08;
+    request->pose.position.z = grasp_pose.position.z + 0.2;
     request->pose.orientation.x = grasp_pose.orientation.x;
     request->pose.orientation.y = grasp_pose.orientation.y;
     request->pose.orientation.z = grasp_pose.orientation.z;

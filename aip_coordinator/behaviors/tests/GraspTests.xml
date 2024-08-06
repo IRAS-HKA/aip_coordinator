@@ -11,7 +11,7 @@
             <!-- <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="0.7" y="0.4" z="1.50"/> -->
             <Action ID="Wait" seconds="1"/>
 
-            <Action ID="DetectObjects" detections="{detections}" depth_image="{depth_image}" result_image="{result_image}"/>
+            <Action ID="DetectObjects" x_offset="0" y_offset="307" width="1126" height="548" detections="{detections}" depth_image="{depth_image}" result_image="{result_image}"/>
             <Action ID="UserInteraction" detections="{detections}" user_input="{user_input}"/>
             <Action ID="LLMProcessing" detections="{detections}" objects_to_pick="{objects_to_pick}" user_input="{user_input}"/>
             <Action ID="PackPlanning" feedback="{feedback}" objects_to_pick="{objects_to_pick}" package_sequence="{package_sequence}"/>
@@ -20,27 +20,27 @@
 
             <SubTree ID="PickAndPlace_Object_0" name="PickAndPlace_Object_0" __shared_blackboard="true"/>
             
-            <SubTree ID="PickAndPlace_Object_1" name="PickAndPlace_Object_1" __shared_blackboard="true"/>
+            <!-- <SubTree ID="PickAndPlace_Object_1" name="PickAndPlace_Object_1" __shared_blackboard="true"/> -->
 
         </Sequence>
     </BehaviorTree>
     <!-- ////////// -->
     <BehaviorTree ID="PickAndPlace_Object_0">
         <Sequence>
-            <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="0.7" y="1.05" z="1.42"/>
-            <Action ID="Wait" seconds="1"/>
+            <!-- <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="0.7" y="1.05" z="1.42"/> -->
+            <!-- <Action ID="Wait" seconds="1"/> -->
 
             <Action ID="MoveArmToPreGraspPose" object_no="0" cartesian="true" grasp_poses="{grasp_poses}"/>
 
             <Action ID="Wait" seconds="1"/>
             <Action ID="MoveArmToGraspPose" object_no="0" cartesian="true" grasp_poses="{grasp_poses}"/>
             <Action ID="Wait" seconds="5"/>
-
-            <Action ID="MoveArmToExitGraspPose" object_no="0" cartesian="true" grasp_poses="{grasp_poses}"/>
-            <Action ID="Wait" seconds="3"/>
-            
             <!-- <Action ID="CloseGripper" object_no="0" cylinder_ids="{cylinder_ids}"/> -->
             <Action ID="Wait" seconds="1"/>
+
+            <Action ID="MoveArmToExitGraspPose" object_no="0" cartesian="true" grasp_poses="{grasp_poses}"/>
+            <Action ID="Wait" seconds="1"/>
+            
 
             <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="0.7" y="1.05" z="1.42"/>
             <Action ID="Wait" seconds="1"/>
@@ -49,37 +49,38 @@
 
             <Action ID="Wait" seconds="1"/>
             <Action ID="MoveArmToPlacePose" object_no="0" cartesian="true" place_poses="{place_poses}"/>
-            <Action ID="Wait" seconds="5"/>
+            <!-- <Action ID="Wait" seconds="7"/> -->
             <!-- <Action ID="OpenGripper" object_no="0" cylinder_ids="{cylinder_ids}"/> -->
         </Sequence>
     </BehaviorTree>
     
     <BehaviorTree ID="PickAndPlace_Object_1">
         <Sequence>
-            <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="0.7" y="1.05" z="1.42"/>
-            <Action ID="Wait" seconds="1"/>
+            <!-- <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="0.7" y="1.05" z="1.42"/> -->
+            <!-- <Action ID="Wait" seconds="7"/> -->
 
             <Action ID="MoveArmToPreGraspPose" object_no="1" cartesian="true" grasp_poses="{grasp_poses}"/>
 
             <Action ID="Wait" seconds="1"/>
             <Action ID="MoveArmToGraspPose" object_no="1" cartesian="true" grasp_poses="{grasp_poses}"/>
-            <Action ID="Wait" seconds="5"/>
+            <Action ID="Wait" seconds="1"/>
+
+            <!-- <Action ID="CloseGripper" object_no="1" cylinder_ids="{cylinder_ids}"/> -->
+            <!-- <Action ID="Wait" seconds="2"/> -->
 
             <Action ID="MoveArmToExitGraspPose" object_no="1" cartesian="true" grasp_poses="{grasp_poses}"/>
-            <Action ID="Wait" seconds="3"/>
+            <Action ID="Wait" seconds="1"/>
             
-            <!-- <Action ID="CloseGripper" object_no="0" cylinder_ids="{cylinder_ids}"/> -->
-            <Action ID="Wait" seconds="1"/>
 
-            <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="0.7" y="1.05" z="1.42"/>
-            <Action ID="Wait" seconds="1"/>
+            <!-- <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="0.7" y="1.05" z="1.42"/> -->
+            <!-- <Action ID="Wait" seconds="1"/> -->
 
             <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="1.05" y="0.46" z="1.55"/>
 
-            <Action ID="Wait" seconds="1"/>
-            <Action ID="MoveArmToPlacePose" object_no="1" cartesian="true" place_poses="{place_poses}"/>
-            <Action ID="Wait" seconds="5"/>
-            <!-- <Action ID="OpenGripper" object_no="0" cylinder_ids="{cylinder_ids}"/> -->
+            <!-- <Action ID="Wait" seconds="1"/> -->
+            <!-- <Action ID="MoveArmToPlacePose" object_no="1" cartesian="true" place_poses="{place_poses}"/> -->
+            <!-- <Action ID="Wait" seconds="3"/> -->
+            <!-- <Action ID="OpenGripper" object_no="1" cylinder_ids="{cylinder_ids}"/> -->
         </Sequence>
     </BehaviorTree>
     <!-- ////////// -->
@@ -138,6 +139,10 @@
             <output_port name="z" type="float"/>
         </Action>
         <Action ID="DetectObjects">
+            <input_port name="x_offset" type="int"/>
+            <input_port name="y_offset" type="int"/>
+            <input_port name="width" type="int"/>
+            <input_port name="height" type="int"/>
             <output_port name="detections" type="object_detector_tensorflow_interfaces::msg::Detections_&lt;std::allocator&lt;void&gt; &gt;"/>
             <output_port name="reference_image" type="sensor_msgs::msg::Image_&lt;std::allocator&lt;void&gt; &gt;"/>
             <output_port name="result_image" type="sensor_msgs::msg::Image_&lt;std::allocator&lt;void&gt; &gt;"/>
