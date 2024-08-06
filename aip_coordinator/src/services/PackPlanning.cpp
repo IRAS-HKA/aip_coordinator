@@ -23,7 +23,8 @@ BT::PortsList PackPlanning::providedPorts()
 {
     return {BT::InputPort<std::vector<std::string>>("objects_to_pick"),
             BT::OutputPort<aip_packing_planning_interfaces::msg::PackageSequence>("package_sequence"),
-            BT::OutputPort<aip_packing_planning_interfaces::msg::SolutionFeedback>("feedback")}; // ::Response
+            BT::OutputPort<aip_packing_planning_interfaces::msg::SolutionFeedback>("feedback")
+            }; // ::Response
 }
 
 /**
