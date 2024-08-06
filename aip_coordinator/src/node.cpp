@@ -64,6 +64,9 @@
 // User Interaction
 #include <aip_coordinator/services/UserInteraction.h>
 
+// Flexible BT 
+#include <aip_coordinator/nodes/SetInitialObjectNo.h>
+#include <aip_coordinator/nodes/SetObjectNo.h>
 // Misc
 #include <aip_coordinator/nodes/Wait.h>
 
@@ -128,6 +131,10 @@ BT::Tree create_tree(const std::string &main_tree_path, const std::string &groot
 
     // Grasp Planning
     factory.registerNodeType<GraspPlanning>("GraspPlanning");
+
+    // Flexible BT 
+    factory.registerNodeType<SetInitialObjectNo>("SetInitialObjectNo");
+    factory.registerNodeType<SetObjectNo>("SetObjectNo");
 
     XmlGenerator xml_generator(&factory);
     xml_generator.generate_xml_palette(groot_palette_path);
