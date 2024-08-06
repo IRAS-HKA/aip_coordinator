@@ -4,7 +4,7 @@
     <BehaviorTree ID="BehaviorTree">
         <Sequence>
             <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="0.7" y="0.4" z="1.50"/>
-            <Action ID="DetectObjects" detections="{detections}" depth_image="{depth_image}" result_image="{result_image}"/>
+            <Action ID="DetectObjects" x_offset="0" y_offset="307" width="1126" height="548" detections="{detections}" depth_image="{depth_image}" result_image="{result_image}"/>
             <Action ID="UserInteraction" detections="{detections}" user_input="{user_input}"/>
             <Action ID="LLMProcessing" detections="{detections}" objects_to_pick="{objects_to_pick}" user_input="{user_input}"/>
             <Action ID="PackPlanning" objects_to_pick="{objects_to_pick}" package_sequence="{package_sequence}"/>
