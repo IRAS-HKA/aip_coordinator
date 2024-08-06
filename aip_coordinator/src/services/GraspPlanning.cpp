@@ -29,7 +29,9 @@ BT::PortsList GraspPlanning::providedPorts()
             BT::InputPort<sensor_msgs::msg::Image>("depth_image"),
             BT::OutputPort<std::vector<geometry_msgs::msg::Pose>>("grasp_poses"),
             BT::OutputPort<std::vector<aip_grasp_planning_interfaces::msg::CylinderCombination>>("cylinder_ids"),
-            BT::OutputPort<std::vector<geometry_msgs::msg::Pose>>("place_poses")}; // ::Response
+            BT::OutputPort<std::vector<geometry_msgs::msg::Pose>>("place_poses"),
+            BT::OutputPort<int>("amount_of_objects_to_place")
+            }; // ::Response
             
 }
 
@@ -61,6 +63,8 @@ bool GraspPlanning::on_result(std::shared_ptr<GraspPlanningSrv::Response> respon
     ports.set_value<std::vector<geometry_msgs::msg::Pose>>("grasp_poses", response->grasp_pose);
     ports.set_value<std::vector<aip_grasp_planning_interfaces::msg::CylinderCombination>>("cylinder_ids", response->cylinder_ids);
     ports.set_value<std::vector<geometry_msgs::msg::Pose>>("place_poses", response->place_pose);
+
+    ports.set_value<int>("amount_of_objects_to_place", response->amount_of_objects_to_place);
 
     log("Received a Grasping planning containing " + std::to_string(request->objects_to_pick.size()) + " packages");
     for (const auto& pose : response->grasp_pose) {

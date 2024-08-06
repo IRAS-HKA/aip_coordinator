@@ -4,6 +4,7 @@
             <inout_port name="object_no" type="int"/>
         </Action>
         <Action ID="GraspPlanning">
+            <output_port name="amount_of_objects_to_place" type="int"/>
             <output_port name="cylinder_ids" type="undefined"/>
             <input_port name="depth_image" type="undefined"/>
             <output_port name="place_poses" type="undefined"/>
