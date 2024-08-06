@@ -23,6 +23,10 @@ BT::PortsList DetectObjects::providedPorts()
 {
     return {
             // BT::InputPort<bool>("start_detection"),   // check interface update 
+            BT::InputPort<int>("x_offset"),
+            BT::InputPort<int>("y_offset"),
+            BT::InputPort<int>("width"),
+            BT::InputPort<int>("height"),
             BT::OutputPort<object_detector_tensorflow_interfaces::msg::Detections>("detections"),
             BT::OutputPort<sensor_msgs::msg::Image>("result_image"), // RGB image with BB, Center Point etc.
             BT::OutputPort<sensor_msgs::msg::Image>("depth_image") // Depth image
@@ -33,8 +37,16 @@ BT::PortsList DetectObjects::providedPorts()
  * @brief Set the content of the request message which is sent to the ROS2 service server.
  */
 
-void DetectObjects::on_send(std::shared_ptr<DetectObjectsSrv::Request> )
+void DetectObjects::on_send(std::shared_ptr<DetectObjectsSrv::Request> request)
 {
+    int x_offset = ports.get_value<int>("x_offset");
+    int y_offset = ports.get_value<int>("y_offset");
+    int width = ports.get_value<int>("width");
+    int height = ports.get_value<int>("height");
+    request->roi.x_offset = x_offset; 
+    request->roi.y_offset = y_offset;
+    request->roi.width = width;
+    request->roi.height = height;
     // request->start_detection = ports.get_value<bool>("detect_objects");
     // log("Requested ODTF to detect objects in szene: (" + Converter::ftos(request->start_detection));
 }
