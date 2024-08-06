@@ -9,9 +9,11 @@
             <Action ID="DetectObjects" x_offset="0" y_offset="307" width="1126" height="548" detections="{detections}" depth_image="{depth_image}" result_image="{result_image}"/>
             <Action ID="UserInteraction" detections="{detections}" user_input="{user_input}"/>
             <Action ID="LLMProcessing" detections="{detections}" objects_to_pick="{objects_to_pick}" user_input="{user_input}"/>
-            <Action ID="PackPlanning" feedback="{feedback}" objects_to_pick="{objects_to_pick}" package_sequence="{package_sequence}"/>
+            <Action ID="PackPlanning" objects_to_pick="{objects_to_pick}" package_sequence="{package_sequence}"/>
+            <!-- <Action ID="PackPlanning" feedback="{feedback}" objects_to_pick="{objects_to_pick}" package_sequence="{package_sequence}"/> -->
+
             <Action ID="GraspPlanning" amount_of_objects_to_place="{amount_of_objects_to_place}" cylinder_ids="{cylinder_ids}" depth_image="{depth_image}" detections="{detections}" grasp_poses="{grasp_poses}" objects_to_pick="{objects_to_pick}" package_sequence="{package_sequence}" place_poses="{place_poses}"/>
-            <Action ID="WebsiteFeedback" cylinder_ids="{cylinder_ids}" package_sequence="{package_sequence}" feedback="{feedback}" grasp_poses="{grasp_poses}" place_poses="{place_poses}"/>
+            <!-- <Action ID="WebsiteFeedback" cylinder_ids="{cylinder_ids}" package_sequence="{package_sequence}" feedback="{feedback}" grasp_poses="{grasp_poses}" place_poses="{place_poses}"/> -->
             <Action ID="SetInitialObjectNo" object_no="{object_no}"/>
             <Repeat num_cycles="{amount_of_objects_to_place}">
                 <SubTree ID="PickAndPlace" name="PickAndPlace" __shared_blackboard="true"/>
