@@ -6,7 +6,7 @@
  */
 std::string WebsiteFeedback::ros2_service_name()
 {
-    return "/website_feedback";
+    return "/LLM/get_website_feedback";
 }
 
 /**

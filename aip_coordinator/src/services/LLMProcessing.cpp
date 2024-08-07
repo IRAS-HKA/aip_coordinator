@@ -6,7 +6,7 @@
  */
 std::string LLMProcessing::ros2_service_name()
 {
-    return "/scene_interpretation";   
+    return "/LLM/scene_interpretation";   
 }
 
 /**

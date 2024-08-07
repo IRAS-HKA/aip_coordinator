@@ -5,7 +5,7 @@
  */
 std::string UserInteraction::ros2_service_name()
 {
-    return "/user_interaction";
+    return "/LLM/user_interaction";
 }
 
 /**
