@@ -108,7 +108,7 @@ RUN mv ./aip_packing_algorithm/aip_packing_planning_interfaces . && \
     rm -rf ./aip_packing_algorithm
 
 # Grasp Planning Interfaces
-RUN git clone -b flexible_Sequence https://github.com/LeoSc4/aip_grasp_planning.git
+RUN git clone https://github.com/LeoSc4/aip_grasp_planning.git
 RUN mv ./aip_grasp_planning/aip_grasp_planning_interfaces . && \
     rm -rf ./aip_grasp_planning
 
