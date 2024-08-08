@@ -23,15 +23,6 @@
             <input_port name="detections" type="undefined"/>
             <input_port name="user_input" type="std::string"/>
         </Action>
-        <Action ID="SetInitialPose">
-            <input_port name="quaternion_z" type="float"/>
-            <input_port name="quaternion_y" type="float"/>
-            <input_port name="quaternion_w" type="float"/>
-            <input_port name="quaternion_x" type="float"/>
-            <input_port name="z" type="float"/>
-            <input_port name="y" type="float"/>
-            <input_port name="x" type="float"/>
-        </Action>
         <Action ID="DetectObjects">
             <output_port name="depth_image" type="undefined"/>
             <output_port name="result_image" type="undefined"/>
@@ -41,11 +32,28 @@
             <input_port name="y_offset" type="int"/>
             <input_port name="x_offset" type="int"/>
         </Action>
+        <Action ID="VizCloseGripper">
+            <input_port name="object_no" type="int"/>
+            <input_port name="cylinder_ids" type="undefined"/>
+        </Action>
+        <Action ID="SetInitialPose">
+            <input_port name="quaternion_z" type="float"/>
+            <input_port name="quaternion_y" type="float"/>
+            <input_port name="quaternion_w" type="float"/>
+            <input_port name="quaternion_x" type="float"/>
+            <input_port name="z" type="float"/>
+            <input_port name="y" type="float"/>
+            <input_port name="x" type="float"/>
+        </Action>
         <Condition ID="CheckBlackboard">
             <input_port name="compare_to" type="std::string"/>
             <input_port name="input" type="std::string"/>
         </Condition>
         <Action ID="ClearGlobalCostmap"/>
+        <Action ID="VizOpenGripper">
+            <input_port name="object_no" type="int"/>
+            <input_port name="cylinder_ids" type="undefined"/>
+        </Action>
         <Action ID="MoveArmToPose">
             <input_port name="cartesian" type="bool"/>
             <input_port name="q_z" type="float"/>

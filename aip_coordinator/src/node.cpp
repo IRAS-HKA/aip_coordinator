@@ -47,7 +47,8 @@
 // Gripper 
 #include <aip_coordinator/services/OpenGripper.h>
 #include <aip_coordinator/services/CloseGripper.h>
-
+#include <aip_coordinator/services/VizOpenGripper.h>
+#include <aip_coordinator/services/VizCloseGripper.h>
 // ODTF
 #include <aip_coordinator/services/DetectObjects.h>
 
@@ -118,6 +119,8 @@ BT::Tree create_tree(const std::string &main_tree_path, const std::string &groot
     // Gripper
     factory.registerNodeType<OpenGripper>("OpenGripper");
     factory.registerNodeType<CloseGripper>("CloseGripper");
+    factory.registerNodeType<VizOpenGripper>("VizOpenGripper");
+    factory.registerNodeType<VizCloseGripper>("VizCloseGripper");
 
     // ODTF
     factory.registerNodeType<DetectObjects>("DetectObjects");
