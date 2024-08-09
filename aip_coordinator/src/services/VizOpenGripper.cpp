@@ -6,7 +6,7 @@
  */
 std::string VizOpenGripper::ros2_service_name()
 {
-    return "/close_gripper";
+    return "/viz_open_gripper";
 }
 
 /**

@@ -1,4 +1,6 @@
 #include <aip_coordinator/services/WebsiteFeedback.h>
+// #include <yaml-cpp/yaml.h>
+
 
 /**
  * @brief Set the name of the ROS2 service server to connect with.
@@ -6,7 +8,7 @@
  */
 std::string WebsiteFeedback::ros2_service_name()
 {
-    return "/website_feedback";
+    return "/LLM/get_website_feedback";
 }
 
 /**
@@ -43,6 +45,24 @@ void WebsiteFeedback::on_send(std::shared_ptr<WebsiteFeedbackSrv::Request> reque
     request->grasp_poses = ports.get_value<std::vector<geometry_msgs::msg::Pose>>("grasp_poses");
     request->place_poses = ports.get_value<std::vector<geometry_msgs::msg::Pose>>("place_poses");
 
+    
+    // YAML::Emitter emitter;
+    // emitter << YAML::BeginMap;
+    // emitter << YAML::Key << "package_sequence";
+    // emitter << YAML::Value << request->package;
+    // emitter << YAML::Key << "feedback";
+    // emitter << YAML::Value << request->feedback;
+    // emitter << YAML::Key << "cylinder_ids";
+    // emitter << YAML::Value << request->cylinder_ids;
+    // emitter << YAML::Key << "grasp_poses";
+    // emitter << YAML::Value << request->grasp_poses;
+    // emitter << YAML::Key << "place_poses";
+    // emitter << YAML::Value << request->place_poses;
+    // emitter << YAML::EndMap;
+
+    
+
+    // std::cout << "Request:\n" << emitter.c_str() << std::endl;
     log("Sending Website Feedback Request to Website Feedback Service");
 }
 
