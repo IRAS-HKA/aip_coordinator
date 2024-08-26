@@ -92,11 +92,6 @@ RUN git clone -b devel https://github.com/eshan-savla/object_detector_tensorflow
 RUN mv ./object_detector_tensorflow/ros/object_detector_tensorflow_interfaces . && \
     rm -rf ./object_detector_tensorflow
 
-# User Interaction Interfaces
-# RUN git clone -b humble
-# RUN mv ./. && \
-#     rm -rf ./
-
 # LLM Interfaces
 RUN git clone https://github.com/maudetroll/LLM_Scene_Docker.git
 RUN mv ./LLM_Scene_Docker/src/llm_interfaces . && \
@@ -113,7 +108,7 @@ RUN mv ./aip_grasp_planning/aip_grasp_planning_interfaces . && \
     rm -rf ./aip_grasp_planning
 
 # Communication Modules
-RUN git clone https://github.com/IRAS-HKA/petra_communication.git
+# RUN git clone https://github.com/IRAS-HKA/petra_communication.git
 
 USER $USER 
 
