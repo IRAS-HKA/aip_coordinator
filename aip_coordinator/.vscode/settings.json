@@ -12,5 +12,6 @@
         "/opt/ros/humble/local/lib/python3.10/dist-packages",
         "./",
         "install/lib/python3.10/site-packages"
-    ]
+    ],
+    "ros.distro": "humble"
 }
