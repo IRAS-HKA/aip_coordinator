@@ -22,8 +22,6 @@ For further development, make sure to rebuild the image and update the interface
 
 The current application (SS2024) uses the following behavior tree: 
 
-**### UPDATE the picture ###**
-
 <img src="aip_coordinator/docs/BT_application_SS24.png" width="1000"><br>
 
 It uses regular service clients, (shared) blackboards, decorators, subtrees and standalone BT nodes to perform simple tasks.
