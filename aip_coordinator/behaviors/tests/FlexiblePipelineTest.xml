@@ -5,7 +5,7 @@
         <Sequence>
             <!-- <Action ID="DeleteParameters"/> -->
             <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="0.7" y="0.4" z="1.50"/>
-            <Action ID="Wait" seconds="3"/>
+            <Action ID="Wait" seconds="2"/>
 
             <Action ID="DetectObjects" x_offset="0" y_offset="307" width="1126" height="600" detections="{detections}" depth_image="{depth_image}" result_image="{result_image}"/>
             <Action ID="UserInteraction" detections="{detections}" user_input="{user_input}"/>
@@ -25,19 +25,19 @@
     <BehaviorTree ID="PickAndPlace">
         <Sequence>
             <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="0.7" y="1.05" z="1.42"/>
-            <Action ID="Wait" seconds="4"/>
+            <Action ID="Wait" seconds="3"/>
             <Action ID="MoveArmToGraspPose" object_no="{object_no}" cartesian="true" grasp_poses="{grasp_poses}"/>
-            <Action ID="Wait" seconds="4"/>
+            <Action ID="Wait" seconds="3"/>
 
             <Action ID="VizCloseGripper" object_no="{object_no}" cylinder_ids="{cylinder_ids}"/>
             <Action ID="CloseGripper" object_no="{object_no}" cylinder_ids="{cylinder_ids}"/>
             <Action ID="MoveArmToExitGraspPose" object_no="{object_no}" cartesian="true" grasp_poses="{grasp_poses}"/>
-            <Action ID="Wait" seconds="4"/>
+            <Action ID="Wait" seconds="3"/>
             <!-- <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="0.7" y="1.05" z="1.42"/> -->
             <Action ID="MoveArmToPose" cartesian="true" q_w="1.0" q_x="0.0" q_y="0.0" q_z="0.0" x="0.7" y="0.46" z="1.55"/>
-            <Action ID="Wait" seconds="4"/>
+            <Action ID="Wait" seconds="3"/>
             <Action ID="MoveArmToPlacePose" object_no="{object_no}" cartesian="true" place_poses="{place_poses}"/>
-            <Action ID="Wait" seconds="4"/>
+            <Action ID="Wait" seconds="3"/>
             <Action ID="VizOpenGripper" object_no="{object_no}" cylinder_ids="{cylinder_ids}"/>
             <Action ID="OpenGripper" object_no="{object_no}" cylinder_ids="{cylinder_ids}"/>
 
